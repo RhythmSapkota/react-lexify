@@ -1,17 +1,19 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts'],  // Your main entry file
-  format: ['esm', 'cjs'],   // Generate both module types
-  dts: true,               // Generate declaration files
-  sourcemap: true,         // Helpful for debugging
-  clean: true,             // Clean dist folder before build
-  external: ['react', 'react-dom'], // Critical to prevent duplicate React
-  esbuildOptions(options) {
+  entry: ['src/index.ts'],
+  format: ['esm'], // Only build ESM (no CJS)
+  dts: true,      // Generate TypeScript declarations
+  clean: true,    // Clear dist/ before build
+  splitting: false,
+  sourcemap: true,
+  external: ['react', 'react-dom'], // Avoid bundling React
+  esbuildOptions: (options) => {
     options.banner = {
-      js: '"use client";'  // If using Next.js with app router
-    }
+      js: '"use client";', // Optional: Only needed if used in Next.js
+    };
   },
-  // If you need to bundle specific dependencies:
-  noExternal: ['lexical', '@lexical/*'] // Bundle lexical but not React
-})
+  loader: {
+    '.svg': 'dataurl', // Handle SVGs as data URLs
+  },
+});
