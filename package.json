@@ -1,14 +1,36 @@
 {
-  "name": "lexical-playground",
-  "version": "0.31.1",
-  "private": true,
-  "type": "module",
+  "name": "rs-richeditor",
+  "version": "1.0.0",
+  "description": "A customizable, performant, and modern rich text editor built with Lexical and React. Created by Rhythm Sapkota.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "rich-text-editor",
+    "lexical",
+    "react",
+    "editor",
+    "wysiwyg",
+    "rs-richeditor",
+    "rhythm"
+  ],
+  "author": "Rhythm Sapkota",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/rs-richeditor.git"
+  },
   "scripts": {
     "dev": "vite",
     "build-dev": "vite build",
     "build-prod": "vite build --mode production",
     "build-vercel": "(cd ../../ && node ./scripts/build.js) && npm run build-dev",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "build": "vite build && npm run typegen",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.0",
@@ -36,6 +58,10 @@
     "react-error-boundary": "^3.1.4",
     "y-websocket": "^1.5.4",
     "yjs": ">=13.5.42"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.24.7",
