@@ -1,6 +1,6 @@
 {
   "name": "rs-richeditor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A customizable, performant, and modern rich text editor built with Lexical and React. Created by Rhythm Sapkota.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
