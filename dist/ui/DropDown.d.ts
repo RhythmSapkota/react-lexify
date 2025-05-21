@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type { JSX } from 'react';
-import * as React from 'react';
-import { ReactNode } from 'react';
+import type { JSX } from "react";
+import * as React from "react";
+import { ReactNode } from "react";
 export declare function DropDownItem({ children, className, onClick, title, }: {
     children: React.ReactNode;
     className: string;

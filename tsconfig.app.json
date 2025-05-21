@@ -26,5 +26,5 @@
       "@/*": ["./src/*"]
     }
   },
-"include": ["src", "src/images.d.ts"]
+  "include": ["src", "src/types"]
 }

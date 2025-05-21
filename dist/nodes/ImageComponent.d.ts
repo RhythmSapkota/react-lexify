@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type { LexicalCommand, LexicalEditor, NodeKey } from 'lexical';
-import type { JSX } from 'react';
-import './ImageNode.css';
+import type { LexicalCommand, LexicalEditor, NodeKey } from "lexical";
+import type { JSX } from "react";
+import "./ImageNode.css";
 export declare const RIGHT_CLICK_IMAGE_COMMAND: LexicalCommand<MouseEvent>;
 export default function ImageComponent({ src, altText, nodeKey, width, height, maxWidth, resizable, showCaption, caption, captionsEnabled, }: {
     altText: string;
     caption: LexicalEditor;
-    height: 'inherit' | number;
+    height: "inherit" | number;
     maxWidth: number;
     nodeKey: NodeKey;
     resizable: boolean;
     showCaption: boolean;
     src: string;
-    width: 'inherit' | number;
+    width: "inherit" | number;
     captionsEnabled: boolean;
 }): JSX.Element;

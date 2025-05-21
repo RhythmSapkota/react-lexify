@@ -16,6 +16,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src", "src/images.d.ts", "src/globals.d.ts"],
+  "include": ["src", "src/types"],
   "exclude": ["node_modules", "dist", "vite.config.ts"]
 }
