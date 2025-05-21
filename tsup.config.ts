@@ -1,19 +1,24 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ['src/index.ts'],
-  format: ['esm'], // Only build ESM (no CJS)
-  dts: true,      // Generate TypeScript declarations
-  clean: true,    // Clear dist/ before build
+  entry: ["src/index.ts"],
+  format: ["esm"],
+  dts: {
+    entry: "src/index.ts",
+    resolve: true,
+  },
+  clean: true,
   splitting: false,
   sourcemap: true,
-  external: ['react', 'react-dom'], // Avoid bundling React
+  target: "esnext",
+  tsconfig: "./tsconfig.build.json",
+  external: ["react", "react-dom"],
   esbuildOptions: (options) => {
     options.banner = {
-      js: '"use client";', // Optional: Only needed if used in Next.js
+      js: '"use client";',
     };
   },
   loader: {
-    '.svg': 'dataurl', // Handle SVGs as data URLs
+    ".svg": "dataurl",
   },
 });
