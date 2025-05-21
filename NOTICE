@@ -1,0 +1,9 @@
+NOTICE
+
+This project makes use of the Lexical framework by Meta Platforms, Inc.,
+available at https://github.com/facebook/lexical, under the terms of the MIT License.
+
+Lexical is a powerful framework for building rich text editors in React.
+This project adapts and extends its functionality with additional plugins and configurations.
+
+This project is not affiliated with or endorsed by Meta.
