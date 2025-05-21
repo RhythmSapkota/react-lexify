@@ -1,0 +1,8 @@
+src/
+demo/
+*.test.ts
+.vscode/
+tsconfig*.json
+vite.config.ts
+*.md
+scripts/

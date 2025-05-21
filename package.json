@@ -2,7 +2,8 @@
   "name": "rs-richeditor",
   "version": "1.0.0",
   "description": "A customizable, performant, and modern rich text editor built with Lexical and React. Created by Rhythm Sapkota.",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -20,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/rs-richeditor.git"
+    "url": "https://github.com/RhythmSapkota/rs-richeditor.git"
   },
   "scripts": {
     "dev": "vite",
@@ -29,7 +30,7 @@
     "build-vercel": "(cd ../../ && node ./scripts/build.js) && npm run build-dev",
     "preview": "vite preview",
     "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
-    "build": "vite build && npm run typegen",
+    "build": "vite build",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
