@@ -26,8 +26,8 @@ export default function DraggableBlockPlugin({
   anchorElem?: HTMLElement;
 }): JSX.Element {
   const [editor] = useLexicalComposerContext();
-  const menuRef = useRef<HTMLDivElement>(null);
-  const targetLineRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const targetLineRef = useRef<HTMLDivElement | null>(null);
   const [draggableElement, setDraggableElement] = useState<HTMLElement | null>(
     null,
   );

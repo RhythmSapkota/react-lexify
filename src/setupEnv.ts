@@ -28,7 +28,15 @@ export default (() => {
   }
 
   if (INITIAL_SETTINGS.disableBeforeInput) {
-    delete window.InputEvent.prototype.getTargetRanges;
+    try {
+      // Force TS to treat it as a writable JS object
+      delete (window as any).InputEvent.prototype.getTargetRanges;
+    } catch (err) {
+      console.warn(
+        "Failed to delete getTargetRanges from InputEvent.prototype",
+        err
+      );
+    }
   }
 
   // @ts-ignore

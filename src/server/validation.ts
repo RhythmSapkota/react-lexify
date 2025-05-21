@@ -23,7 +23,7 @@ global.__DEV__ = true;
 
 const editor = createHeadlessEditor({
   namespace: 'validation',
-  nodes: [...PlaygroundNodes],
+  nodes: [...PlaygroundNodes] as any,
   onError: (error) => {
     console.error(error);
   },

@@ -39,7 +39,7 @@ export function DropDownItem({
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   title?: string;
 }) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLButtonElement | null>(null);
 
   const dropDownContext = React.useContext(DropDownContext);
 
