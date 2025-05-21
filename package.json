@@ -31,7 +31,7 @@
     "preview": "vite preview",
     "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
     "types:build": "tsc -p tsconfig.build.json",
-    "build": "vite build && npm run types:build",
+    "build": "vite build && npm run types:build && npm run typegen",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
