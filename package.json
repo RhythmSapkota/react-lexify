@@ -9,8 +9,18 @@
   "files": [
     "dist",
     "dist/index.css",
-    "dist/index.css.map"
+    "dist/index.css.map",
+    "dist/cat-typing-BZQCDE3J.gif",
+    "dist/landscape-RJWVK6ET.jpg",
+    "dist/yellow-flower-R72KOP74.jpg"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles.css": "./dist/index.css"
+  },
   "keywords": [
     "rich-text-editor",
     "lexical",
