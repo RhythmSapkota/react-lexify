@@ -72,6 +72,11 @@ import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import TwitterPlugin from "./plugins/TwitterPlugin";
 import YouTubePlugin from "./plugins/YouTubePlugin";
 import ContentEditable from "./ui/ContentEditable";
+import {
+  ClassNameOverride,
+  ToolbarStyleConfig,
+} from "./plugins/ToolbarPlugin/toolbar-style.types";
+import { resolveClass } from "./plugins/ToolbarPlugin/utils";
 
 const skipCollaborationInit =
   // @ts-expect-error
@@ -180,6 +185,14 @@ export type EditorPluginConfig = {
   tableCellActionMenu?: boolean;
 };
 
+export type EditorClassOverrides = {
+  editorContainer?: ClassNameOverride;
+  editorScroller?: ClassNameOverride;
+  editorContent?: ClassNameOverride;
+  plainText?: ClassNameOverride;
+  treeView?: ClassNameOverride;
+  richTextPlugin?: ClassNameOverride;
+};
 export interface InnerEditorProps {
   plugins?: EditorPluginConfig;
   fetchMentions?: (query: string) => Promise<Mention[]>;
@@ -187,6 +200,8 @@ export interface InnerEditorProps {
   renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
   placeholder?: string;
   readOnly?: boolean;
+  toolbarStyle?: ToolbarStyleConfig;
+  classOverrides?: EditorClassOverrides;
 }
 
 export default function LexicalEditorInner({
@@ -196,6 +211,8 @@ export default function LexicalEditorInner({
   renderMentionOption,
   placeholder: customPlaceholder,
   readOnly,
+  classOverrides,
+  toolbarStyle,
 }: InnerEditorProps) {
   const { historyState } = useSharedHistoryContext();
   const {
@@ -310,8 +327,10 @@ export default function LexicalEditorInner({
           activeEditor={activeEditor}
           setActiveEditor={setActiveEditor}
           setIsLinkEditMode={setIsLinkEditMode}
+          toolbarStyle={toolbarStyle} // ✅ Pass it here
         />
       )}
+
       {config.isRichText && plugins.shortcuts !== false && (
         <ShortcutsPlugin
           editor={activeEditor}
@@ -319,9 +338,12 @@ export default function LexicalEditorInner({
         />
       )}
       <div
-        className={`editor-container ${
-          config.showTreeView ? "tree-view" : ""
-        } ${!config.isRichText ? "plain-text" : ""}`}
+        className={resolveClass(
+          classOverrides?.editorContainer,
+          `editor-container ${config.showTreeView ? "tree-view" : ""} ${
+            !config.isRichText ? "plain-text" : ""
+          }`
+        )}
       >
         {config.isMaxLength && <MaxLengthPlugin maxLength={config.maxLength} />}
         {plugins.dragDropPaste !== false && <DragDropPaste />}
@@ -420,14 +442,26 @@ export default function LexicalEditorInner({
             )}
             <RichTextPlugin
               contentEditable={
-                <div className="editor-scroller">
-                  <div className="editor" ref={onRef}>
+                <div
+                  className={resolveClass(
+                    classOverrides?.editorScroller,
+                    "editor-scroller"
+                  )}
+                >
+                  <div
+                    className={resolveClass(
+                      classOverrides?.editorContent,
+                      "editor"
+                    )}
+                    ref={onRef}
+                  >
                     <ContentEditable placeholder={placeholder} />
                   </div>
                 </div>
               }
               ErrorBoundary={LexicalErrorBoundary}
             />
+
             {plugins.markdownShortcut !== false && <MarkdownShortcutPlugin />}
             {plugins.codeHighlight !== false && <CodeHighlightPlugin />}
             {plugins.list !== false && (
@@ -514,7 +548,12 @@ export default function LexicalEditorInner({
         ) : (
           <>
             <PlainTextPlugin
-              contentEditable={<ContentEditable placeholder={placeholder} />}
+              contentEditable={
+                <ContentEditable
+                  placeholder={placeholder}
+                  className={resolveClass(classOverrides?.plainText, "")}
+                />
+              }
               ErrorBoundary={LexicalErrorBoundary}
             />
             {plugins.history !== false && (

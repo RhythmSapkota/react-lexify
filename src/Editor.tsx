@@ -5,11 +5,16 @@ import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { JSX } from "react";
 import { SharedHistoryContext } from "./context/SharedHistoryContext";
 import { ToolbarContext } from "./context/ToolbarContext";
-import LexicalEditorInner, { EditorPluginConfig, InnerEditorProps } from "./EditorInner";
+import LexicalEditorInner, {
+  EditorClassOverrides,
+  EditorPluginConfig,
+  InnerEditorProps,
+} from "./EditorInner";
 import PlaygroundNodes from "./nodes/PlaygroundNodes";
 import { TableContext } from "./plugins/TablePlugin";
 import PlaygroundEditorTheme from "./themes/PlaygroundEditorTheme";
 import { $prepopulatedRichText } from "./utils/editorConfig";
+import { ToolbarStyleConfig } from "./plugins/ToolbarPlugin/toolbar-style.types";
 
 const defaultInitialConfig = {
   namespace: "Editor",
@@ -26,11 +31,15 @@ export interface EditorWrapperProps extends Omit<InnerEditorProps, "editor"> {
   initialConfig?: Partial<
     Parameters<typeof LexicalComposer>[0]["initialConfig"]
   >;
+  toolbarStyle?: ToolbarStyleConfig;
+  classOverrides?: EditorClassOverrides;
 }
 
 export default function Editor({
   initialConfig = {},
   plugins,
+  toolbarStyle,
+  classOverrides,
   ...props
 }: EditorWrapperProps): JSX.Element {
   const mergedConfig = {
@@ -43,7 +52,12 @@ export default function Editor({
       <SharedHistoryContext>
         <TableContext>
           <ToolbarContext>
-            <LexicalEditorInner plugins={plugins} {...props} />
+            <LexicalEditorInner
+              plugins={plugins}
+              toolbarStyle={toolbarStyle}
+              classOverrides={classOverrides}
+              {...props}
+            />
           </ToolbarContext>
         </TableContext>
       </SharedHistoryContext>

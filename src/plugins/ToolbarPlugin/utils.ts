@@ -35,12 +35,21 @@ import {
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
 } from '../../context/ToolbarContext';
+import { ClassNameOverride } from './toolbar-style.types';
 
 // eslint-disable-next-line no-shadow
 export enum UpdateFontSizeType {
   increment = 1,
   decrement,
 }
+
+export function resolveClass(
+  override: ClassNameOverride | undefined,
+  defaultClass: string
+): string {
+  return typeof override === 'function' ? override(defaultClass) : override ?? defaultClass;
+}
+
 
 /**
  * Calculates the new font size based on the update type.
