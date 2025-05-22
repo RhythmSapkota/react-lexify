@@ -410,7 +410,7 @@
 }
 
 .PlaygroundEditorTheme__tableAddColumns:after {
-  background-image: url(../images/icons/plus.svg);
+  background-image: url(images/icons/plus.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -439,7 +439,7 @@
 }
 
 .PlaygroundEditorTheme__tableAddRows:after {
-  background-image: url(../images/icons/plus.svg);
+  background-image: url(images/icons/plus.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -1665,7 +1665,7 @@ select {
   opacity: 0.5;
 
   background-size: cover;
-  background-image: url(../../images/icons/scissors.svg);
+  background-image: url(images/icons/scissors.svg);
   width: 16px;
   height: 16px;
 }
@@ -1795,7 +1795,7 @@ i.add-comment {
   height: 20px;
   width: 20px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/chat-left-text.svg);
+  background-image: url(images/icons/chat-left-text.svg);
 }
 
 @media (max-width: 600px) {
@@ -1914,7 +1914,7 @@ i.comments {
   height: 20px;
   width: 20px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/comments.svg);
+  background-image: url(images/icons/comments.svg);
   opacity: 0.5;
   transition: opacity 0.2s linear;
 }
@@ -2006,7 +2006,7 @@ i.send {
   height: 20px;
   width: 20px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/send.svg);
+  background-image: url(images/icons/send.svg);
   opacity: 0.5;
   transition: opacity 0.2s linear;
 }
@@ -2193,7 +2193,7 @@ i.send {
   height: 15px;
   width: 15px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/trash3.svg);
+  background-image: url(images/icons/trash3.svg);
   transition: opacity 0.2s linear;
 }
 
@@ -2284,7 +2284,7 @@ i.send {
   width: 16px;
   height: 16px;
   opacity: 0.3;
-  background-image: url(../../images/icons/draggable-block-menu.svg);
+  background-image: url(images/icons/draggable-block-menu.svg);
 }
 
 .draggable-block-menu .icon-plus {
@@ -2292,7 +2292,7 @@ i.send {
   border: none;
   cursor: pointer;
   background-color: transparent;
-  background-image: url(../../images/icons/plus.svg);
+  background-image: url(images/icons/plus.svg);
 }
 
 .draggable-block-menu:active {
@@ -2653,13 +2653,13 @@ input[type='number'] {
 }
 
 .add-icon {
-  background-image: url(../../images/icons/add-sign.svg);
+  background-image: url(images/icons/add-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .minus-icon {
-  background-image: url(../../images/icons/minus-sign.svg);
+  background-image: url(images/icons/minus-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
 }

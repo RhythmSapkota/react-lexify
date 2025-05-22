@@ -1,6 +1,6 @@
 {
   "name": "rs-richeditor",
-  "version": "1.0.8-beta.2",
+  "version": "1.0.9-beta.2",
   "description": "A customizable, performant, and modern rich text editor built with Lexical and React. Created by Rhythm Sapkota.",
   "type": "module",
   "main": "dist/index.js",
@@ -19,7 +19,7 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-  "./dist/rs-richeditor.css": "./dist/rs-richeditor.css"
+    "./dist/rs-richeditor.css": "./dist/rs-richeditor.css"
   },
   "keywords": [
     "rich-text-editor",
@@ -37,11 +37,12 @@
     "url": "https://github.com/RhythmSapkota/rs-richeditor.git"
   },
   "scripts": {
-    "build": "tsup && npm run build:css",
+    "build": "tsup && npm run build:css && npm run copy-assets",
     "dev": "tsup --watch",
     "build:css": "postcss src/styles.css -o dist/rs-richeditor.css",
     "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
-    "prepublishOnly": "npm run build && npm run typegen"
+    "prepublishOnly": "npm run build && npm run typegen",
+    "copy-assets": "cpx \"src/**/*.{svg,jpg,png,gif}\" dist"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.0",
@@ -92,6 +93,7 @@
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.2.1",
+    "cpx": "^1.5.0",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.0",
