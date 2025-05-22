@@ -30,3 +30,5 @@
 @import './plugins/TableCellResizer/index.css';
 @import './plugins/TableOfContentsPlugin/index.css';
 @import './plugins/ToolbarPlugin/fontSize.css';
+
+@import "./index.css"
