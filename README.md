@@ -64,6 +64,24 @@ Make sure you also have:
 npm install react react-dom
 ```
 
+---
+
+> ⚠️ **Important Note**
+>
+> To ensure proper **styling of the editor and toolbar**, you **must** import the editor’s CSS file **once globally**.
+>
+> 🌸 **Add the following import** in your root file (e.g., `index.tsx`, `_app.tsx`, or layout):
+>
+> ```ts
+> import "rs-richeditor/dist/rs-richeditor.css";
+> ```
+>
+> ✅ This is **required** for the editor to render styles correctly.
+>
+> 🎨 You can **customize the look and feel** later using the `theme` and `toolbarStyle` options.
+
+---
+
 ## 🛠️ Basic Usage
 
 ```tsx
@@ -496,6 +514,7 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
   />
   ```
 - `tableCellActionMenu`: `boolean` - Enables the table cell action menu. Requires `richText: true` and `table: { enabled: true }`. Defaults to `false`.
+
   ```tsx
   <Editor
     plugins={{
@@ -505,6 +524,146 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
     }}
   />
   ```
+
+# 🎨 Styling and Class Overrides
+
+rs-richeditor provides a flexible way to override the default class names used for styling the editor and toolbar components. This allows developers to fully customize the appearance using their own CSS framework (e.g., Tailwind, Bootstrap) or design system.
+
+## Editor Class Overrides
+
+You can override the editor wrapper and internal elements using the theme configuration inside initialConfig:
+
+```jsx
+<Editor
+  initialConfig={{
+    theme: {
+      paragraph: "my-paragraph-style",
+      heading: {
+        h1: "text-4xl font-bold",
+        h2: "text-3xl font-semibold",
+      },
+      list: {
+        ul: "list-disc pl-5",
+        ol: "list-decimal pl-5",
+      },
+      quote: "border-l-4 pl-4 italic text-muted",
+      link: "text-blue-500 underline",
+      text: {
+        bold: "font-bold",
+        italic: "italic",
+        underline: "underline",
+        strikethrough: "line-through",
+      },
+    },
+  }}
+/>
+```
+
+## Toolbar Style Customization
+
+You can customize the toolbar in a structured and type-safe way using ToolbarStyleConfig. This supports class overrides and icon or label customization:
+
+### ToolbarStyleConfig Properties
+
+| Property              | Type                                                                                          | Description                                                                       |
+| --------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `rootClass`           | `string \| (defaultClass: string) => string`                                                  | Main wrapper class for the toolbar.                                               |
+| `buttonClasses`       | `Partial<Record<ToolbarButtonKey, string \| (defaultClass: string) => string>>`               | Class overrides for each individual button.                                       |
+| `iconClasses`         | `Partial<Record<ToolbarButtonKey \| ToolbarDropdownKey, string \| (defaultClass) => string>>` | Icon-level class override per button or dropdown.                                 |
+| `dropdownItemClasses` | `Partial<Record<ToolbarDropdownKey, string \| (defaultClass) => string>>`                     | Class override for each dropdown item (like h1, bullet list, align options, etc). |
+| `labelOverrides`      | `Partial<Record<ToolbarDropdownKey, string>>`                                                 | Change default labels shown in dropdowns (e.g., "h1" to "Heading One").           |
+
+### ToolbarButtonKey Descriptions
+
+| Key               | Description                |
+| ----------------- | -------------------------- |
+| `bold`            | Toggle bold text           |
+| `italic`          | Toggle italic text         |
+| `underline`       | Toggle underline           |
+| `code`            | Toggle inline code         |
+| `link`            | Create or edit a link      |
+| `strikethrough`   | Toggle strikethrough       |
+| `subscript`       | Toggle subscript           |
+| `superscript`     | Toggle superscript         |
+| `highlight`       | Highlight text             |
+| `clearFormatting` | Remove all formatting      |
+| `undo`            | Undo last action           |
+| `redo`            | Redo last undone action    |
+| `insertCodeBlock` | Insert a code block        |
+| `insertLink`      | Insert a link              |
+| `lowercase`       | Transform to lowercase     |
+| `uppercase`       | Transform to uppercase     |
+| `capitalize`      | Capitalize text            |
+| `fontColor`       | Change font color          |
+| `bgColor`         | Change background color    |
+| `insert`          | Open insert menu           |
+| `blockControls`   | Block-level formatting     |
+| `alignment`       | Align text                 |
+| `fontFamily`      | Change font family         |
+| `fontSize`        | Change font size           |
+| `moreStyles`      | Open more styles dropdown  |
+| `horizontalRule`  | Insert horizontal line     |
+| `pageBreak`       | Insert page break          |
+| `image`           | Insert image               |
+| `inlineImage`     | Insert inline image        |
+| `gif`             | Insert GIF                 |
+| `excalidraw`      | Insert drawing canvas      |
+| `table`           | Insert table               |
+| `poll`            | Insert poll                |
+| `columns`         | Insert column layout       |
+| `equation`        | Insert math equation       |
+| `sticky`          | Insert sticky note         |
+| `collapsible`     | Insert collapsible section |
+
+### ToolbarDropdownKey Descriptions
+
+| Key            | Description              |
+| -------------- | ------------------------ |
+| `paragraph`    | Paragraph text           |
+| `h1`           | Heading level 1          |
+| `h2`           | Heading level 2          |
+| `h3`           | Heading level 3          |
+| `bullet`       | Bullet list              |
+| `number`       | Numbered list            |
+| `check`        | Checklist                |
+| `quote`        | Blockquote               |
+| `code`         | Code block               |
+| `leftAlign`    | Align text left          |
+| `centerAlign`  | Center align text        |
+| `rightAlign`   | Align text right         |
+| `justifyAlign` | Justify text             |
+| `startAlign`   | Align to start (for RTL) |
+| `endAlign`     | Align to end (for RTL)   |
+| `outdent`      | Outdent list level       |
+| `indent`       | Indent list level        |
+
+## Example
+
+```jsx
+<Editor
+  plugins={{
+    toolbar: true,
+  }}
+  toolbarStyle={{
+    rootClass: "flex gap-2 p-2 bg-white shadow",
+    buttonClasses: {
+      bold: "text-bold hover:bg-gray-100",
+    },
+    iconClasses: {
+      italic: "text-blue-500",
+    },
+    dropdownItemClasses: {
+      h1: "font-bold text-lg",
+    },
+    labelOverrides: {
+      h1: "Heading One",
+      h2: "Heading Two",
+    },
+  }}
+/>
+```
+
+This gives you full flexibility to style, override, or relabel any part of the toolbar to match your design system.
 
 ## 🧩 Advanced Configuration
 

@@ -13,6 +13,17 @@ interface Mention {
     };
 }
 
+type ToolbarButtonKey = "bold" | "italic" | "underline" | "code" | "link" | "strikethrough" | "subscript" | "superscript" | "highlight" | "clearFormatting" | "undo" | "redo" | "insertCodeBlock" | "insertLink" | "lowercase" | "uppercase" | "capitalize" | "fontColor" | "bgColor" | "insert" | "blockControls" | "alignment" | "fontFamily" | "fontSize" | "moreStyles" | "horizontalRule" | "pageBreak" | "image" | "inlineImage" | "gif" | "excalidraw" | "table" | "poll" | "columns" | "equation" | "sticky" | "collapsible";
+type ToolbarDropdownKey = "paragraph" | "h1" | "h2" | "h3" | "bullet" | "number" | "check" | "quote" | "code" | "leftAlign" | "centerAlign" | "rightAlign" | "justifyAlign" | "startAlign" | "endAlign" | "outdent" | "indent";
+type ClassNameOverride = string | ((defaultClass: string) => string);
+type ToolbarStyleConfig = {
+    rootClass?: ClassNameOverride;
+    buttonClasses?: Partial<Record<ToolbarButtonKey, ClassNameOverride>>;
+    iconClasses?: Partial<Record<ToolbarButtonKey | ToolbarDropdownKey, ClassNameOverride>>;
+    dropdownItemClasses?: Partial<Record<ToolbarDropdownKey, ClassNameOverride>>;
+    labelOverrides?: Partial<Record<ToolbarDropdownKey, string>>;
+};
+
 type EditorPluginConfig = {
     autoFocus?: boolean;
     clearEditor?: boolean;
@@ -99,6 +110,14 @@ type EditorPluginConfig = {
     tableHoverActions?: boolean;
     tableCellActionMenu?: boolean;
 };
+type EditorClassOverrides = {
+    editorContainer?: ClassNameOverride;
+    editorScroller?: ClassNameOverride;
+    editorContent?: ClassNameOverride;
+    plainText?: ClassNameOverride;
+    treeView?: ClassNameOverride;
+    richTextPlugin?: ClassNameOverride;
+};
 interface InnerEditorProps {
     plugins?: EditorPluginConfig;
     fetchMentions?: (query: string) => Promise<Mention[]>;
@@ -106,11 +125,15 @@ interface InnerEditorProps {
     renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
     placeholder?: string;
     readOnly?: boolean;
+    toolbarStyle?: ToolbarStyleConfig;
+    classOverrides?: EditorClassOverrides;
 }
 
 interface EditorWrapperProps extends Omit<InnerEditorProps, "editor"> {
     initialConfig?: Partial<Parameters<typeof LexicalComposer>[0]["initialConfig"]>;
+    toolbarStyle?: ToolbarStyleConfig;
+    classOverrides?: EditorClassOverrides;
 }
-declare function Editor({ initialConfig, plugins, ...props }: EditorWrapperProps): JSX.Element;
+declare function Editor({ initialConfig, plugins, toolbarStyle, classOverrides, ...props }: EditorWrapperProps): JSX.Element;
 
 export { Editor, type EditorPluginConfig, type EditorWrapperProps as EditorProps, type Mention, Editor as default };

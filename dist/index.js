@@ -30513,6 +30513,9 @@ import {
   $isRangeSelection as $isRangeSelection14,
   $isTextNode as $isTextNode6
 } from "lexical";
+function resolveClass(override, defaultClass) {
+  return typeof override === "function" ? override(defaultClass) : override ?? defaultClass;
+}
 var calculateNextFontSize = (currentFontSize, updateType) => {
   if (!updateType) {
     return currentFontSize;
@@ -33101,6 +33104,8 @@ function TableOfContentsPlugin() {
 }
 
 // src/plugins/ToolbarPlugin/index.tsx
+import * as React12 from "react";
+import { useCallback as useCallback25, useEffect as useEffect50, useState as useState40 } from "react";
 import {
   $isCodeNode as $isCodeNode5,
   CODE_LANGUAGE_FRIENDLY_NAME_MAP,
@@ -33144,7 +33149,6 @@ import {
   SELECTION_CHANGE_COMMAND as SELECTION_CHANGE_COMMAND7,
   UNDO_COMMAND as UNDO_COMMAND2
 } from "lexical";
-import { useCallback as useCallback25, useEffect as useEffect50, useState as useState40 } from "react";
 init_useModal();
 init_StickyNode();
 
@@ -33326,190 +33330,317 @@ var ELEMENT_FORMAT_OPTIONS = {
   }
 };
 function dropDownActiveClass(active) {
-  if (active) {
-    return "active dropdown-item-active";
-  } else {
-    return "";
+  return active ? "active dropdown-item-active" : "";
+}
+function resolveClass2(override, defaultClass) {
+  if (typeof override === "function") {
+    return override(defaultClass);
   }
+  return override ?? defaultClass;
 }
-function BlockFormatDropDown({
-  editor,
-  blockType,
-  rootType,
-  disabled = false
-}) {
-  return /* @__PURE__ */ jsxs37(
-    DropDown,
-    {
-      disabled,
-      buttonClassName: "toolbar-item block-controls",
-      buttonIconClassName: "icon block-type " + blockType,
-      buttonLabel: blockTypeToBlockName[blockType],
-      buttonAriaLabel: "Formatting options for text style",
-      children: [
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "paragraph"),
-            onClick: () => formatParagraph(editor),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon paragraph" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Normal" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.NORMAL })
-            ]
+var Divider = () => /* @__PURE__ */ jsx65("div", { className: "divider" });
+var ToolbarButton = React12.memo(
+  ({
+    command,
+    active,
+    disabled,
+    icon,
+    title,
+    shortcut,
+    buttonKey,
+    toolbarStyle,
+    onClick
+  }) => {
+    const buttonClass = resolveClass2(
+      toolbarStyle?.buttonClasses?.[buttonKey],
+      `toolbar-item spaced ${active ? "active" : ""}`
+    );
+    const iconClass = resolveClass2(
+      toolbarStyle?.iconClasses?.[buttonKey],
+      `format ${icon}`
+    );
+    const handleClick = useCallback25(() => {
+      if (onClick) {
+        onClick();
+      }
+    }, [onClick]);
+    return /* @__PURE__ */ jsx65(
+      "button",
+      {
+        disabled,
+        onClick: handleClick,
+        className: buttonClass,
+        title: `${title} (${shortcut})`,
+        type: "button",
+        "aria-label": `${title}. Shortcut: ${shortcut}`,
+        children: /* @__PURE__ */ jsx65("i", { className: iconClass })
+      }
+    );
+  }
+);
+var BlockFormatDropDown = React12.memo(
+  ({
+    editor,
+    blockType,
+    rootType,
+    disabled = false,
+    toolbarStyle
+  }) => {
+    const getButtonClassName = () => resolveClass2(
+      toolbarStyle?.buttonClasses?.blockControls,
+      "toolbar-item block-controls"
+    );
+    const getButtonIconClassName = () => resolveClass2(
+      toolbarStyle?.iconClasses?.[blockType],
+      `icon block-type ${blockType}`
+    );
+    const getItemClassName = (type) => resolveClass2(
+      toolbarStyle?.dropdownItemClasses?.[type],
+      `item wide ${dropDownActiveClass(blockType === type)}`
+    );
+    const getLabel = (type) => toolbarStyle?.labelOverrides?.[type] ?? blockTypeToBlockName[type];
+    return /* @__PURE__ */ jsxs37(
+      DropDown,
+      {
+        disabled,
+        buttonClassName: getButtonClassName(),
+        buttonIconClassName: getButtonIconClassName(),
+        buttonLabel: getLabel(blockType),
+        buttonAriaLabel: "Formatting options for text style",
+        children: [
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("paragraph"),
+              onClick: () => formatParagraph(editor),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.paragraph,
+                        "icon paragraph"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("paragraph") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.NORMAL })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("h1"),
+              onClick: () => formatHeading(editor, blockType, "h1"),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(toolbarStyle?.iconClasses?.h1, "icon h1")
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("h1") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.HEADING1 })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("h2"),
+              onClick: () => formatHeading(editor, blockType, "h2"),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(toolbarStyle?.iconClasses?.h2, "icon h2")
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("h2") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.HEADING2 })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("h3"),
+              onClick: () => formatHeading(editor, blockType, "h3"),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(toolbarStyle?.iconClasses?.h3, "icon h3")
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("h3") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.HEADING3 })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("bullet"),
+              onClick: () => formatBulletList(editor, blockType),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.bullet,
+                        "icon bullet-list"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("bullet") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.BULLET_LIST })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("number"),
+              onClick: () => formatNumberedList(editor, blockType),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.number,
+                        "icon numbered-list"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("number") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.NUMBERED_LIST })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("check"),
+              onClick: () => formatCheckList(editor, blockType),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.check,
+                        "icon check-list"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("check") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CHECK_LIST })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("quote"),
+              onClick: () => formatQuote(editor, blockType),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.quote,
+                        "icon quote"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("quote") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.QUOTE })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              className: getItemClassName("code"),
+              onClick: () => formatCode(editor, blockType),
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.code,
+                        "icon code"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: getLabel("code") })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CODE_BLOCK })
+              ]
+            }
+          )
+        ]
+      }
+    );
+  }
+);
+var FontDropDown = React12.memo(
+  ({
+    editor,
+    value,
+    style,
+    disabled = false,
+    toolbarStyle
+  }) => {
+    const handleClick = useCallback25(
+      (option) => {
+        editor.update(() => {
+          const selection = $getSelection24();
+          if (selection !== null) {
+            $patchStyleText2(selection, {
+              [style]: option
+            });
           }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "h1"),
-            onClick: () => formatHeading(editor, blockType, "h1"),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon h1" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Heading 1" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.HEADING1 })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "h2"),
-            onClick: () => formatHeading(editor, blockType, "h2"),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon h2" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Heading 2" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.HEADING2 })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "h3"),
-            onClick: () => formatHeading(editor, blockType, "h3"),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon h3" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Heading 3" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.HEADING3 })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "bullet"),
-            onClick: () => formatBulletList(editor, blockType),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon bullet-list" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Bullet List" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.BULLET_LIST })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "number"),
-            onClick: () => formatNumberedList(editor, blockType),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon numbered-list" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Numbered List" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.NUMBERED_LIST })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "check"),
-            onClick: () => formatCheckList(editor, blockType),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon check-list" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Check List" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CHECK_LIST })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "quote"),
-            onClick: () => formatQuote(editor, blockType),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon quote" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Quote" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.QUOTE })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            className: "item wide " + dropDownActiveClass(blockType === "code"),
-            onClick: () => formatCode(editor, blockType),
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon code" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Code Block" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CODE_BLOCK })
-            ]
-          }
-        )
-      ]
-    }
-  );
-}
-function Divider() {
-  return /* @__PURE__ */ jsx65("div", { className: "divider" });
-}
-function FontDropDown({
-  editor,
-  value,
-  style,
-  disabled = false
-}) {
-  const handleClick = useCallback25(
-    (option) => {
-      editor.update(() => {
-        const selection = $getSelection24();
-        if (selection !== null) {
-          $patchStyleText2(selection, {
-            [style]: option
-          });
-        }
-      });
-    },
-    [editor, style]
-  );
-  const buttonAriaLabel = style === "font-family" ? "Formatting options for font family" : "Formatting options for font size";
-  return /* @__PURE__ */ jsx65(
-    DropDown,
-    {
-      disabled,
-      buttonClassName: "toolbar-item " + style,
-      buttonLabel: value,
-      buttonIconClassName: style === "font-family" ? "icon block-type font-family" : "",
-      buttonAriaLabel,
-      children: (style === "font-family" ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
-        ([option, text]) => /* @__PURE__ */ jsx65(
+        });
+      },
+      [editor, style]
+    );
+    const buttonAriaLabel = style === "font-family" ? "Formatting options for font family" : "Formatting options for font size";
+    const buttonClassName = resolveClass2(
+      toolbarStyle?.buttonClasses?.[style === "font-family" ? "fontFamily" : "fontSize"],
+      `toolbar-item ${style}`
+    );
+    const buttonIconClassName = resolveClass2(
+      toolbarStyle?.iconClasses?.[style === "font-family" ? "fontFamily" : "fontSize"],
+      style === "font-family" ? "icon block-type font-family" : ""
+    );
+    return /* @__PURE__ */ jsx65(
+      DropDown,
+      {
+        disabled,
+        buttonClassName,
+        buttonLabel: value,
+        buttonIconClassName,
+        buttonAriaLabel,
+        children: (style === "font-family" ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(([option, text]) => /* @__PURE__ */ jsx65(
           DropDownItem,
           {
             className: `item ${dropDownActiveClass(value === option)} ${style === "font-size" ? "fontsize-item" : ""}`,
@@ -33517,169 +33648,235 @@ function FontDropDown({
             children: /* @__PURE__ */ jsx65("span", { className: "text", children: text })
           },
           option
-        )
-      )
-    }
-  );
-}
-function ElementFormatDropdown({
-  editor,
-  value,
-  isRTL,
-  disabled = false
-}) {
-  const formatOption = ELEMENT_FORMAT_OPTIONS[value || "left"];
-  return /* @__PURE__ */ jsxs37(
-    DropDown,
-    {
-      disabled,
-      buttonLabel: formatOption.name,
-      buttonIconClassName: `icon ${isRTL ? formatOption.iconRTL : formatOption.icon}`,
-      buttonClassName: "toolbar-item spaced alignment",
-      buttonAriaLabel: "Formatting options for text alignment",
-      children: [
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "left");
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon left-align" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Left Align" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.LEFT_ALIGN })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "center");
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon center-align" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Center Align" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CENTER_ALIGN })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "right");
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon right-align" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Right Align" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.RIGHT_ALIGN })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "justify");
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon justify-align" }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Justify Align" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.JUSTIFY_ALIGN })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "start");
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsx65(
-                "i",
-                {
-                  className: `icon ${isRTL ? ELEMENT_FORMAT_OPTIONS.start.iconRTL : ELEMENT_FORMAT_OPTIONS.start.icon}`
-                }
-              ),
-              /* @__PURE__ */ jsx65("span", { className: "text", children: "Start Align" })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "end");
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsx65(
-                "i",
-                {
-                  className: `icon ${isRTL ? ELEMENT_FORMAT_OPTIONS.end.iconRTL : ELEMENT_FORMAT_OPTIONS.end.icon}`
-                }
-              ),
-              /* @__PURE__ */ jsx65("span", { className: "text", children: "End Align" })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsx65(Divider, {}),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(OUTDENT_CONTENT_COMMAND2, void 0);
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon " + (isRTL ? "indent" : "outdent") }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Outdent" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.OUTDENT })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs37(
-          DropDownItem,
-          {
-            onClick: () => {
-              editor.dispatchCommand(INDENT_CONTENT_COMMAND2, void 0);
-            },
-            className: "item wide",
-            children: [
-              /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                /* @__PURE__ */ jsx65("i", { className: "icon " + (isRTL ? "outdent" : "indent") }),
-                /* @__PURE__ */ jsx65("span", { className: "text", children: "Indent" })
-              ] }),
-              /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.INDENT })
-            ]
-          }
-        )
-      ]
-    }
-  );
-}
+        ))
+      }
+    );
+  }
+);
+var ElementFormatDropdown = React12.memo(
+  ({
+    editor,
+    value,
+    isRTL,
+    disabled = false,
+    toolbarStyle
+  }) => {
+    const formatOption = ELEMENT_FORMAT_OPTIONS[value || "left"];
+    const buttonClassName = resolveClass2(
+      toolbarStyle?.buttonClasses?.alignment,
+      "toolbar-item spaced alignment"
+    );
+    const buttonIconClassName = resolveClass2(
+      toolbarStyle?.iconClasses?.alignment,
+      `icon ${isRTL ? formatOption.iconRTL : formatOption.icon}`
+    );
+    return /* @__PURE__ */ jsxs37(
+      DropDown,
+      {
+        disabled,
+        buttonLabel: formatOption.name,
+        buttonIconClassName,
+        buttonClassName,
+        buttonAriaLabel: "Formatting options for text alignment",
+        children: [
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "left");
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.leftAlign,
+                        "icon left-align"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Left Align" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.LEFT_ALIGN })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "center");
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.centerAlign,
+                        "icon center-align"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Center Align" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CENTER_ALIGN })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "right");
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.rightAlign,
+                        "icon right-align"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Right Align" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.RIGHT_ALIGN })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "justify");
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.justifyAlign,
+                        "icon justify-align"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Justify Align" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.JUSTIFY_ALIGN })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "start");
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsx65(
+                  "i",
+                  {
+                    className: resolveClass2(
+                      toolbarStyle?.iconClasses?.startAlign,
+                      `icon ${isRTL ? ELEMENT_FORMAT_OPTIONS.start.iconRTL : ELEMENT_FORMAT_OPTIONS.start.icon}`
+                    )
+                  }
+                ),
+                /* @__PURE__ */ jsx65("span", { className: "text", children: "Start Align" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_ELEMENT_COMMAND3, "end");
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsx65(
+                  "i",
+                  {
+                    className: resolveClass2(
+                      toolbarStyle?.iconClasses?.endAlign,
+                      `icon ${isRTL ? ELEMENT_FORMAT_OPTIONS.end.iconRTL : ELEMENT_FORMAT_OPTIONS.end.icon}`
+                    )
+                  }
+                ),
+                /* @__PURE__ */ jsx65("span", { className: "text", children: "End Align" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsx65(Divider, {}),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(OUTDENT_CONTENT_COMMAND2, void 0);
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.outdent,
+                        `icon ${isRTL ? "indent" : "outdent"}`
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Outdent" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.OUTDENT })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                editor.dispatchCommand(INDENT_CONTENT_COMMAND2, void 0);
+              },
+              className: "item wide",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.indent,
+                        `icon ${isRTL ? "outdent" : "indent"}`
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Indent" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.INDENT })
+              ]
+            }
+          )
+        ]
+      }
+    );
+  }
+);
 function ToolbarPlugin({
   editor,
   activeEditor,
   setActiveEditor,
-  setIsLinkEditMode
+  setIsLinkEditMode,
+  toolbarStyle
 }) {
   const [selectedElementKey, setSelectedElementKey] = useState40(
     null
@@ -33898,33 +34095,34 @@ function ToolbarPlugin({
   };
   const canViewerSeeInsertDropdown = !toolbarState.isImageCaption;
   const canViewerSeeInsertCodeButton = !toolbarState.isImageCaption;
-  return /* @__PURE__ */ jsxs37("div", { className: "toolbar", children: [
+  const rootClassName = resolveClass2(toolbarStyle?.rootClass, "toolbar");
+  return /* @__PURE__ */ jsxs37("div", { className: rootClassName, children: [
     /* @__PURE__ */ jsx65(
-      "button",
+      ToolbarButton,
       {
+        command: UNDO_COMMAND2,
+        active: false,
         disabled: !toolbarState.canUndo || !isEditable,
-        onClick: () => {
-          activeEditor.dispatchCommand(UNDO_COMMAND2, void 0);
-        },
-        title: IS_APPLE2 ? "Undo (\u2318Z)" : "Undo (Ctrl+Z)",
-        type: "button",
-        className: "toolbar-item spaced",
-        "aria-label": "Undo",
-        children: /* @__PURE__ */ jsx65("i", { className: "format undo" })
+        icon: "undo",
+        title: "Undo",
+        shortcut: IS_APPLE2 ? "\u2318Z" : "Ctrl+Z",
+        buttonKey: "undo",
+        toolbarStyle,
+        onClick: () => activeEditor.dispatchCommand(UNDO_COMMAND2, void 0)
       }
     ),
     /* @__PURE__ */ jsx65(
-      "button",
+      ToolbarButton,
       {
+        command: REDO_COMMAND2,
+        active: false,
         disabled: !toolbarState.canRedo || !isEditable,
-        onClick: () => {
-          activeEditor.dispatchCommand(REDO_COMMAND2, void 0);
-        },
-        title: IS_APPLE2 ? "Redo (\u21E7\u2318Z)" : "Redo (Ctrl+Y)",
-        type: "button",
-        className: "toolbar-item",
-        "aria-label": "Redo",
-        children: /* @__PURE__ */ jsx65("i", { className: "format redo" })
+        icon: "redo",
+        title: "Redo",
+        shortcut: IS_APPLE2 ? "\u21E7\u2318Z" : "Ctrl+Y",
+        buttonKey: "redo",
+        toolbarStyle,
+        onClick: () => activeEditor.dispatchCommand(REDO_COMMAND2, void 0)
       }
     ),
     /* @__PURE__ */ jsx65(Divider, {}),
@@ -33935,7 +34133,8 @@ function ToolbarPlugin({
           disabled: !isEditable,
           blockType: toolbarState.blockType,
           rootType: toolbarState.rootType,
-          editor: activeEditor
+          editor: activeEditor,
+          toolbarStyle
         }
       ),
       /* @__PURE__ */ jsx65(Divider, {})
@@ -33968,7 +34167,8 @@ function ToolbarPlugin({
           disabled: !isEditable,
           style: "font-family",
           value: toolbarState.fontFamily,
-          editor: activeEditor
+          editor: activeEditor,
+          toolbarStyle
         }
       ),
       /* @__PURE__ */ jsx65(Divider, {}),
@@ -33982,80 +34182,88 @@ function ToolbarPlugin({
       ),
       /* @__PURE__ */ jsx65(Divider, {}),
       /* @__PURE__ */ jsx65(
-        "button",
+        ToolbarButton,
         {
+          command: FORMAT_TEXT_COMMAND3,
+          active: toolbarState.isBold,
           disabled: !isEditable,
-          onClick: () => {
-            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "bold");
-          },
-          className: "toolbar-item spaced " + (toolbarState.isBold ? "active" : ""),
-          title: `Bold (${SHORTCUTS.BOLD})`,
-          type: "button",
-          "aria-label": `Format text as bold. Shortcut: ${SHORTCUTS.BOLD}`,
-          children: /* @__PURE__ */ jsx65("i", { className: "format bold" })
+          icon: "bold",
+          title: "Bold",
+          shortcut: SHORTCUTS.BOLD,
+          buttonKey: "bold",
+          toolbarStyle,
+          onClick: () => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "bold")
         }
       ),
       /* @__PURE__ */ jsx65(
-        "button",
+        ToolbarButton,
         {
+          command: FORMAT_TEXT_COMMAND3,
+          active: toolbarState.isItalic,
           disabled: !isEditable,
-          onClick: () => {
-            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "italic");
-          },
-          className: "toolbar-item spaced " + (toolbarState.isItalic ? "active" : ""),
-          title: `Italic (${SHORTCUTS.ITALIC})`,
-          type: "button",
-          "aria-label": `Format text as italics. Shortcut: ${SHORTCUTS.ITALIC}`,
-          children: /* @__PURE__ */ jsx65("i", { className: "format italic" })
+          icon: "italic",
+          title: "Italic",
+          shortcut: SHORTCUTS.ITALIC,
+          buttonKey: "italic",
+          toolbarStyle,
+          onClick: () => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "italic")
         }
       ),
       /* @__PURE__ */ jsx65(
-        "button",
+        ToolbarButton,
         {
+          command: FORMAT_TEXT_COMMAND3,
+          active: toolbarState.isUnderline,
           disabled: !isEditable,
-          onClick: () => {
-            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "underline");
-          },
-          className: "toolbar-item spaced " + (toolbarState.isUnderline ? "active" : ""),
-          title: `Underline (${SHORTCUTS.UNDERLINE})`,
-          type: "button",
-          "aria-label": `Format text to underlined. Shortcut: ${SHORTCUTS.UNDERLINE}`,
-          children: /* @__PURE__ */ jsx65("i", { className: "format underline" })
+          icon: "underline",
+          title: "Underline",
+          shortcut: SHORTCUTS.UNDERLINE,
+          buttonKey: "underline",
+          toolbarStyle,
+          onClick: () => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "underline")
         }
       ),
       canViewerSeeInsertCodeButton && /* @__PURE__ */ jsx65(
-        "button",
+        ToolbarButton,
         {
+          command: FORMAT_TEXT_COMMAND3,
+          active: toolbarState.isCode,
           disabled: !isEditable,
-          onClick: () => {
-            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "code");
-          },
-          className: "toolbar-item spaced " + (toolbarState.isCode ? "active" : ""),
-          title: `Insert code block (${SHORTCUTS.INSERT_CODE_BLOCK})`,
-          type: "button",
-          "aria-label": "Insert code block",
-          children: /* @__PURE__ */ jsx65("i", { className: "format code" })
+          icon: "code",
+          title: "Insert code block",
+          shortcut: SHORTCUTS.INSERT_CODE_BLOCK,
+          buttonKey: "code",
+          toolbarStyle,
+          onClick: () => activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "code")
         }
       ),
       /* @__PURE__ */ jsx65(
-        "button",
+        ToolbarButton,
         {
+          command: TOGGLE_LINK_COMMAND5,
+          active: toolbarState.isLink,
           disabled: !isEditable,
-          onClick: insertLink,
-          className: "toolbar-item spaced " + (toolbarState.isLink ? "active" : ""),
-          "aria-label": "Insert link",
-          title: `Insert link (${SHORTCUTS.INSERT_LINK})`,
-          type: "button",
-          children: /* @__PURE__ */ jsx65("i", { className: "format link" })
+          icon: "link",
+          title: "Insert link",
+          shortcut: SHORTCUTS.INSERT_LINK,
+          buttonKey: "link",
+          toolbarStyle,
+          onClick: insertLink
         }
       ),
       /* @__PURE__ */ jsx65(
         DropdownColorPicker,
         {
           disabled: !isEditable,
-          buttonClassName: "toolbar-item color-picker",
+          buttonClassName: resolveClass2(
+            toolbarStyle?.buttonClasses?.fontColor,
+            "toolbar-item color-picker"
+          ),
           buttonAriaLabel: "Formatting text color",
-          buttonIconClassName: "icon font-color",
+          buttonIconClassName: resolveClass2(
+            toolbarStyle?.iconClasses?.fontColor,
+            "icon font-color"
+          ),
           color: toolbarState.fontColor,
           onChange: onFontColorSelect,
           title: "text color"
@@ -34065,169 +34273,62 @@ function ToolbarPlugin({
         DropdownColorPicker,
         {
           disabled: !isEditable,
-          buttonClassName: "toolbar-item color-picker",
+          buttonClassName: resolveClass2(
+            toolbarStyle?.buttonClasses?.bgColor,
+            "toolbar-item color-picker"
+          ),
           buttonAriaLabel: "Formatting background color",
-          buttonIconClassName: "icon bg-color",
+          buttonIconClassName: resolveClass2(
+            toolbarStyle?.iconClasses?.bgColor,
+            "icon bg-color"
+          ),
           color: toolbarState.bgColor,
           onChange: onBgColorSelect,
           title: "bg color"
         }
       ),
-      /* @__PURE__ */ jsxs37(
+      /* @__PURE__ */ jsx65(
         DropDown,
         {
           disabled: !isEditable,
-          buttonClassName: "toolbar-item spaced",
+          buttonClassName: resolveClass2(
+            toolbarStyle?.buttonClasses?.moreStyles,
+            "toolbar-item spaced"
+          ),
           buttonLabel: "",
           buttonAriaLabel: "Formatting options for additional text styles",
-          buttonIconClassName: "icon dropdown-more",
-          children: [
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "lowercase");
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isLowercase),
-                title: "Lowercase",
-                "aria-label": "Format text to lowercase",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon lowercase" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Lowercase" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.LOWERCASE })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "uppercase");
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isUppercase),
-                title: "Uppercase",
-                "aria-label": "Format text to uppercase",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon uppercase" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Uppercase" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.UPPERCASE })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "capitalize");
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isCapitalize),
-                title: "Capitalize",
-                "aria-label": "Format text to capitalize",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon capitalize" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Capitalize" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CAPITALIZE })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(
-                    FORMAT_TEXT_COMMAND3,
-                    "strikethrough"
-                  );
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isStrikethrough),
-                title: "Strikethrough",
-                "aria-label": "Format text with a strikethrough",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon strikethrough" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Strikethrough" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.STRIKETHROUGH })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "subscript");
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isSubscript),
-                title: "Subscript",
-                "aria-label": "Format text with a subscript",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon subscript" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Subscript" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.SUBSCRIPT })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(
-                    FORMAT_TEXT_COMMAND3,
-                    "superscript"
-                  );
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isSuperscript),
-                title: "Superscript",
-                "aria-label": "Format text with a superscript",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon superscript" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Superscript" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.SUPERSCRIPT })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsx65(
-              DropDownItem,
-              {
-                onClick: () => {
-                  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "highlight");
-                },
-                className: "item wide " + dropDownActiveClass(toolbarState.isHighlight),
-                title: "Highlight",
-                "aria-label": "Format text with a highlight",
-                children: /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                  /* @__PURE__ */ jsx65("i", { className: "icon highlight" }),
-                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Highlight" })
-                ] })
-              }
-            ),
-            /* @__PURE__ */ jsxs37(
-              DropDownItem,
-              {
-                onClick: () => clearFormatting(activeEditor),
-                className: "item wide",
-                title: "Clear text formatting",
-                "aria-label": "Clear all text formatting",
-                children: [
-                  /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon clear" }),
-                    /* @__PURE__ */ jsx65("span", { className: "text", children: "Clear Formatting" })
-                  ] }),
-                  /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.CLEAR_FORMATTING })
-                ]
-              }
-            )
-          ]
+          buttonIconClassName: resolveClass2(
+            toolbarStyle?.iconClasses?.moreStyles,
+            "icon dropdown-more"
+          ),
+          children: /* @__PURE__ */ jsxs37(
+            DropDownItem,
+            {
+              onClick: () => {
+                activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND3, "lowercase");
+              },
+              className: `item wide ${dropDownActiveClass(
+                toolbarState.isLowercase
+              )}`,
+              title: "Lowercase",
+              "aria-label": "Format text to lowercase",
+              children: [
+                /* @__PURE__ */ jsxs37("div", { className: "icon-text-container", children: [
+                  /* @__PURE__ */ jsx65(
+                    "i",
+                    {
+                      className: resolveClass2(
+                        toolbarStyle?.iconClasses?.lowercase,
+                        "icon lowercase"
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsx65("span", { className: "text", children: "Lowercase" })
+                ] }),
+                /* @__PURE__ */ jsx65("span", { className: "shortcut", children: SHORTCUTS.LOWERCASE })
+              ]
+            }
+          )
         }
       ),
       canViewerSeeInsertDropdown && /* @__PURE__ */ jsxs37(Fragment24, { children: [
@@ -34236,23 +34337,35 @@ function ToolbarPlugin({
           DropDown,
           {
             disabled: !isEditable,
-            buttonClassName: "toolbar-item spaced",
+            buttonClassName: resolveClass2(
+              toolbarStyle?.buttonClasses?.insert,
+              "toolbar-item spaced"
+            ),
             buttonLabel: "Insert",
             buttonAriaLabel: "Insert specialized editor node",
-            buttonIconClassName: "icon plus",
+            buttonIconClassName: resolveClass2(
+              toolbarStyle?.iconClasses?.insert,
+              "icon plus"
+            ),
             children: [
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    activeEditor.dispatchCommand(
-                      INSERT_HORIZONTAL_RULE_COMMAND2,
-                      void 0
-                    );
-                  },
+                  onClick: () => activeEditor.dispatchCommand(
+                    INSERT_HORIZONTAL_RULE_COMMAND2,
+                    void 0
+                  ),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon horizontal-rule" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.horizontalRule,
+                          "icon horizontal-rule"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Horizontal Rule" })
                   ]
                 }
@@ -34260,31 +34373,44 @@ function ToolbarPlugin({
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    activeEditor.dispatchCommand(INSERT_PAGE_BREAK, void 0);
-                  },
+                  onClick: () => activeEditor.dispatchCommand(INSERT_PAGE_BREAK, void 0),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon page-break" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.pageBreak,
+                          "icon page-break"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Page Break" })
                   ]
                 }
               ),
+              /* @__PURE__ */ jsx65(Divider, {}),
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    showModal("Insert Image", (onClose) => /* @__PURE__ */ jsx65(
-                      InsertImageDialog,
-                      {
-                        activeEditor,
-                        onClose
-                      }
-                    ));
-                  },
+                  onClick: () => showModal("Insert Image", (onClose) => /* @__PURE__ */ jsx65(
+                    InsertImageDialog,
+                    {
+                      activeEditor,
+                      onClose
+                    }
+                  )),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon image" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.image,
+                          "icon image"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Image" })
                   ]
                 }
@@ -34292,18 +34418,24 @@ function ToolbarPlugin({
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    showModal("Insert Inline Image", (onClose) => /* @__PURE__ */ jsx65(
-                      InsertInlineImageDialog,
-                      {
-                        activeEditor,
-                        onClose
-                      }
-                    ));
-                  },
+                  onClick: () => showModal("Insert Inline Image", (onClose) => /* @__PURE__ */ jsx65(
+                    InsertInlineImageDialog,
+                    {
+                      activeEditor,
+                      onClose
+                    }
+                  )),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon image" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.inlineImage,
+                          "icon image"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Inline Image" })
                   ]
                 }
@@ -34317,23 +34449,38 @@ function ToolbarPlugin({
                   }),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon gif" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.gif,
+                          "icon gif"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "GIF" })
                   ]
                 }
               ),
+              /* @__PURE__ */ jsx65(Divider, {}),
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    activeEditor.dispatchCommand(
-                      INSERT_EXCALIDRAW_COMMAND,
-                      void 0
-                    );
-                  },
+                  onClick: () => activeEditor.dispatchCommand(
+                    INSERT_EXCALIDRAW_COMMAND,
+                    void 0
+                  ),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon diagram-2" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.excalidraw,
+                          "icon diagram-2"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Excalidraw" })
                   ]
                 }
@@ -34341,18 +34488,24 @@ function ToolbarPlugin({
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    showModal("Insert Table", (onClose) => /* @__PURE__ */ jsx65(
-                      InsertTableDialog,
-                      {
-                        activeEditor,
-                        onClose
-                      }
-                    ));
-                  },
+                  onClick: () => showModal("Insert Table", (onClose) => /* @__PURE__ */ jsx65(
+                    InsertTableDialog,
+                    {
+                      activeEditor,
+                      onClose
+                    }
+                  )),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon table" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.table,
+                          "icon table"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Table" })
                   ]
                 }
@@ -34360,18 +34513,24 @@ function ToolbarPlugin({
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    showModal("Insert Poll", (onClose) => /* @__PURE__ */ jsx65(
-                      InsertPollDialog,
-                      {
-                        activeEditor,
-                        onClose
-                      }
-                    ));
-                  },
+                  onClick: () => showModal("Insert Poll", (onClose) => /* @__PURE__ */ jsx65(
+                    InsertPollDialog,
+                    {
+                      activeEditor,
+                      onClose
+                    }
+                  )),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon poll" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.poll,
+                          "icon poll"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Poll" })
                   ]
                 }
@@ -34379,37 +34538,50 @@ function ToolbarPlugin({
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    showModal("Insert Columns Layout", (onClose) => /* @__PURE__ */ jsx65(
-                      InsertLayoutDialog,
-                      {
-                        activeEditor,
-                        onClose
-                      }
-                    ));
-                  },
+                  onClick: () => showModal("Insert Columns Layout", (onClose) => /* @__PURE__ */ jsx65(
+                    InsertLayoutDialog,
+                    {
+                      activeEditor,
+                      onClose
+                    }
+                  )),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon columns" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.columns,
+                          "icon columns"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Columns Layout" })
                   ]
                 }
               ),
+              /* @__PURE__ */ jsx65(Divider, {}),
               /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
-                  onClick: () => {
-                    showModal("Insert Equation", (onClose) => /* @__PURE__ */ jsx65(
-                      InsertEquationDialog,
-                      {
-                        activeEditor,
-                        onClose
-                      }
-                    ));
-                  },
+                  onClick: () => showModal("Insert Equation", (onClose) => /* @__PURE__ */ jsx65(
+                    InsertEquationDialog,
+                    {
+                      activeEditor,
+                      onClose
+                    }
+                  )),
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon equation" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.equation,
+                          "icon equation"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Equation" })
                   ]
                 }
@@ -34426,7 +34598,15 @@ function ToolbarPlugin({
                   },
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon sticky" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.sticky,
+                          "icon sticky"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Sticky Note" })
                   ]
                 }
@@ -34442,11 +34622,20 @@ function ToolbarPlugin({
                   },
                   className: "item",
                   children: [
-                    /* @__PURE__ */ jsx65("i", { className: "icon caret-right" }),
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.collapsible,
+                          "icon caret-right"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: "Collapsible container" })
                   ]
                 }
               ),
+              /* @__PURE__ */ jsx65(Divider, {}),
               EmbedConfigs.map((embedConfig) => /* @__PURE__ */ jsxs37(
                 DropDownItem,
                 {
@@ -34458,7 +34647,15 @@ function ToolbarPlugin({
                   },
                   className: "item",
                   children: [
-                    embedConfig.icon,
+                    /* @__PURE__ */ jsx65(
+                      "i",
+                      {
+                        className: resolveClass2(
+                          toolbarStyle?.iconClasses?.[embedConfig.type],
+                          "icon embed"
+                        )
+                      }
+                    ),
                     /* @__PURE__ */ jsx65("span", { className: "text", children: embedConfig.contentName })
                   ]
                 },
@@ -34497,7 +34694,9 @@ function LexicalEditorInner({
   onMentionSelect,
   renderMentionOption,
   placeholder: customPlaceholder,
-  readOnly
+  readOnly,
+  classOverrides,
+  toolbarStyle
 }) {
   const { historyState } = useSharedHistoryContext();
   const {
@@ -34580,7 +34779,8 @@ function LexicalEditorInner({
         editor,
         activeEditor,
         setActiveEditor,
-        setIsLinkEditMode
+        setIsLinkEditMode,
+        toolbarStyle
       }
     ),
     config.isRichText && plugins.shortcuts !== false && /* @__PURE__ */ jsx66(
@@ -34593,7 +34793,10 @@ function LexicalEditorInner({
     /* @__PURE__ */ jsxs38(
       "div",
       {
-        className: `editor-container ${config.showTreeView ? "tree-view" : ""} ${!config.isRichText ? "plain-text" : ""}`,
+        className: resolveClass(
+          classOverrides?.editorContainer,
+          `editor-container ${config.showTreeView ? "tree-view" : ""} ${!config.isRichText ? "plain-text" : ""}`
+        ),
         children: [
           config.isMaxLength && /* @__PURE__ */ jsx66(MaxLengthPlugin, { maxLength: config.maxLength }),
           plugins.dragDropPaste !== false && /* @__PURE__ */ jsx66(DragDropPaste, {}),
@@ -34679,7 +34882,26 @@ function LexicalEditorInner({
             /* @__PURE__ */ jsx66(
               RichTextPlugin3,
               {
-                contentEditable: /* @__PURE__ */ jsx66("div", { className: "editor-scroller", children: /* @__PURE__ */ jsx66("div", { className: "editor", ref: onRef, children: /* @__PURE__ */ jsx66(LexicalContentEditable, { placeholder }) }) }),
+                contentEditable: /* @__PURE__ */ jsx66(
+                  "div",
+                  {
+                    className: resolveClass(
+                      classOverrides?.editorScroller,
+                      "editor-scroller"
+                    ),
+                    children: /* @__PURE__ */ jsx66(
+                      "div",
+                      {
+                        className: resolveClass(
+                          classOverrides?.editorContent,
+                          "editor"
+                        ),
+                        ref: onRef,
+                        children: /* @__PURE__ */ jsx66(LexicalContentEditable, { placeholder })
+                      }
+                    )
+                  }
+                ),
                 ErrorBoundary: LexicalErrorBoundary5
               }
             ),
@@ -34745,7 +34967,13 @@ function LexicalEditorInner({
             /* @__PURE__ */ jsx66(
               PlainTextPlugin3,
               {
-                contentEditable: /* @__PURE__ */ jsx66(LexicalContentEditable, { placeholder }),
+                contentEditable: /* @__PURE__ */ jsx66(
+                  LexicalContentEditable,
+                  {
+                    placeholder,
+                    className: resolveClass(classOverrides?.plainText, "")
+                  }
+                ),
                 ErrorBoundary: LexicalErrorBoundary5
               }
             ),
@@ -34873,13 +35101,23 @@ var defaultInitialConfig = {
 function Editor({
   initialConfig = {},
   plugins,
+  toolbarStyle,
+  classOverrides,
   ...props
 }) {
   const mergedConfig = {
     ...defaultInitialConfig,
     ...initialConfig
   };
-  return /* @__PURE__ */ jsx67(LexicalComposer2, { initialConfig: mergedConfig, children: /* @__PURE__ */ jsx67(SharedHistoryContext, { children: /* @__PURE__ */ jsx67(TableContext, { children: /* @__PURE__ */ jsx67(ToolbarContext, { children: /* @__PURE__ */ jsx67(LexicalEditorInner, { plugins, ...props }) }) }) }) });
+  return /* @__PURE__ */ jsx67(LexicalComposer2, { initialConfig: mergedConfig, children: /* @__PURE__ */ jsx67(SharedHistoryContext, { children: /* @__PURE__ */ jsx67(TableContext, { children: /* @__PURE__ */ jsx67(ToolbarContext, { children: /* @__PURE__ */ jsx67(
+    LexicalEditorInner,
+    {
+      plugins,
+      toolbarStyle,
+      classOverrides,
+      ...props
+    }
+  ) }) }) }) });
 }
 
 // src/index.ts
