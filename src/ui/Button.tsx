@@ -8,8 +8,6 @@
 
 import type {JSX} from 'react';
 
-import './Button.css';
-
 import * as React from 'react';
 import {ReactNode} from 'react';
 

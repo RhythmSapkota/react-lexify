@@ -8,8 +8,6 @@
 import type {Position} from '../../nodes/InlineImageNode/InlineImageNode';
 import type {JSX} from 'react';
 
-import '../../nodes/InlineImageNode/InlineImageNode.css';
-
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {$wrapNodeInElement, mergeRegister} from '@lexical/utils';
 import {

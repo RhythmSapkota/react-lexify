@@ -1,24 +1,24 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["esm"],
+  entry: ['src/index.ts'],
+  format: ['esm'],
   dts: {
-    entry: "src/index.ts",
+    entry: 'src/index.ts',
     resolve: true,
   },
   clean: true,
   splitting: false,
   sourcemap: true,
-  target: "esnext",
-  tsconfig: "./tsconfig.build.json",
-  external: ["react", "react-dom"],
+  target: 'esnext',
+  tsconfig: './tsconfig.build.json',
+  external: ['react', 'react-dom'],
+  loader: {
+    '.svg': 'dataurl',
+  },
   esbuildOptions: (options) => {
     options.banner = {
       js: '"use client";',
     };
-  },
-  loader: {
-    ".svg": "dataurl",
   },
 });

@@ -14,8 +14,6 @@ import type {
 } from '@excalidraw/excalidraw/types';
 import type {JSX} from 'react';
 
-import './ExcalidrawModal.css';
-
 import {Excalidraw} from '@excalidraw/excalidraw';
 import {isDOMNode} from 'lexical';
 import * as React from 'react';

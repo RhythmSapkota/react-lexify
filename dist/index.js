@@ -127,12 +127,6 @@ var init_SettingsContext = __esm({
   }
 });
 
-// src/ui/Modal.css
-var init_Modal = __esm({
-  "src/ui/Modal.css"() {
-  }
-});
-
 // src/ui/Modal.tsx
 import { isDOMNode } from "lexical";
 import { useEffect as useEffect3, useRef } from "react";
@@ -212,10 +206,9 @@ function Modal({
     document.body
   );
 }
-var init_Modal2 = __esm({
+var init_Modal = __esm({
   "src/ui/Modal.tsx"() {
     "use strict";
-    init_Modal();
   }
 });
 
@@ -257,13 +250,7 @@ function useModal() {
 var init_useModal = __esm({
   "src/hooks/useModal.tsx"() {
     "use strict";
-    init_Modal2();
-  }
-});
-
-// src/ui/Button.css
-var init_Button = __esm({
-  "src/ui/Button.css"() {
+    init_Modal();
   }
 });
 
@@ -306,17 +293,10 @@ function Button({
     }
   );
 }
-var init_Button2 = __esm({
+var init_Button = __esm({
   "src/ui/Button.tsx"() {
     "use strict";
-    init_Button();
     init_joinClasses();
-  }
-});
-
-// src/ui/Dialog.css
-var init_Dialog = __esm({
-  "src/ui/Dialog.css"() {
   }
 });
 
@@ -331,16 +311,9 @@ function DialogActions({
 }) {
   return /* @__PURE__ */ jsx7("div", { className: "DialogActions", "data-test-id": dataTestId, children });
 }
-var init_Dialog2 = __esm({
+var init_Dialog = __esm({
   "src/ui/Dialog.tsx"() {
     "use strict";
-    init_Dialog();
-  }
-});
-
-// src/ui/EquationEditor.css
-var init_EquationEditor = __esm({
-  "src/ui/EquationEditor.css"() {
   }
 });
 
@@ -380,10 +353,9 @@ function EquationEditor({ equation, setEquation, inline }, forwardedRef) {
   ] });
 }
 var EquationEditor_default;
-var init_EquationEditor2 = __esm({
+var init_EquationEditor = __esm({
   "src/ui/EquationEditor.tsx"() {
     "use strict";
-    init_EquationEditor();
     EquationEditor_default = forwardRef(EquationEditor);
   }
 });
@@ -570,7 +542,7 @@ function EquationComponent({
 var init_EquationComponent = __esm({
   "src/nodes/EquationComponent.tsx"() {
     "use strict";
-    init_EquationEditor2();
+    init_EquationEditor();
     init_KatexRenderer();
     init_EquationNode();
   }
@@ -697,12 +669,6 @@ var init_EquationNode = __esm({
         );
       }
     };
-  }
-});
-
-// src/ui/ExcalidrawModal.css
-var init_ExcalidrawModal = __esm({
-  "src/ui/ExcalidrawModal.css"() {
   }
 });
 
@@ -869,12 +835,11 @@ function ExcalidrawModal({
   );
 }
 var useCallbackRefState;
-var init_ExcalidrawModal2 = __esm({
+var init_ExcalidrawModal = __esm({
   "src/ui/ExcalidrawModal.tsx"() {
     "use strict";
-    init_ExcalidrawModal();
-    init_Button2();
-    init_Modal2();
+    init_Button();
+    init_Modal();
     useCallbackRefState = () => {
       const [refValue, setRefValue] = React3.useState(null);
       const refCallback = React3.useCallback(
@@ -1425,7 +1390,7 @@ function ExcalidrawComponent({
 var init_ExcalidrawComponent = __esm({
   "src/nodes/ExcalidrawNode/ExcalidrawComponent.tsx"() {
     "use strict";
-    init_ExcalidrawModal2();
+    init_ExcalidrawModal();
     init_ImageResizer();
     init_ExcalidrawNode();
     init_ExcalidrawImage();
@@ -1665,12 +1630,6 @@ var init_KeywordNode = __esm({
         return true;
       }
     };
-  }
-});
-
-// src/nodes/ImageNode.css
-var init_ImageNode = __esm({
-  "src/nodes/ImageNode.css"() {
   }
 });
 
@@ -2105,12 +2064,6 @@ var init_TreeViewPlugin = __esm({
   }
 });
 
-// src/ui/ContentEditable.css
-var init_ContentEditable = __esm({
-  "src/ui/ContentEditable.css"() {
-  }
-});
-
 // src/ui/ContentEditable.tsx
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { jsx as jsx31 } from "react/jsx-runtime";
@@ -2128,10 +2081,9 @@ function LexicalContentEditable({
     }
   );
 }
-var init_ContentEditable2 = __esm({
+var init_ContentEditable = __esm({
   "src/ui/ContentEditable.tsx"() {
     "use strict";
-    init_ContentEditable();
   }
 });
 
@@ -2595,7 +2547,6 @@ var imageCache, RIGHT_CLICK_IMAGE_COMMAND;
 var init_ImageComponent = __esm({
   "src/nodes/ImageComponent.tsx"() {
     "use strict";
-    init_ImageNode();
     init_collaboration();
     init_SettingsContext();
     init_SharedHistoryContext();
@@ -2605,9 +2556,9 @@ var init_ImageComponent = __esm({
     init_LinkPlugin();
     init_MentionsPlugin();
     init_TreeViewPlugin();
-    init_ContentEditable2();
+    init_ContentEditable();
     init_ImageResizer();
-    init_ImageNode2();
+    init_ImageNode();
     imageCache = /* @__PURE__ */ new Map();
     RIGHT_CLICK_IMAGE_COMMAND = createCommand7("RIGHT_CLICK_IMAGE_COMMAND");
   }
@@ -2668,7 +2619,7 @@ function $isImageNode(node) {
   return node instanceof ImageNode;
 }
 var ImageComponent2, ImageNode;
-var init_ImageNode2 = __esm({
+var init_ImageNode = __esm({
   "src/nodes/ImageNode.tsx"() {
     "use strict";
     init_EmojiNode();
@@ -2821,12 +2772,6 @@ var init_ImageNode2 = __esm({
   }
 });
 
-// src/ui/Input.css
-var init_Input = __esm({
-  "src/ui/Input.css"() {
-  }
-});
-
 // src/ui/TextInput.tsx
 import { jsx as jsx35, jsxs as jsxs14 } from "react/jsx-runtime";
 function TextInput({
@@ -2857,13 +2802,6 @@ function TextInput({
 var init_TextInput = __esm({
   "src/ui/TextInput.tsx"() {
     "use strict";
-    init_Input();
-  }
-});
-
-// src/nodes/PollNode.css
-var init_PollNode = __esm({
-  "src/nodes/PollNode.css"() {
   }
 });
 
@@ -3058,10 +2996,9 @@ function PollComponent({
 var init_PollComponent = __esm({
   "src/nodes/PollComponent.tsx"() {
     "use strict";
-    init_PollNode();
-    init_Button2();
+    init_Button();
     init_joinClasses();
-    init_PollNode2();
+    init_PollNode();
   }
 });
 
@@ -3117,7 +3054,7 @@ function $isPollNode(node) {
   return node instanceof PollNode;
 }
 var PollComponent2, questionState, optionsState, PollNode;
-var init_PollNode2 = __esm({
+var init_PollNode = __esm({
   "src/nodes/PollNode.tsx"() {
     "use strict";
     PollComponent2 = React7.lazy(() => Promise.resolve().then(() => (init_PollComponent(), PollComponent_exports)));
@@ -19850,18 +19787,11 @@ var init_emoji_list = __esm({
   }
 });
 
-// src/themes/PlaygroundEditorTheme.css
-var init_PlaygroundEditorTheme = __esm({
-  "src/themes/PlaygroundEditorTheme.css"() {
-  }
-});
-
 // src/themes/PlaygroundEditorTheme.ts
 var theme, PlaygroundEditorTheme_default;
-var init_PlaygroundEditorTheme2 = __esm({
+var init_PlaygroundEditorTheme = __esm({
   "src/themes/PlaygroundEditorTheme.ts"() {
     "use strict";
-    init_PlaygroundEditorTheme();
     theme = {
       autocomplete: "PlaygroundEditorTheme__autocomplete",
       blockCursor: "PlaygroundEditorTheme__blockCursor",
@@ -19983,18 +19913,6 @@ var init_PlaygroundEditorTheme2 = __esm({
   }
 });
 
-// src/nodes/InlineImageNode/InlineImageNode.css
-var init_InlineImageNode = __esm({
-  "src/nodes/InlineImageNode/InlineImageNode.css"() {
-  }
-});
-
-// src/ui/Select.css
-var init_Select = __esm({
-  "src/ui/Select.css"() {
-  }
-});
-
 // src/ui/Select.tsx
 import { jsx as jsx51, jsxs as jsxs27 } from "react/jsx-runtime";
 function Select({
@@ -20008,10 +19926,9 @@ function Select({
     /* @__PURE__ */ jsx51("select", { ...other, className: className || "select", children })
   ] });
 }
-var init_Select2 = __esm({
+var init_Select = __esm({
   "src/ui/Select.tsx"() {
     "use strict";
-    init_Select();
   }
 });
 
@@ -20339,13 +20256,12 @@ var imageCache2;
 var init_InlineImageComponent = __esm({
   "src/nodes/InlineImageNode/InlineImageComponent.tsx"() {
     "use strict";
-    init_InlineImageNode();
     init_useModal();
     init_LinkPlugin();
-    init_Button2();
-    init_ContentEditable2();
-    init_Dialog2();
-    init_Select2();
+    init_Button();
+    init_ContentEditable();
+    init_Dialog();
+    init_Select();
     init_TextInput();
     imageCache2 = /* @__PURE__ */ new Set();
   }
@@ -22049,25 +21965,12 @@ var init_LexicalMarkdown_prod = __esm({
   }
 });
 
-// src/nodes/StickyNode.css
-var init_StickyNode = __esm({
-  "src/nodes/StickyNode.css"() {
-  }
-});
-
-// src/themes/StickyEditorTheme.css
-var init_StickyEditorTheme = __esm({
-  "src/themes/StickyEditorTheme.css"() {
-  }
-});
-
 // src/themes/StickyEditorTheme.ts
 var theme2, StickyEditorTheme_default;
-var init_StickyEditorTheme2 = __esm({
+var init_StickyEditorTheme = __esm({
   "src/themes/StickyEditorTheme.ts"() {
     "use strict";
-    init_StickyEditorTheme();
-    init_PlaygroundEditorTheme2();
+    init_PlaygroundEditorTheme();
     theme2 = {
       ...PlaygroundEditorTheme_default,
       paragraph: "StickyEditorTheme__paragraph"
@@ -22301,12 +22204,11 @@ function StickyComponent({
 var init_StickyComponent = __esm({
   "src/nodes/StickyComponent.tsx"() {
     "use strict";
-    init_StickyNode();
     init_collaboration();
     init_SharedHistoryContext();
-    init_StickyEditorTheme2();
-    init_ContentEditable2();
-    init_StickyNode2();
+    init_StickyEditorTheme();
+    init_ContentEditable();
+    init_StickyNode();
   }
 });
 
@@ -22322,7 +22224,7 @@ function $createStickyNode(xOffset, yOffset) {
   return new StickyNode(xOffset, yOffset, "yellow");
 }
 var StickyComponent2, StickyNode;
-var init_StickyNode2 = __esm({
+var init_StickyNode = __esm({
   "src/nodes/StickyNode.tsx"() {
     "use strict";
     StickyComponent2 = React10.lazy(() => Promise.resolve().then(() => (init_StickyComponent(), StickyComponent_exports)));
@@ -25138,8 +25040,8 @@ var DICTIONARY = [
 
 // src/plugins/AutoEmbedPlugin/index.tsx
 init_useModal();
-init_Button2();
-init_Dialog2();
+init_Button();
+init_Dialog();
 import {
   AutoEmbedOption,
   LexicalAutoEmbedPlugin,
@@ -26703,7 +26605,6 @@ var cat_typing_default = "./cat-typing-BZQCDE3J.gif";
 
 // src/plugins/EquationsPlugin/index.tsx
 init_EquationNode();
-import "katex/dist/katex.css";
 import { useLexicalComposerContext as useLexicalComposerContext11 } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodeInElement } from "@lexical/utils";
 import {
@@ -26716,7 +26617,7 @@ import {
 import { useCallback as useCallback8, useEffect as useEffect13 } from "react";
 
 // src/ui/KatexEquationAlterer.tsx
-init_Button2();
+init_Button();
 init_KatexRenderer();
 import { useLexicalComposerContext as useLexicalComposerContext10 } from "@lexical/react/LexicalComposerContext";
 import { useCallback as useCallback7, useState as useState10 } from "react";
@@ -26816,8 +26717,7 @@ function EquationsPlugin() {
 
 // src/plugins/ExcalidrawPlugin/index.tsx
 init_ExcalidrawNode();
-init_ExcalidrawModal2();
-import "@excalidraw/excalidraw/index.css";
+init_ExcalidrawModal();
 import { useLexicalComposerContext as useLexicalComposerContext13 } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodeInElement as $wrapNodeInElement2 } from "@lexical/utils";
 import {
@@ -26918,12 +26818,11 @@ var landscape_default = "./landscape-RJWVK6ET.jpg";
 var yellow_flower_default = "./yellow-flower-R72KOP74.jpg";
 
 // src/plugins/ImagesPlugin/index.tsx
-init_ImageNode2();
-init_Button2();
-init_Dialog2();
+init_ImageNode();
+init_Button();
+init_Dialog();
 
 // src/ui/FileInput.tsx
-init_Input();
 import { jsx as jsx34, jsxs as jsxs13 } from "react/jsx-runtime";
 function FileInput({
   accept,
@@ -27245,7 +27144,7 @@ function getDragSelection(event) {
 }
 
 // src/plugins/LayoutPlugin/InsertLayoutDialog.tsx
-init_Button2();
+init_Button();
 import { useState as useState20 } from "react";
 
 // src/ui/DropDown.tsx
@@ -27937,9 +27836,9 @@ function PageBreakPlugin() {
 }
 
 // src/plugins/PollPlugin/index.tsx
-init_PollNode2();
-init_Button2();
-init_Dialog2();
+init_PollNode();
+init_Button();
+init_Dialog();
 init_TextInput();
 import { useLexicalComposerContext as useLexicalComposerContext24 } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodeInElement as $wrapNodeInElement4 } from "@lexical/utils";
@@ -27995,8 +27894,8 @@ function PollPlugin() {
 }
 
 // src/plugins/TablePlugin.tsx
-init_Button2();
-init_Dialog2();
+init_Button();
+init_Dialog();
 init_TextInput();
 import { useLexicalComposerContext as useLexicalComposerContext25 } from "@lexical/react/LexicalComposerContext";
 import {
@@ -29761,7 +29660,6 @@ function FloatingTextFormatToolbarPlugin({
 }
 
 // src/plugins/InlineImagePlugin/index.tsx
-init_InlineImageNode();
 import { useLexicalComposerContext as useLexicalComposerContext35 } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodeInElement as $wrapNodeInElement5, mergeRegister as mergeRegister15 } from "@lexical/utils";
 import {
@@ -29998,9 +29896,9 @@ function $isInlineImageNode(node) {
 }
 
 // src/plugins/InlineImagePlugin/index.tsx
-init_Button2();
-init_Dialog2();
-init_Select2();
+init_Button();
+init_Dialog();
+init_Select();
 init_TextInput();
 import { Fragment as Fragment19, jsx as jsx54, jsxs as jsxs29 } from "react/jsx-runtime";
 var INSERT_INLINE_IMAGE_COMMAND = createCommand13("INSERT_INLINE_IMAGE_COMMAND");
@@ -30287,7 +30185,7 @@ var registerMarkdownShortcuts2 = mod.registerMarkdownShortcuts;
 
 // src/plugins/MarkdownTransformers/index.ts
 init_EquationNode();
-init_ImageNode2();
+init_ImageNode();
 import {
   $createHorizontalRuleNode,
   $isHorizontalRuleNode,
@@ -33248,7 +33146,7 @@ import {
 } from "lexical";
 import { useCallback as useCallback25, useEffect as useEffect50, useState as useState40 } from "react";
 init_useModal();
-init_StickyNode2();
+init_StickyNode();
 
 // src/ui/DropdownColorPicker.tsx
 import { jsx as jsx63 } from "react/jsx-runtime";
@@ -34587,7 +34485,7 @@ function ToolbarPlugin({
 
 // src/EditorInner.tsx
 init_TreeViewPlugin();
-init_ContentEditable2();
+init_ContentEditable();
 import { Fragment as Fragment25, jsx as jsx66, jsxs as jsxs38 } from "react/jsx-runtime";
 var skipCollaborationInit = (
   // @ts-expect-error
@@ -34884,11 +34782,11 @@ import { TableCellNode as TableCellNode5, TableNode as TableNode5, TableRowNode 
 init_EmojiNode();
 init_EquationNode();
 init_ExcalidrawNode();
-init_ImageNode2();
+init_ImageNode();
 init_KeywordNode();
 init_MentionNode();
-init_PollNode2();
-init_StickyNode2();
+init_PollNode();
+init_StickyNode();
 var PlaygroundNodes = [
   HeadingNode2,
   ListNode3,
@@ -34929,7 +34827,7 @@ var PlaygroundNodes = [
 var PlaygroundNodes_default = PlaygroundNodes;
 
 // src/Editor.tsx
-init_PlaygroundEditorTheme2();
+init_PlaygroundEditorTheme();
 
 // src/utils/editorConfig.ts
 import {

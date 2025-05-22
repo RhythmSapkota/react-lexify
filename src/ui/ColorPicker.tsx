@@ -8,8 +8,6 @@
 
 import type {JSX} from 'react';
 
-import './ColorPicker.css';
-
 import {calculateZoomLevel} from '@lexical/utils';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import * as React from 'react';
