@@ -122,6 +122,7 @@ type EditorClassOverrides = {
 };
 interface InnerEditorProps {
     plugins?: EditorPluginConfig;
+    initialValue?: string;
     outputFormat?: "editorState" | "htmlString";
     fetchMentions?: (query: string) => Promise<Mention[]>;
     onMentionSelect?: (mention: Mention) => void;

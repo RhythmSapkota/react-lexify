@@ -37,7 +37,7 @@
   },
   "scripts": {
     "build": "tsup && npm run build:css && npm run copy-assets",
-    "dev": "vite dev",
+    "dev": "tsup --watch",
     "build:css": "postcss src/styles.css -o dist/react-lexify.css",
     "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
     "prepublishOnly": "npm run build && npm run typegen",

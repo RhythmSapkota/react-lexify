@@ -35040,6 +35040,7 @@ var $generateHtmlFromNodes2 = mod2.$generateHtmlFromNodes;
 var $generateNodesFromDOM2 = mod2.$generateNodesFromDOM;
 
 // src/EditorInner.tsx
+import { $getRoot as $getRoot4 } from "lexical";
 import { Fragment as Fragment25, jsx as jsx66, jsxs as jsxs38 } from "react/jsx-runtime";
 var skipCollaborationInit = (
   // @ts-expect-error
@@ -35052,6 +35053,7 @@ function LexicalEditorInner({
   renderMentionOption,
   placeholder: customPlaceholder,
   readOnly,
+  initialValue,
   classOverrides,
   toolbarStyle,
   outputFormat = "htmlString",
@@ -35131,6 +35133,17 @@ function LexicalEditorInner({
       window.removeEventListener("resize", updateViewPortWidth);
     };
   }, [isSmallWidthViewport]);
+  useEffect51(() => {
+    if (!initialValue || !editor) return;
+    editor.update(() => {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString(initialValue, "text/html");
+      const nodes = $generateNodesFromDOM2(editor, dom);
+      const root = $getRoot4();
+      root.clear();
+      root.append(...nodes);
+    });
+  }, [initialValue, editor]);
   return /* @__PURE__ */ jsxs38(Fragment25, { children: [
     onChange && /* @__PURE__ */ jsx66(
       OnChangePlugin2,
@@ -35430,37 +35443,6 @@ var PlaygroundNodes_default = PlaygroundNodes;
 
 // src/Editor.tsx
 init_PlaygroundEditorTheme();
-
-// src/utils/editorConfig.ts
-import {
-  $createParagraphNode as $createParagraphNode14,
-  $createTextNode as $createTextNode5,
-  $getRoot as $getRoot4,
-  $isTextNode as $isTextNode9,
-  TextNode as TextNode11
-} from "lexical";
-import { $createHeadingNode as $createHeadingNode4 } from "@lexical/rich-text";
-function $prepopulatedRichText() {
-  const root = $getRoot4();
-  if (root.getFirstChild() === null) {
-    const heading = $createHeadingNode4("h1");
-    heading.append($createTextNode5("Welcome to the playground"));
-    root.append(heading);
-    const paragraph = $createParagraphNode14();
-    paragraph.append(
-      $createTextNode5("This is the playground. Try typing some text with "),
-      $createTextNode5("bold").toggleFormat("bold"),
-      $createTextNode5(", "),
-      $createTextNode5("italic").toggleFormat("italic"),
-      $createTextNode5(", or "),
-      $createTextNode5("code").toggleFormat("code"),
-      $createTextNode5(" formatting.")
-    );
-    root.append(paragraph);
-  }
-}
-
-// src/Editor.tsx
 import { jsx as jsx67 } from "react/jsx-runtime";
 var defaultInitialConfig = {
   namespace: "Editor",
@@ -35469,8 +35451,7 @@ var defaultInitialConfig = {
   onError: (e3) => {
     console.error(e3);
     throw e3;
-  },
-  editorState: $prepopulatedRichText
+  }
 };
 function Editor({
   initialConfig = {},
