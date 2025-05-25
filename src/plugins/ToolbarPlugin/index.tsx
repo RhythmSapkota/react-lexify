@@ -191,9 +191,8 @@ function resolveClass(
   if (typeof override === "function") {
     return override(defaultClass);
   }
-  return override ?? defaultClass;
+  return `${override} ${defaultClass}`
 }
-
 // Components
 const Divider = (): JSX.Element => <div className="divider" />;
 

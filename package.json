@@ -38,7 +38,7 @@
   },
   "scripts": {
     "build": "tsup && npm run build:css && npm run copy-assets",
-    "dev": "tsup --watch",
+    "dev": "vite dev",
     "build:css": "postcss src/styles.css -o dist/rs-richeditor.css",
     "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
     "prepublishOnly": "npm run build && npm run typegen",
