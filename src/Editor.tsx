@@ -10,6 +10,7 @@ import LexicalEditorInner, {
   EditorPluginConfig,
   InnerEditorProps,
 } from "./EditorInner";
+import "@excalidraw/excalidraw/index.css";
 import PlaygroundNodes from "./nodes/PlaygroundNodes";
 import { TableContext } from "./plugins/TablePlugin";
 import PlaygroundEditorTheme from "./themes/PlaygroundEditorTheme";

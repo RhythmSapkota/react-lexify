@@ -738,6 +738,7 @@ function ExcalidrawModal({
   const save = () => {
     if (elements2 && elements2.filter((el) => !el.isDeleted).length > 0) {
       const appState = excalidrawAPI?.getAppState();
+      console.log(appState);
       const partialState = {
         exportBackground: appState?.exportBackground,
         exportScale: appState?.exportScale,
@@ -27119,7 +27120,7 @@ function ExcalidrawPlugin() {
     ExcalidrawModal,
     {
       initialElements: [],
-      initialAppState: {},
+      initialAppState: { zoom: { value: 1 }, isLoading: false },
       initialFiles: {},
       isShown: isModalOpen,
       onDelete,
@@ -35400,6 +35401,9 @@ function LexicalEditorInner({
     config.showTreeView && /* @__PURE__ */ jsx66(TreeViewPlugin, {})
   ] });
 }
+
+// src/Editor.tsx
+import "@excalidraw/excalidraw/index.css";
 
 // src/nodes/PlaygroundNodes.ts
 import { CodeHighlightNode, CodeNode as CodeNode3 } from "@lexical/code";
