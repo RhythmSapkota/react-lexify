@@ -150,7 +150,7 @@ interface EditorProps {
 | `onChange`                | `(output: EditorState \| string) => void`                | Called whenever the editor content changes. Format is determined by `outputFormat`. |
 | `outputFormat`            | `"htmlString" \| "editorState"`                          | Determines the return format for `onChange`. Defaults to `"htmlString"`.            |
 
-## ⚠️ Deprecated Props (as of v0.1.3)
+## ⚠️ Deprecated Props (as of v1.0.0)
 
 The following props have been deprecated and will be removed in future versions:
 
