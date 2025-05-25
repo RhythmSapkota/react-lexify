@@ -1,15 +1,15 @@
 {
-  "name": "rs-richeditor",
-  "version": "1.0.7",
+  "name": "react-lexify",
+  "version": "0.1.0",
   "description": "A customizable, performant, and modern rich text editor built with Lexical and React. Created by Rhythm Sapkota.",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "style": "dist/rs-richeditor.css",
+  "style": "dist/react-lexify.css",
   "files": [
     "dist",
-    "dist/rs-richeditor.css",
+    "dist/react-lexify.css",
     "dist/cat-typing-BZQCDE3J.gif",
     "dist/landscape-RJWVK6ET.jpg",
     "dist/yellow-flower-R72KOP74.jpg"
@@ -19,7 +19,7 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./dist/rs-richeditor.css": "./dist/rs-richeditor.css"
+    "./dist/react-lexify.css": "./dist/react-lexify.css"
   },
   "keywords": [
     "rich-text-editor",
@@ -27,19 +27,18 @@
     "react",
     "editor",
     "wysiwyg",
-    "rs-richeditor",
-    "rhythm"
+    "react-lexify"
   ],
   "author": "Rhythm Sapkota",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RhythmSapkota/rs-richeditor.git"
+    "url": "https://github.com/RhythmSapkota/react-lexify.git"
   },
   "scripts": {
     "build": "tsup && npm run build:css && npm run copy-assets",
     "dev": "vite dev",
-    "build:css": "postcss src/styles.css -o dist/rs-richeditor.css",
+    "build:css": "postcss src/styles.css -o dist/react-lexify.css",
     "typegen": "tsc --declaration --emitDeclarationOnly --outDir dist",
     "prepublishOnly": "npm run build && npm run typegen",
     "copy-assets": "cpx \"src/**/*.{svg,jpg,png,gif}\" dist"

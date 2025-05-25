@@ -1,17 +1,17 @@
-# rs-richeditor
+# react-lexify
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Made with Lexical](https://img.shields.io/badge/Made%20with-Lexical-blue)](https://lexical.dev/)
-[![npm version](https://img.shields.io/npm/v/rs-richeditor.svg)](https://www.npmjs.com/package/rs-richeditor)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/rhythmsapkota/rs-richeditor/pulls)
+[![npm version](https://img.shields.io/npm/v/react-lexify.svg)](https://www.npmjs.com/package/react-lexify)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/rhythmsapkota/react-lexify/pulls)
 
-A powerful, extensible, and modular rich text editor built with [Lexical](https://lexical.dev/) and [React](https://reactjs.org/). `rs-richeditor` is designed for developers who need a flexible editor that can be easily customized with plugins, collaborative features, and advanced content types.
+A powerful, extensible, and modular rich text editor built with [Lexical](https://lexical.dev/) and [React](https://reactjs.org/). `react-lexify` is designed for developers who need a flexible editor that can be easily customized with plugins, collaborative features, and advanced content types.
 
 > ⚠️ **Important Note:**  
 > This editor is built on top of [Lexical](https://lexical.dev/), which is an actively developed and evolving library maintained by Meta. As such, **breaking changes** or frequent updates may occur in Lexical’s core or plugin APIs.  
-> We are committed to keeping `rs-richeditor` in sync with Lexical's latest stable versions and **will try to publish updates as soon as possible** to maintain compatibility and stability.
+> We are committed to keeping `react-lexify` in sync with Lexical's latest stable versions and **will try to publish updates as soon as possible** to maintain compatibility and stability.
 
-<!-- ![rs-richeditor demo](https://path-to-your-demo-gif.gif) -->
+<!-- ![react-lexify demo](https://path-to-your-demo-gif.gif) -->
 
 ## Table of Contents
 
@@ -51,11 +51,11 @@ A powerful, extensible, and modular rich text editor built with [Lexical](https:
 ## 📦 Installation
 
 ```bash
-npm install rs-richeditor
+npm install react-lexify
 # or
-yarn add rs-richeditor
+yarn add react-lexify
 # or
-pnpm add rs-richeditor
+pnpm add react-lexify
 ```
 
 Make sure you also have:
@@ -73,7 +73,7 @@ npm install react react-dom
 > 🌸 **Add the following import** in your root file (e.g., `index.tsx`, `_app.tsx`, or layout):
 >
 > ```ts
-> import "rs-richeditor/dist/rs-richeditor.css";
+> import "react-lexify/dist/react-lexify.css";
 > ```
 >
 > ✅ This is **required** for the editor to render styles correctly.
@@ -86,7 +86,7 @@ npm install react react-dom
 
 ```tsx
 import React from "react";
-import Editor from "rs-richeditor";
+import Editor from "react-lexify";
 
 export default function MyEditor() {
   return (
@@ -527,7 +527,7 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
 
 # 🎨 Styling and Class Overrides
 
-rs-richeditor provides a flexible way to override the default class names used for styling the editor and toolbar components. This allows developers to fully customize the appearance using their own CSS framework (e.g., Tailwind, Bootstrap) or design system.
+react-lexify provides a flexible way to override the default class names used for styling the editor and toolbar components. This allows developers to fully customize the appearance using their own CSS framework (e.g., Tailwind, Bootstrap) or design system.
 
 ## Editor Class Overrides
 
@@ -673,7 +673,7 @@ Below is a comprehensive example showing most of the available configuration opt
 
 ```tsx
 import React from "react";
-import Editor from "rs-richeditor";
+import Editor from "react-lexify";
 
 export default function FullFeaturedEditor() {
   return (
@@ -824,7 +824,7 @@ interface Mention {
 
 ```tsx
 import React from "react";
-import Editor from "rs-richeditor";
+import Editor from "react-lexify";
 
 export default function BasicEditor() {
   return (
@@ -845,7 +845,7 @@ export default function BasicEditor() {
 
 ```tsx
 import React from "react";
-import Editor from "rs-richeditor";
+import Editor from "react-lexify";
 import { WebsocketProvider } from "y-websocket";
 import * as Y from "yjs";
 
@@ -882,7 +882,7 @@ export default function CollaborativeEditor() {
 
 ```tsx
 import React from "react";
-import Editor from "rs-richeditor";
+import Editor from "react-lexify";
 
 export default function SocialEditor() {
   return (
@@ -936,12 +936,12 @@ export default function SocialEditor() {
 The library is built with TypeScript and includes type definitions for all components and configurations:
 
 ```ts
-import { Editor, EditorPluginConfig, Mention } from "rs-richeditor";
+import { Editor, EditorPluginConfig, Mention } from "react-lexify";
 ```
 
 ## 🌐 Browser Support
 
-rs-richeditor supports all modern browsers:
+react-lexify supports all modern browsers:
 
 - Chrome (latest)
 - Firefox (latest)
@@ -963,13 +963,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 This project is licensed under the [MIT License](./LICENSE).
 
 > **Disclaimer:**  
-> This project (`rs-richeditor`) is built on top of [Lexical](https://lexical.dev/), an open-source framework developed and maintained by [Meta Platforms, Inc.](https://meta.com).  
+> This project (`react-lexify`) is built on top of [Lexical](https://lexical.dev/), an open-source framework developed and maintained by [Meta Platforms, Inc.](https://meta.com).  
 > It is an **independent project not affiliated with or endorsed by Meta**.  
 > Portions of the code and plugin structure are adapted from the [Lexical Playground](https://github.com/facebook/lexical/tree/main/packages/lexical-playground), which is also licensed under the MIT License.
 
 ## 👤 Author
 
-Built and maintained by **Rhythm Sapkota**  
+by **rhythmsapkota**  
 [GitHub Profile](https://github.com/rhythmsapkota)
 
 Contributions, issues, and suggestions are welcome!
