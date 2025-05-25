@@ -13,11 +13,12 @@ interface Mention {
     };
 }
 
-type ToolbarButtonKey = "bold" | "italic" | "underline" | "code" | "link" | "strikethrough" | "subscript" | "superscript" | "highlight" | "clearFormatting" | "undo" | "redo" | "insertCodeBlock" | "insertLink" | "lowercase" | "uppercase" | "capitalize" | "fontColor" | "bgColor" | "insert" | "blockControls" | "alignment" | "fontFamily" | "fontSize" | "moreStyles" | "horizontalRule" | "pageBreak" | "image" | "inlineImage" | "gif" | "excalidraw" | "table" | "poll" | "columns" | "equation" | "sticky" | "collapsible";
+type ToolbarButtonKey = "bold" | "italic" | "underline" | "code" | "link" | "strikethrough" | "subscript" | "superscript" | "highlight" | "clearFormatting" | "undo" | "redo" | "insertCodeBlock" | "insertLink" | "lowercase" | "uppercase" | "capitalize" | "fontColor" | "bgColor" | "insert" | "blockControls" | "alignment" | "fontFamily" | "fontSize" | "moreStyles" | "horizontalRule" | "pageBreak" | "image" | "inlineImage" | "gif" | "excalidraw" | "table" | "poll" | "columns" | "equation" | "sticky" | "collapsible" | "fontSizeIncrease" | "fontSizeDecrease";
 type ToolbarDropdownKey = "paragraph" | "h1" | "h2" | "h3" | "bullet" | "number" | "check" | "quote" | "code" | "leftAlign" | "centerAlign" | "rightAlign" | "justifyAlign" | "startAlign" | "endAlign" | "outdent" | "indent";
 type ClassNameOverride = string | ((defaultClass: string) => string);
 type ToolbarStyleConfig = {
     rootClass?: ClassNameOverride;
+    inputClasses?: Partial<Record<"fontSizeInput", ClassNameOverride>>;
     buttonClasses?: Partial<Record<ToolbarButtonKey, ClassNameOverride>>;
     iconClasses?: Partial<Record<ToolbarButtonKey | ToolbarDropdownKey, ClassNameOverride>>;
     dropdownItemClasses?: Partial<Record<ToolbarDropdownKey, ClassNameOverride>>;

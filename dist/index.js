@@ -33182,7 +33182,10 @@ import { Fragment as Fragment23, jsx as jsx64, jsxs as jsxs36 } from "react/jsx-
 function FontSize({
   selectionFontSize,
   disabled,
-  editor
+  editor,
+  inputClassName,
+  decrementButtonClassName,
+  incrementButtonClassName
 }) {
   const [inputValue, setInputValue] = React11.useState(selectionFontSize);
   const [inputChangeFlag, setInputChangeFlag] = React11.useState(false);
@@ -33229,7 +33232,7 @@ function FontSize({
         type: "button",
         disabled: disabled || selectionFontSize !== "" && Number(inputValue) <= MIN_ALLOWED_FONT_SIZE,
         onClick: () => updateFontSize(editor, 2 /* decrement */, inputValue),
-        className: "toolbar-item font-decrement",
+        className: `toolbar-item font-decrement ${decrementButtonClassName}`,
         "aria-label": "Decrease font size",
         title: `Decrease font size (${SHORTCUTS.DECREASE_FONT_SIZE})`,
         children: /* @__PURE__ */ jsx64("i", { className: "format minus-icon" })
@@ -33242,7 +33245,7 @@ function FontSize({
         title: "Font size",
         value: inputValue,
         disabled,
-        className: "toolbar-item font-size-input",
+        className: `toolbar-item font-size-input ${inputClassName}`,
         min: MIN_ALLOWED_FONT_SIZE,
         max: MAX_ALLOWED_FONT_SIZE,
         onChange: (e2) => setInputValue(e2.target.value),
@@ -33256,7 +33259,7 @@ function FontSize({
         type: "button",
         disabled: disabled || selectionFontSize !== "" && Number(inputValue) >= MAX_ALLOWED_FONT_SIZE,
         onClick: () => updateFontSize(editor, 1 /* increment */, inputValue),
-        className: "toolbar-item font-increment",
+        className: `toolbar-item font-increment ${incrementButtonClassName}`,
         "aria-label": "Increase font size",
         title: `Increase font size (${SHORTCUTS.INCREASE_FONT_SIZE})`,
         children: /* @__PURE__ */ jsx64("i", { className: "format add-icon" })
@@ -34176,6 +34179,9 @@ function ToolbarPlugin({
       /* @__PURE__ */ jsx65(
         FontSize,
         {
+          inputClassName: toolbarStyle?.inputClasses?.fontSizeInput,
+          decrementButtonClassName: toolbarStyle?.buttonClasses?.fontSizeIncrease,
+          incrementButtonClassName: toolbarStyle?.buttonClasses?.fontSizeDecrease,
           selectionFontSize: toolbarState.fontSize.slice(0, -2),
           editor: activeEditor,
           disabled: !isEditable
