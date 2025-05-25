@@ -200,9 +200,16 @@ export interface InnerEditorProps {
   plugins?: EditorPluginConfig;
   initialValue?: string;
   outputFormat?: "editorState" | "htmlString";
+
+  /** @deprecated Pass this under `plugins.mentions.fetchMentions` instead */
   fetchMentions?: (query: string) => Promise<Mention[]>;
+
+  /** @deprecated Pass this under `plugins.mentions.onMentionSelect` instead */
   onMentionSelect?: (mention: Mention) => void;
+
+  /** @deprecated Pass this under `plugins.mentions.renderMentionOption` instead */
   renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
+
   placeholder?: string;
   readOnly?: boolean;
   toolbarStyle?: ToolbarStyleConfig;
@@ -327,6 +334,26 @@ export default function LexicalEditorInner({
       window.removeEventListener("resize", updateViewPortWidth);
     };
   }, [isSmallWidthViewport]);
+
+  useEffect(() => {
+    if (fetchMentions) {
+      console.warn(
+        "[LexicalEditorInner] `fetchMentions` is deprecated. Please pass it via `plugins.mentions.fetchMentions` instead."
+      );
+    }
+
+    if (onMentionSelect) {
+      console.warn(
+        "[LexicalEditorInner] `onMentionSelect` is deprecated. Please pass it via `plugins.mentions.onMentionSelect` instead."
+      );
+    }
+
+    if (renderMentionOption) {
+      console.warn(
+        "[LexicalEditorInner] `renderMentionOption` is deprecated. Please pass it via `plugins.mentions.renderMentionOption` instead."
+      );
+    }
+  }, [fetchMentions, onMentionSelect, renderMentionOption]);
 
   useEffect(() => {
     if (!initialValue || !editor) return;

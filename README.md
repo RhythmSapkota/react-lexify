@@ -121,25 +121,48 @@ interface EditorProps {
   plugins?: EditorPluginConfig;
   placeholder?: string;
   readOnly?: boolean;
+  /**
+   * @deprecated Use `plugins.mentions.fetchMentions` instead.
+   */
   fetchMentions?: (query: string) => Promise<Mention[]>;
+  /**
+   * @deprecated Use `plugins.mentions.onMentionSelect` instead.
+   */
   onMentionSelect?: (mention: Mention) => void;
+  /**
+   * @deprecated Use `plugins.mentions.renderMentionOption` instead.
+   */
   renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
   onChange?: (output: EditorState | string) => void;
   outputFormat?: "htmlString" | "editorState";
 }
 ```
 
-| Prop                  | Type                                                     | Description                                                                            |
-| --------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `initialConfig`       | `Partial<LexicalComposerInitialConfig>`                  | Partial configuration for the Lexical composer.                                        |
-| `plugins`             | `EditorPluginConfig`                                     | Configuration for all the plugins. See [Plugin Configuration](#-plugin-configuration). |
-| `placeholder`         | `string`                                                 | Placeholder text for the editor when empty.                                            |
-| `readOnly`            | `boolean`                                                | Makes the editor read-only if set to `true`.                                           |
-| `fetchMentions`       | `(query: string) => Promise<Mention[]>`                  | Function to fetch mention data based on query.                                         |
-| `onMentionSelect`     | `(mention: Mention) => void`                             | Callback function when a mention is selected.                                          |
-| `renderMentionOption` | `(mention: Mention, isSelected: boolean) => JSX.Element` | Custom render function for mention options.                                            |
-| `onChange`            | `(output: EditorState \| string) => void`                | Called whenever the editor content changes. Output depends on `outputFormat`.          |
-| `outputFormat`        | `"htmlString" \| "editorState"`                          | Determines the format returned in `onChange`. Defaults to `"htmlString"`.              |
+| Prop                      | Type                                                     | Description                                                                         |
+| ------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `initialConfig`           | `Partial<LexicalComposerInitialConfig>`                  | Partial configuration for the Lexical composer.                                     |
+| `plugins`                 | `EditorPluginConfig`                                     | Configuration for all plugins. See [Plugin Configuration](#-plugin-configuration).  |
+| `placeholder`             | `string`                                                 | Placeholder text for the editor when empty.                                         |
+| `readOnly`                | `boolean`                                                | Makes the editor read-only when `true`.                                             |
+| ~~`fetchMentions`~~       | `(query: string) => Promise<Mention[]>`                  | **Deprecated** – use `plugins.mentions.fetchMentions` instead.                      |
+| ~~`onMentionSelect`~~     | `(mention: Mention) => void`                             | **Deprecated** – use `plugins.mentions.onMentionSelect` instead.                    |
+| ~~`renderMentionOption`~~ | `(mention: Mention, isSelected: boolean) => JSX.Element` | **Deprecated** – use `plugins.mentions.renderMentionOption` instead.                |
+| `onChange`                | `(output: EditorState \| string) => void`                | Called whenever the editor content changes. Format is determined by `outputFormat`. |
+| `outputFormat`            | `"htmlString" \| "editorState"`                          | Determines the return format for `onChange`. Defaults to `"htmlString"`.            |
+
+## ⚠️ Deprecated Props (as of v0.1.3)
+
+The following props have been deprecated and will be removed in future versions:
+
+| Deprecated Prop       | Use Instead                            |
+| --------------------- | -------------------------------------- |
+| `fetchMentions`       | `plugins.mentions.fetchMentions`       |
+| `onMentionSelect`     | `plugins.mentions.onMentionSelect`     |
+| `renderMentionOption` | `plugins.mentions.renderMentionOption` |
+
+**Reason**: These props have been scoped under the `plugins.mentions` object to improve modularity and plugin-specific configuration.
+
+**Action**: Please migrate to the new structure under `plugins.mentions`.
 
 ### 🧾 Output Format and Change Handler
 
