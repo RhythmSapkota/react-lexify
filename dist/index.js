@@ -526,7 +526,7 @@ function EquationComponent({
       inline,
       ref: inputRef
     }
-  ) : /* @__PURE__ */ jsx18(ErrorBoundary, { onError: (e2) => editor._onError(e2), fallback: null, children: /* @__PURE__ */ jsx18(
+  ) : /* @__PURE__ */ jsx18(ErrorBoundary, { onError: (e3) => editor._onError(e3), fallback: null, children: /* @__PURE__ */ jsx18(
     KatexRenderer,
     {
       equation: equationValue,
@@ -1647,15 +1647,15 @@ import { TextNode as TextNode4 } from "lexical";
 import { useEffect as useEffect18 } from "react";
 function $findAndTransformEmoji(node) {
   const text = node.getTextContent();
-  for (let i2 = 0; i2 < text.length; i2++) {
-    const emojiData = emojis.get(text[i2]) || emojis.get(text.slice(i2, i2 + 2));
+  for (let i3 = 0; i3 < text.length; i3++) {
+    const emojiData = emojis.get(text[i3]) || emojis.get(text.slice(i3, i3 + 2));
     if (emojiData !== void 0) {
       const [emojiStyle, emojiText] = emojiData;
       let targetNode;
-      if (i2 === 0) {
-        [targetNode] = node.splitText(i2 + 2);
+      if (i3 === 0) {
+        [targetNode] = node.splitText(i3 + 2);
       } else {
-        [, targetNode] = node.splitText(i2, i2 + 2);
+        [, targetNode] = node.splitText(i3, i3 + 2);
       }
       const emojiNode = $createEmojiNode(emojiStyle, emojiText);
       targetNode.replace(emojiNode);
@@ -1988,22 +1988,22 @@ function MentionsPlugin({
       triggerFn: checkForMentionMatch,
       options,
       menuRenderFn: (anchorElementRef, { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }) => anchorElementRef.current && results.length ? ReactDOM2.createPortal(
-        /* @__PURE__ */ jsx29("div", { className: "typeahead-popover mentions-menu", children: /* @__PURE__ */ jsx29("ul", { children: options.map((option, i2) => /* @__PURE__ */ jsx29(
+        /* @__PURE__ */ jsx29("div", { className: "typeahead-popover mentions-menu", children: /* @__PURE__ */ jsx29("ul", { children: options.map((option, i3) => /* @__PURE__ */ jsx29(
           MentionsTypeaheadMenuItem,
           {
-            index: i2,
-            isSelected: selectedIndex === i2,
+            index: i3,
+            isSelected: selectedIndex === i3,
             onClick: () => {
-              setHighlightedIndex(i2);
+              setHighlightedIndex(i3);
               selectOptionAndCleanUp(option);
             },
             onMouseEnter: () => {
-              setHighlightedIndex(i2);
+              setHighlightedIndex(i3);
             },
             option,
             renderMentionOption
           },
-          `${option.key}-${i2}`
+          `${option.key}-${i3}`
         )) }) }),
         anchorElementRef.current
       ) : null
@@ -2213,9 +2213,9 @@ function LazyImage({
       style: imageStyle,
       onError,
       draggable: "false",
-      onLoad: (e2) => {
+      onLoad: (e3) => {
         if (isSVGImage) {
-          const img3 = e2.currentTarget;
+          const img3 = e3.currentTarget;
           setDimensions({
             height: img3.naturalHeight,
             width: img3.naturalWidth
@@ -2791,8 +2791,8 @@ function TextInput({
         className: "Input__input",
         placeholder,
         value,
-        onChange: (e2) => {
-          onChange(e2.target.value);
+        onChange: (e3) => {
+          onChange(e3.target.value);
         },
         "data-test-id": dataTestId
       }
@@ -2856,7 +2856,7 @@ function PollOptionComponent({
             ref: checkboxRef,
             className: "PollNode__optionCheckbox",
             type: "checkbox",
-            onChange: (e2) => {
+            onChange: (e3) => {
               withPollNode((node) => {
                 node.toggleVote(option, clientID);
               });
@@ -2881,8 +2881,8 @@ function PollOptionComponent({
           className: "PollNode__optionInput",
           type: "text",
           value: text,
-          onChange: (e2) => {
-            const target = e2.target;
+          onChange: (e3) => {
+            const target = e3.target;
             const value = target.value;
             const selectionStart = target.selectionStart;
             const selectionEnd = target.selectionEnd;
@@ -3065,7 +3065,7 @@ var init_PollNode = __esm({
     );
     optionsState = makeStateWrapper(
       createState("options", {
-        isEqual: (a2, b2) => a2.length === b2.length && JSON.stringify(a2) === JSON.stringify(b2),
+        isEqual: (a3, b2) => a3.length === b2.length && JSON.stringify(a3) === JSON.stringify(b2),
         parse: parseOptions
       })
     );
@@ -20011,11 +20011,11 @@ function UpdateInlineImageDialog({
   const [altText, setAltText] = useState31(node.getAltText());
   const [showCaption, setShowCaption] = useState31(node.getShowCaption());
   const [position, setPosition] = useState31(node.getPosition());
-  const handleShowCaptionChange = (e2) => {
-    setShowCaption(e2.target.checked);
+  const handleShowCaptionChange = (e3) => {
+    setShowCaption(e3.target.checked);
   };
-  const handlePositionChange = (e2) => {
-    setPosition(e2.target.value);
+  const handlePositionChange = (e3) => {
+    setPosition(e3.target.value);
   };
   const handleOnConfirm = () => {
     const payload = { altText, position, showCaption };
@@ -20317,7 +20317,7 @@ function indexBy(list, callback) {
   return index;
 }
 function transformersByType(transformers) {
-  const byType = indexBy(transformers, (t2) => t2.type);
+  const byType = indexBy(transformers, (t3) => t3.type);
   return {
     element: byType.element || [],
     multilineElement: byType["multiline-element"] || [],
@@ -20348,19 +20348,19 @@ function createMarkdownExport(transformers, shouldPreserveNewLines = false) {
   const byType = transformersByType(transformers);
   const elementTransformers = [...byType.multilineElement, ...byType.element];
   const isNewlineDelimited = !shouldPreserveNewLines;
-  const textFormatTransformers = byType.textFormat.filter((transformer) => transformer.format.length === 1).sort((a2, b2) => {
-    return Number(a2.format.includes("code")) - Number(b2.format.includes("code"));
+  const textFormatTransformers = byType.textFormat.filter((transformer) => transformer.format.length === 1).sort((a3, b2) => {
+    return Number(a3.format.includes("code")) - Number(b2.format.includes("code"));
   });
   return (node) => {
     const output = [];
     const children = (node || $getRoot()).getChildren();
-    for (let i2 = 0; i2 < children.length; i2++) {
-      const child = children[i2];
+    for (let i3 = 0; i3 < children.length; i3++) {
+      const child = children[i3];
       const result = exportTopLevelElements(child, elementTransformers, textFormatTransformers, byType.textMatch);
       if (result != null) {
         output.push(
           // separate consecutive group of texts with a line break: eg. ["hello", "world"] -> ["hello", "/nworld"]
-          isNewlineDelimited && i2 > 0 && !isEmptyParagraph(child) && !isEmptyParagraph(children[i2 - 1]) ? "\n".concat(result) : result
+          isNewlineDelimited && i3 > 0 && !isEmptyParagraph(child) && !isEmptyParagraph(children[i3 - 1]) ? "\n".concat(result) : result
         );
       }
     }
@@ -20453,14 +20453,14 @@ function exportTextFormat(node, textContent, textTransformers, unclosedTags, unc
       }
     }
   }
-  for (let i2 = 0; i2 < unclosedTags.length; i2++) {
-    const nodeHasFormat = hasFormat(node, unclosedTags[i2].format);
-    const nextNodeHasFormat = hasFormat(nextNode, unclosedTags[i2].format);
+  for (let i3 = 0; i3 < unclosedTags.length; i3++) {
+    const nodeHasFormat = hasFormat(node, unclosedTags[i3].format);
+    const nextNodeHasFormat = hasFormat(nextNode, unclosedTags[i3].format);
     if (nodeHasFormat && nextNodeHasFormat) {
       continue;
     }
     const unhandledUnclosedTags = [...unclosedTags];
-    while (unhandledUnclosedTags.length > i2) {
+    while (unhandledUnclosedTags.length > i3) {
       const unclosedTag = unhandledUnclosedTags.pop();
       if (unclosableTags && unclosedTag && unclosableTags.find((element) => element.tag === unclosedTag.tag)) {
         continue;
@@ -20693,11 +20693,11 @@ function createMarkdownImport(transformers, shouldPreserveNewLines = false) {
     const linesLength = lines.length;
     const root = node || $getRoot();
     root.clear();
-    for (let i2 = 0; i2 < linesLength; i2++) {
-      const lineText = lines[i2];
-      const [imported, shiftedIndex] = $importMultiline(lines, i2, byType.multilineElement, root);
+    for (let i3 = 0; i3 < linesLength; i3++) {
+      const lineText = lines[i3];
+      const [imported, shiftedIndex] = $importMultiline(lines, i3, byType.multilineElement, root);
       if (imported) {
-        i2 = shiftedIndex;
+        i3 = shiftedIndex;
         continue;
       }
       $importBlocks(lineText, root, byType.element, textFormatTransformersIndex, byType.textMatch, shouldPreserveNewLines);
@@ -20759,15 +20759,15 @@ function $importMultiline(lines, startLineIndex, multilineElementTransformers, r
       if (endMatch && startLineIndex === endLineIndex) {
         linesInBetween.push(lines[startLineIndex].slice(startMatch[0].length, -endMatch[0].length));
       } else {
-        for (let i2 = startLineIndex; i2 <= endLineIndex; i2++) {
-          if (i2 === startLineIndex) {
-            const text = lines[i2].slice(startMatch[0].length);
+        for (let i3 = startLineIndex; i3 <= endLineIndex; i3++) {
+          if (i3 === startLineIndex) {
+            const text = lines[i3].slice(startMatch[0].length);
             linesInBetween.push(text);
-          } else if (i2 === endLineIndex && endMatch) {
-            const text = lines[i2].slice(0, -endMatch[0].length);
+          } else if (i3 === endLineIndex && endMatch) {
+            const text = lines[i3].slice(0, -endMatch[0].length);
             linesInBetween.push(text);
           } else {
-            linesInBetween.push(lines[i2]);
+            linesInBetween.push(lines[i3]);
           }
         }
       }
@@ -21022,8 +21022,8 @@ function $runTextFormatTransformers(anchorNode, anchorOffset, textFormatTransfor
 }
 function getOpenTagStartIndex(string, maxIndex, tag) {
   const tagLength = tag.length;
-  for (let i2 = maxIndex; i2 >= tagLength; i2--) {
-    const startIndex = i2 - tagLength;
+  for (let i3 = maxIndex; i3 >= tagLength; i3--) {
+    const startIndex = i3 - tagLength;
     if (isEqualSubString(string, startIndex, tag, 0, tagLength) && // Space after opening tag cancels transformation
     string[startIndex + tagLength] !== " ") {
       return startIndex;
@@ -21032,8 +21032,8 @@ function getOpenTagStartIndex(string, maxIndex, tag) {
   return -1;
 }
 function isEqualSubString(stringA, aStart, stringB, bStart, length) {
-  for (let i2 = 0; i2 < length; i2++) {
-    if (stringA[aStart + i2] !== stringB[bStart + i2]) {
+  for (let i3 = 0; i3 < length; i3++) {
+    if (stringA[aStart + i3] !== stringB[bStart + i3]) {
       return false;
     }
   }
@@ -21123,8 +21123,8 @@ function normalizeMarkdown(input, shouldMergeAdjacentLines = false) {
   const lines = input.split("\n");
   let inCodeBlock = false;
   const sanitizedLines = [];
-  for (let i2 = 0; i2 < lines.length; i2++) {
-    const line = lines[i2];
+  for (let i3 = 0; i3 < lines.length; i3++) {
+    const line = lines[i3];
     const lastLine = sanitizedLines[sanitizedLines.length - 1];
     if (CODE_SINGLE_LINE_REGEX.test(line)) {
       sanitizedLines.push(line);
@@ -21476,370 +21476,370 @@ import { $isQuoteNode as $, HeadingNode as v, $isHeadingNode as S, QuoteNode as 
 import { $findMatchingParent as N } from "@lexical/utils";
 import { $isCodeNode as w, CodeNode as k, $createCodeNode as L } from "@lexical/code";
 import { LinkNode as P, $isLinkNode as R, $createLinkNode as _ } from "@lexical/link";
-function B(t2, e2) {
-  const n2 = {};
-  for (const o2 of t2) {
-    const t3 = e2(o2);
-    t3 && (n2[t3] ? n2[t3].push(o2) : n2[t3] = [o2]);
+function B(t3, e3) {
+  const n3 = {};
+  for (const o3 of t3) {
+    const t4 = e3(o3);
+    t4 && (n3[t4] ? n3[t4].push(o3) : n3[t4] = [o3]);
   }
-  return n2;
+  return n3;
 }
-function M(t2) {
-  const e2 = B(t2, (t3) => t3.type);
-  return { element: e2.element || [], multilineElement: e2["multiline-element"] || [], textFormat: e2["text-format"] || [], textMatch: e2["text-match"] || [] };
+function M(t3) {
+  const e3 = B(t3, (t4) => t4.type);
+  return { element: e3.element || [], multilineElement: e3["multiline-element"] || [], textFormat: e3["text-format"] || [], textMatch: e3["text-match"] || [] };
 }
-function z(n2) {
-  if (!t(n2)) return false;
-  const o2 = n2.getFirstChild();
-  return null == o2 || 1 === n2.getChildrenSize() && e(o2) && A.test(o2.getTextContent());
+function z(n3) {
+  if (!t(n3)) return false;
+  const o3 = n3.getFirstChild();
+  return null == o3 || 1 === n3.getChildrenSize() && e(o3) && A.test(o3.getTextContent());
 }
-function W(t2, e2, n2, i2) {
-  for (const o2 of e2) {
-    if (!o2.export) continue;
-    const e3 = o2.export(t2, (t3) => D(t3, n2, i2));
-    if (null != e3) return e3;
+function W(t3, e3, n3, i3) {
+  for (const o3 of e3) {
+    if (!o3.export) continue;
+    const e4 = o3.export(t3, (t4) => D(t4, n3, i3));
+    if (null != e4) return e4;
   }
-  return o(t2) ? D(t2, n2, i2) : r(t2) ? t2.getTextContent() : null;
+  return o(t3) ? D(t3, n3, i3) : r(t3) ? t3.getTextContent() : null;
 }
-function D(t2, n2, s2, l2, c2) {
-  const f2 = [], a2 = t2.getChildren();
-  l2 || (l2 = []), c2 || (c2 = []);
-  t: for (const t3 of a2) {
-    for (const e2 of s2) {
-      if (!e2.export) continue;
-      const o2 = e2.export(t3, (t4) => D(t4, n2, s2, l2, [...c2, ...l2]), (t4, e3) => O(t4, e3, n2, l2, c2));
-      if (null != o2) {
-        f2.push(o2);
+function D(t3, n3, s3, l3, c3) {
+  const f3 = [], a3 = t3.getChildren();
+  l3 || (l3 = []), c3 || (c3 = []);
+  t: for (const t4 of a3) {
+    for (const e3 of s3) {
+      if (!e3.export) continue;
+      const o3 = e3.export(t4, (t5) => D(t5, n3, s3, l3, [...c3, ...l3]), (t5, e4) => O(t5, e4, n3, l3, c3));
+      if (null != o3) {
+        f3.push(o3);
         continue t;
       }
     }
-    i(t3) ? f2.push("\n") : e(t3) ? f2.push(O(t3, t3.getTextContent(), n2, l2, c2)) : o(t3) ? f2.push(D(t3, n2, s2, l2, c2)) : r(t3) && f2.push(t3.getTextContent());
+    i(t4) ? f3.push("\n") : e(t4) ? f3.push(O(t4, t4.getTextContent(), n3, l3, c3)) : o(t4) ? f3.push(D(t4, n3, s3, l3, c3)) : r(t4) && f3.push(t4.getTextContent());
   }
-  return f2.join("");
+  return f3.join("");
 }
-function O(t2, e2, n2, o2, r2) {
-  let i2 = 0 === t2.getFormat() ? e2 : function(t3) {
-    return t3.replace(/^\s+|\s+$/g, (t4) => [...t4].map((t5) => "&#" + t5.codePointAt(0) + ";").join(""));
-  }(e2);
-  t2.hasFormat("code") || (i2 = i2.replace(/([*_`~\\])/g, "\\$1"));
-  let s2 = "", l2 = "", c2 = "";
-  const f2 = q(t2, true), a2 = q(t2, false), u2 = /* @__PURE__ */ new Set();
-  for (const e3 of n2) {
-    const n3 = e3.format[0], r3 = e3.tag;
-    G(t2, n3) && !u2.has(n3) && (u2.add(n3), G(f2, n3) && o2.find((t3) => t3.tag === r3) || (o2.push({ format: n3, tag: r3 }), s2 += r3));
+function O(t3, e3, n3, o3, r3) {
+  let i3 = 0 === t3.getFormat() ? e3 : function(t4) {
+    return t4.replace(/^\s+|\s+$/g, (t5) => [...t5].map((t6) => "&#" + t6.codePointAt(0) + ";").join(""));
+  }(e3);
+  t3.hasFormat("code") || (i3 = i3.replace(/([*_`~\\])/g, "\\$1"));
+  let s3 = "", l3 = "", c3 = "";
+  const f3 = q(t3, true), a3 = q(t3, false), u3 = /* @__PURE__ */ new Set();
+  for (const e4 of n3) {
+    const n4 = e4.format[0], r4 = e4.tag;
+    G(t3, n4) && !u3.has(n4) && (u3.add(n4), G(f3, n4) && o3.find((t4) => t4.tag === r4) || (o3.push({ format: n4, tag: r4 }), s3 += r4));
   }
-  for (let e3 = 0; e3 < o2.length; e3++) {
-    const n3 = G(t2, o2[e3].format), i3 = G(a2, o2[e3].format);
-    if (n3 && i3) continue;
-    const s3 = [...o2];
-    for (; s3.length > e3; ) {
-      const t3 = s3.pop();
-      r2 && t3 && r2.find((e4) => e4.tag === t3.tag) || (t3 && "string" == typeof t3.tag && (n3 ? i3 || (c2 += t3.tag) : l2 += t3.tag), o2.pop());
+  for (let e4 = 0; e4 < o3.length; e4++) {
+    const n4 = G(t3, o3[e4].format), i4 = G(a3, o3[e4].format);
+    if (n4 && i4) continue;
+    const s4 = [...o3];
+    for (; s4.length > e4; ) {
+      const t4 = s4.pop();
+      r3 && t4 && r3.find((e5) => e5.tag === t4.tag) || (t4 && "string" == typeof t4.tag && (n4 ? i4 || (c3 += t4.tag) : l3 += t4.tag), o3.pop());
     }
     break;
   }
-  return i2 = s2 + i2 + c2, l2 + i2;
+  return i3 = s3 + i3 + c3, l3 + i3;
 }
-function q(t2, n2) {
-  let r2 = n2 ? t2.getPreviousSibling() : t2.getNextSibling();
-  if (!r2) {
-    const e2 = t2.getParentOrThrow();
-    e2.isInline() && (r2 = n2 ? e2.getPreviousSibling() : e2.getNextSibling());
+function q(t3, n3) {
+  let r3 = n3 ? t3.getPreviousSibling() : t3.getNextSibling();
+  if (!r3) {
+    const e3 = t3.getParentOrThrow();
+    e3.isInline() && (r3 = n3 ? e3.getPreviousSibling() : e3.getNextSibling());
   }
-  for (; r2; ) {
-    if (o(r2)) {
-      if (!r2.isInline()) break;
-      const t3 = n2 ? r2.getLastDescendant() : r2.getFirstDescendant();
-      if (e(t3)) return t3;
-      r2 = n2 ? r2.getPreviousSibling() : r2.getNextSibling();
+  for (; r3; ) {
+    if (o(r3)) {
+      if (!r3.isInline()) break;
+      const t4 = n3 ? r3.getLastDescendant() : r3.getFirstDescendant();
+      if (e(t4)) return t4;
+      r3 = n3 ? r3.getPreviousSibling() : r3.getNextSibling();
     }
-    if (e(r2)) return r2;
-    if (!o(r2)) return null;
+    if (e(r3)) return r3;
+    if (!o(r3)) return null;
   }
   return null;
 }
-function G(t2, n2) {
-  return e(t2) && t2.hasFormat(n2);
+function G(t3, n3) {
+  return e(t3) && t3.hasFormat(n3);
 }
-function H(t2, e2) {
-  const n2 = function(t3, e3) {
-    const n3 = t3.match(e3.openTagsRegExp);
-    if (null == n3) return null;
-    for (const o3 of n3) {
-      const n4 = o3.replace(/^\s/, ""), r2 = e3.fullMatchRegExpByTag[n4];
-      if (null == r2) continue;
-      const i2 = t3.match(r2), s2 = e3.transformersByTag[n4];
-      if (null != i2 && null != s2) {
-        if (false !== s2.intraword) return i2;
-        const { index: e4 = 0 } = i2, n5 = t3[e4 - 1], o4 = t3[e4 + i2[0].length];
-        if ((!n5 || j.test(n5)) && (!o4 || j.test(o4))) return i2;
+function H(t3, e3) {
+  const n3 = function(t4, e4) {
+    const n4 = t4.match(e4.openTagsRegExp);
+    if (null == n4) return null;
+    for (const o4 of n4) {
+      const n5 = o4.replace(/^\s/, ""), r3 = e4.fullMatchRegExpByTag[n5];
+      if (null == r3) continue;
+      const i3 = t4.match(r3), s3 = e4.transformersByTag[n5];
+      if (null != i3 && null != s3) {
+        if (false !== s3.intraword) return i3;
+        const { index: e5 = 0 } = i3, n6 = t4[e5 - 1], o5 = t4[e5 + i3[0].length];
+        if ((!n6 || j.test(n6)) && (!o5 || j.test(o5))) return i3;
       }
     }
     return null;
-  }(t2.getTextContent(), e2);
-  if (!n2) return null;
-  const o2 = n2.index || 0;
-  return { endIndex: o2 + n2[0].length, match: n2, startIndex: o2, transformer: e2.transformersByTag[n2[1]] };
+  }(t3.getTextContent(), e3);
+  if (!n3) return null;
+  const o3 = n3.index || 0;
+  return { endIndex: o3 + n3[0].length, match: n3, startIndex: o3, transformer: e3.transformersByTag[n3[1]] };
 }
-function J(t2) {
-  return e(t2) && !t2.hasFormat("code");
+function J(t3) {
+  return e(t3) && !t3.hasFormat("code");
 }
-function K(t2, e2, n2) {
-  let o2 = H(t2, e2), r2 = function(t3, e3) {
-    const n3 = t3;
-    let o3, r3, i3, s2;
-    for (const t4 of e3) {
-      if (!t4.replace || !t4.importRegExp) continue;
-      const e4 = n3.getTextContent().match(t4.importRegExp);
-      if (!e4) continue;
-      const l2 = e4.index || 0, c2 = t4.getEndIndex ? t4.getEndIndex(n3, e4) : l2 + e4[0].length;
-      false !== c2 && (void 0 === o3 || void 0 === r3 || l2 < o3 && c2 > r3) && (o3 = l2, r3 = c2, i3 = t4, s2 = e4);
+function K(t3, e3, n3) {
+  let o3 = H(t3, e3), r3 = function(t4, e4) {
+    const n4 = t4;
+    let o4, r4, i4, s3;
+    for (const t5 of e4) {
+      if (!t5.replace || !t5.importRegExp) continue;
+      const e5 = n4.getTextContent().match(t5.importRegExp);
+      if (!e5) continue;
+      const l3 = e5.index || 0, c3 = t5.getEndIndex ? t5.getEndIndex(n4, e5) : l3 + e5[0].length;
+      false !== c3 && (void 0 === o4 || void 0 === r4 || l3 < o4 && c3 > r4) && (o4 = l3, r4 = c3, i4 = t5, s3 = e5);
     }
-    return void 0 === o3 || void 0 === r3 || void 0 === i3 || void 0 === s2 ? null : { endIndex: r3, match: s2, startIndex: o3, transformer: i3 };
-  }(t2, n2);
-  if (o2 && r2 && (o2.startIndex <= r2.startIndex && o2.endIndex >= r2.endIndex ? r2 = null : o2 = null), o2) {
-    const r3 = function(t3, e3, n3, o3, r4) {
-      const i3 = t3.getTextContent();
-      let s2, l2, c2;
-      if (r4[0] === i3 ? s2 = t3 : 0 === e3 ? [s2, l2] = t3.splitText(n3) : [c2, s2, l2] = t3.splitText(e3, n3), s2.setTextContent(r4[2]), o3) for (const t4 of o3.format) s2.hasFormat(t4) || s2.toggleFormat(t4);
-      return { nodeAfter: l2, nodeBefore: c2, transformedNode: s2 };
-    }(t2, o2.startIndex, o2.endIndex, o2.transformer, o2.match);
-    J(r3.nodeAfter) && K(r3.nodeAfter, e2, n2), J(r3.nodeBefore) && K(r3.nodeBefore, e2, n2), J(r3.transformedNode) && K(r3.transformedNode, e2, n2);
-  } else if (r2) {
-    const o3 = function(t3, e3, n3, o4, r3) {
-      let i3, s2, l2;
-      return 0 === e3 ? [i3, s2] = t3.splitText(n3) : [l2, i3, s2] = t3.splitText(e3, n3), o4.replace ? { nodeAfter: s2, nodeBefore: l2, transformedNode: o4.replace(i3, r3) || void 0 } : null;
-    }(t2, r2.startIndex, r2.endIndex, r2.transformer, r2.match);
-    if (!o3) return;
-    J(o3.nodeAfter) && K(o3.nodeAfter, e2, n2), J(o3.nodeBefore) && K(o3.nodeBefore, e2, n2), J(o3.transformedNode) && K(o3.transformedNode, e2, n2);
+    return void 0 === o4 || void 0 === r4 || void 0 === i4 || void 0 === s3 ? null : { endIndex: r4, match: s3, startIndex: o4, transformer: i4 };
+  }(t3, n3);
+  if (o3 && r3 && (o3.startIndex <= r3.startIndex && o3.endIndex >= r3.endIndex ? r3 = null : o3 = null), o3) {
+    const r4 = function(t4, e4, n4, o4, r5) {
+      const i4 = t4.getTextContent();
+      let s3, l3, c3;
+      if (r5[0] === i4 ? s3 = t4 : 0 === e4 ? [s3, l3] = t4.splitText(n4) : [c3, s3, l3] = t4.splitText(e4, n4), s3.setTextContent(r5[2]), o4) for (const t5 of o4.format) s3.hasFormat(t5) || s3.toggleFormat(t5);
+      return { nodeAfter: l3, nodeBefore: c3, transformedNode: s3 };
+    }(t3, o3.startIndex, o3.endIndex, o3.transformer, o3.match);
+    J(r4.nodeAfter) && K(r4.nodeAfter, e3, n3), J(r4.nodeBefore) && K(r4.nodeBefore, e3, n3), J(r4.transformedNode) && K(r4.transformedNode, e3, n3);
+  } else if (r3) {
+    const o4 = function(t4, e4, n4, o5, r4) {
+      let i4, s3, l3;
+      return 0 === e4 ? [i4, s3] = t4.splitText(n4) : [l3, i4, s3] = t4.splitText(e4, n4), o5.replace ? { nodeAfter: s3, nodeBefore: l3, transformedNode: o5.replace(i4, r4) || void 0 } : null;
+    }(t3, r3.startIndex, r3.endIndex, r3.transformer, r3.match);
+    if (!o4) return;
+    J(o4.nodeAfter) && K(o4.nodeAfter, e3, n3), J(o4.nodeBefore) && K(o4.nodeBefore, e3, n3), J(o4.transformedNode) && K(o4.transformedNode, e3, n3);
   }
-  const i2 = t2.getTextContent().replace(/\\([*_`~\\])/g, "$1").replace(/&#(\d+);/g, (t3, e3) => String.fromCodePoint(e3));
-  t2.setTextContent(i2);
+  const i3 = t3.getTextContent().replace(/\\([*_`~\\])/g, "$1").replace(/&#(\d+);/g, (t4, e4) => String.fromCodePoint(e4));
+  t3.setTextContent(i3);
 }
-function Q(t2, e2 = false) {
-  const o2 = M(t2), r2 = function(t3) {
-    const e3 = {}, n2 = {}, o3 = [], r3 = "(?<![\\\\])";
-    for (const r4 of t3) {
-      const { tag: t4 } = r4;
-      e3[t4] = r4;
-      const i2 = t4.replace(/(\*|\^|\+)/g, "\\$1");
-      o3.push(i2), 1 === t4.length ? n2[t4] = new RegExp(`(?<![\\\\${i2}])(${i2})((\\\\${i2})?.*?[^${i2}\\s](\\\\${i2})?)((?<!\\\\)|(?<=\\\\\\\\))(${i2})(?![\\\\${i2}])`) : n2[t4] = new RegExp(`(?<!\\\\)(${i2})((\\\\${i2})?.*?[^\\s](\\\\${i2})?)((?<!\\\\)|(?<=\\\\\\\\))(${i2})(?!\\\\)`);
+function Q(t3, e3 = false) {
+  const o3 = M(t3), r3 = function(t4) {
+    const e4 = {}, n3 = {}, o4 = [], r4 = "(?<![\\\\])";
+    for (const r5 of t4) {
+      const { tag: t5 } = r5;
+      e4[t5] = r5;
+      const i3 = t5.replace(/(\*|\^|\+)/g, "\\$1");
+      o4.push(i3), 1 === t5.length ? n3[t5] = new RegExp(`(?<![\\\\${i3}])(${i3})((\\\\${i3})?.*?[^${i3}\\s](\\\\${i3})?)((?<!\\\\)|(?<=\\\\\\\\))(${i3})(?![\\\\${i3}])`) : n3[t5] = new RegExp(`(?<!\\\\)(${i3})((\\\\${i3})?.*?[^\\s](\\\\${i3})?)((?<!\\\\)|(?<=\\\\\\\\))(${i3})(?!\\\\)`);
     }
-    return { fullMatchRegExpByTag: n2, openTagsRegExp: new RegExp(`${r3}(${o3.join("|")})`, "g"), transformersByTag: e3 };
-  }(o2.textFormat);
-  return (t3, i2) => {
-    const l2 = t3.split("\n"), c2 = l2.length, f2 = i2 || n();
-    f2.clear();
-    for (let t4 = 0; t4 < c2; t4++) {
-      const n2 = l2[t4], [i3, s2] = V(l2, t4, o2.multilineElement, f2);
-      i3 ? t4 = s2 : X(n2, f2, o2.element, r2, o2.textMatch, e2);
+    return { fullMatchRegExpByTag: n3, openTagsRegExp: new RegExp(`${r4}(${o4.join("|")})`, "g"), transformersByTag: e4 };
+  }(o3.textFormat);
+  return (t4, i3) => {
+    const l3 = t4.split("\n"), c3 = l3.length, f3 = i3 || n();
+    f3.clear();
+    for (let t5 = 0; t5 < c3; t5++) {
+      const n3 = l3[t5], [i4, s3] = V(l3, t5, o3.multilineElement, f3);
+      i4 ? t5 = s3 : X(n3, f3, o3.element, r3, o3.textMatch, e3);
     }
-    const a2 = f2.getChildren();
-    for (const t4 of a2) !e2 && z(t4) && f2.getChildrenSize() > 1 && t4.remove();
-    null !== s() && f2.selectStart();
+    const a3 = f3.getChildren();
+    for (const t5 of a3) !e3 && z(t5) && f3.getChildrenSize() > 1 && t5.remove();
+    null !== s() && f3.selectStart();
   };
 }
-function V(t2, e2, n2, o2) {
-  for (const r2 of n2) {
-    const { handleImportAfterStartMatch: n3, regExpEnd: i2, regExpStart: s2, replace: l2 } = r2, c2 = t2[e2].match(s2);
-    if (!c2) continue;
-    if (n3) {
-      const i3 = n3({ lines: t2, rootNode: o2, startLineIndex: e2, startMatch: c2, transformer: r2 });
-      if (null === i3) continue;
-      if (i3) return i3;
+function V(t3, e3, n3, o3) {
+  for (const r3 of n3) {
+    const { handleImportAfterStartMatch: n4, regExpEnd: i3, regExpStart: s3, replace: l3 } = r3, c3 = t3[e3].match(s3);
+    if (!c3) continue;
+    if (n4) {
+      const i4 = n4({ lines: t3, rootNode: o3, startLineIndex: e3, startMatch: c3, transformer: r3 });
+      if (null === i4) continue;
+      if (i4) return i4;
     }
-    const f2 = "object" == typeof i2 && "regExp" in i2 ? i2.regExp : i2, a2 = i2 && "object" == typeof i2 && "optional" in i2 ? i2.optional : !i2;
-    let u2 = e2;
-    const g2 = t2.length;
-    for (; u2 < g2; ) {
-      const n4 = f2 ? t2[u2].match(f2) : null;
-      if (!n4 && (!a2 || a2 && u2 < g2 - 1)) {
-        u2++;
+    const f3 = "object" == typeof i3 && "regExp" in i3 ? i3.regExp : i3, a3 = i3 && "object" == typeof i3 && "optional" in i3 ? i3.optional : !i3;
+    let u3 = e3;
+    const g3 = t3.length;
+    for (; u3 < g3; ) {
+      const n5 = f3 ? t3[u3].match(f3) : null;
+      if (!n5 && (!a3 || a3 && u3 < g3 - 1)) {
+        u3++;
         continue;
       }
-      if (n4 && e2 === u2 && n4.index === c2.index) {
-        u2++;
+      if (n5 && e3 === u3 && n5.index === c3.index) {
+        u3++;
         continue;
       }
-      const r3 = [];
-      if (n4 && e2 === u2) r3.push(t2[e2].slice(c2[0].length, -n4[0].length));
-      else for (let o3 = e2; o3 <= u2; o3++) if (o3 === e2) {
-        const e3 = t2[o3].slice(c2[0].length);
-        r3.push(e3);
-      } else if (o3 === u2 && n4) {
-        const e3 = t2[o3].slice(0, -n4[0].length);
-        r3.push(e3);
-      } else r3.push(t2[o3]);
-      if (false !== l2(o2, null, c2, n4, r3, true)) return [true, u2];
+      const r4 = [];
+      if (n5 && e3 === u3) r4.push(t3[e3].slice(c3[0].length, -n5[0].length));
+      else for (let o4 = e3; o4 <= u3; o4++) if (o4 === e3) {
+        const e4 = t3[o4].slice(c3[0].length);
+        r4.push(e4);
+      } else if (o4 === u3 && n5) {
+        const e4 = t3[o4].slice(0, -n5[0].length);
+        r4.push(e4);
+      } else r4.push(t3[o4]);
+      if (false !== l3(o3, null, c3, n5, r4, true)) return [true, u3];
       break;
     }
   }
-  return [false, e2];
+  return [false, e3];
 }
-function X(e2, n2, o2, r2, i2, s2) {
-  const a2 = l(e2), u2 = c();
-  u2.append(a2), n2.append(u2);
-  for (const { regExp: t2, replace: n3 } of o2) {
-    const o3 = e2.match(t2);
-    if (o3 && (a2.setTextContent(e2.slice(o3[0].length)), false !== n3(u2, [a2], o3, true))) break;
+function X(e3, n3, o3, r3, i3, s3) {
+  const a3 = l(e3), u3 = c();
+  u3.append(a3), n3.append(u3);
+  for (const { regExp: t3, replace: n4 } of o3) {
+    const o4 = e3.match(t3);
+    if (o4 && (a3.setTextContent(e3.slice(o4[0].length)), false !== n4(u3, [a3], o4, true))) break;
   }
-  if (K(a2, r2, i2), u2.isAttached() && e2.length > 0) {
-    const e3 = u2.getPreviousSibling();
-    if (!s2 && (t(e3) || $(e3) || h(e3))) {
-      let t2 = e3;
-      if (h(e3)) {
-        const n3 = e3.getLastDescendant();
-        t2 = null == n3 ? null : N(n3, x);
+  if (K(a3, r3, i3), u3.isAttached() && e3.length > 0) {
+    const e4 = u3.getPreviousSibling();
+    if (!s3 && (t(e4) || $(e4) || h(e4))) {
+      let t3 = e4;
+      if (h(e4)) {
+        const n4 = e4.getLastDescendant();
+        t3 = null == n4 ? null : N(n4, x);
       }
-      null != t2 && t2.getTextContentSize() > 0 && (t2.splice(t2.getChildrenSize(), 0, [f(), ...u2.getChildren()]), u2.remove());
+      null != t3 && t3.getTextContentSize() > 0 && (t3.splice(t3.getChildrenSize(), 0, [f(), ...u3.getChildren()]), u3.remove());
     }
   }
 }
-function Y(t2, ...e2) {
-  const n2 = new URL("https://lexical.dev/docs/error"), o2 = new URLSearchParams();
-  o2.append("code", t2);
-  for (const t3 of e2) o2.append("v", t3);
-  throw n2.search = o2.toString(), Error(`Minified Lexical error #${t2}; visit ${n2.toString()} for the full message or use the non-minified dev environment for full errors and additional helpful warnings.`);
+function Y(t3, ...e3) {
+  const n3 = new URL("https://lexical.dev/docs/error"), o3 = new URLSearchParams();
+  o3.append("code", t3);
+  for (const t4 of e3) o3.append("v", t4);
+  throw n3.search = o3.toString(), Error(`Minified Lexical error #${t3}; visit ${n3.toString()} for the full message or use the non-minified dev environment for full errors and additional helpful warnings.`);
 }
-function Z(t2, e2, n2) {
-  const o2 = n2.length;
-  for (let r2 = e2; r2 >= o2; r2--) {
-    const e3 = r2 - o2;
-    if (tt(t2, e3, n2, 0, o2) && " " !== t2[e3 + o2]) return e3;
+function Z(t3, e3, n3) {
+  const o3 = n3.length;
+  for (let r3 = e3; r3 >= o3; r3--) {
+    const e4 = r3 - o3;
+    if (tt(t3, e4, n3, 0, o3) && " " !== t3[e4 + o3]) return e4;
   }
   return -1;
 }
-function tt(t2, e2, n2, o2, r2) {
-  for (let i2 = 0; i2 < r2; i2++) if (t2[e2 + i2] !== n2[o2 + i2]) return false;
+function tt(t3, e3, n3, o3, r3) {
+  for (let i3 = 0; i3 < r3; i3++) if (t3[e3 + i3] !== n3[o3 + i3]) return false;
   return true;
 }
-function et(t2, n2 = Bt) {
-  const o2 = M(n2), r2 = B(o2.textFormat, ({ tag: t3 }) => t3[t3.length - 1]), l2 = B(o2.textMatch, ({ trigger: t3 }) => t3);
-  for (const e2 of n2) {
-    const n3 = e2.type;
-    if ("element" === n3 || "text-match" === n3 || "multiline-element" === n3) {
-      const n4 = e2.dependencies;
-      for (const e3 of n4) t2.hasNode(e3) || Y(173, e3.getType());
+function et(t3, n3 = Bt) {
+  const o3 = M(n3), r3 = B(o3.textFormat, ({ tag: t4 }) => t4[t4.length - 1]), l3 = B(o3.textMatch, ({ trigger: t4 }) => t4);
+  for (const e3 of n3) {
+    const n4 = e3.type;
+    if ("element" === n4 || "text-match" === n4 || "multiline-element" === n4) {
+      const n5 = e3.dependencies;
+      for (const e4 of n5) t3.hasNode(e4) || Y(173, e4.getType());
     }
   }
-  const c2 = (t3, n3, c3) => {
-    (function(t4, e2, n4, o3) {
-      const r3 = t4.getParent();
-      if (!p(r3) || t4.getFirstChild() !== e2) return false;
-      const i2 = e2.getTextContent();
-      if (" " !== i2[n4 - 1]) return false;
-      for (const { regExp: r4, replace: s2 } of o3) {
-        const o4 = i2.match(r4);
-        if (o4 && o4[0].length === (o4[0].endsWith(" ") ? n4 : n4 - 1)) {
-          const r5 = e2.getNextSiblings(), [i3, l3] = e2.splitText(n4);
-          if (i3.remove(), false !== s2(t4, l3 ? [l3, ...r5] : r5, o4, false)) return true;
+  const c3 = (t4, n4, c4) => {
+    (function(t5, e3, n5, o4) {
+      const r4 = t5.getParent();
+      if (!p(r4) || t5.getFirstChild() !== e3) return false;
+      const i3 = e3.getTextContent();
+      if (" " !== i3[n5 - 1]) return false;
+      for (const { regExp: r5, replace: s3 } of o4) {
+        const o5 = i3.match(r5);
+        if (o5 && o5[0].length === (o5[0].endsWith(" ") ? n5 : n5 - 1)) {
+          const r6 = e3.getNextSiblings(), [i4, l4] = e3.splitText(n5);
+          if (i4.remove(), false !== s3(t5, l4 ? [l4, ...r6] : r6, o5, false)) return true;
         }
       }
       return false;
-    })(t3, n3, c3, o2.element) || function(t4, e2, n4, o3) {
-      const r3 = t4.getParent();
-      if (!p(r3) || t4.getFirstChild() !== e2) return false;
-      const i2 = e2.getTextContent();
-      if (" " !== i2[n4 - 1]) return false;
-      for (const { regExpStart: r4, replace: s2, regExpEnd: l3 } of o3) {
-        if (l3 && !("optional" in l3) || l3 && "optional" in l3 && !l3.optional) continue;
-        const o4 = i2.match(r4);
-        if (o4 && o4[0].length === (o4[0].endsWith(" ") ? n4 : n4 - 1)) {
-          const r5 = e2.getNextSiblings(), [i3, l4] = e2.splitText(n4);
-          if (i3.remove(), false !== s2(t4, l4 ? [l4, ...r5] : r5, o4, null, null, false)) return true;
+    })(t4, n4, c4, o3.element) || function(t5, e3, n5, o4) {
+      const r4 = t5.getParent();
+      if (!p(r4) || t5.getFirstChild() !== e3) return false;
+      const i3 = e3.getTextContent();
+      if (" " !== i3[n5 - 1]) return false;
+      for (const { regExpStart: r5, replace: s3, regExpEnd: l4 } of o4) {
+        if (l4 && !("optional" in l4) || l4 && "optional" in l4 && !l4.optional) continue;
+        const o5 = i3.match(r5);
+        if (o5 && o5[0].length === (o5[0].endsWith(" ") ? n5 : n5 - 1)) {
+          const r6 = e3.getNextSiblings(), [i4, l5] = e3.splitText(n5);
+          if (i4.remove(), false !== s3(t5, l5 ? [l5, ...r6] : r6, o5, null, null, false)) return true;
         }
       }
       return false;
-    }(t3, n3, c3, o2.multilineElement) || function(t4, e2, n4) {
-      let o3 = t4.getTextContent();
-      const r3 = n4[o3[e2 - 1]];
-      if (null == r3) return false;
-      e2 < o3.length && (o3 = o3.slice(0, e2));
-      for (const e3 of r3) {
-        if (!e3.replace || !e3.regExp) continue;
-        const n5 = o3.match(e3.regExp);
-        if (null === n5) continue;
-        const r4 = n5.index || 0, i2 = r4 + n5[0].length;
-        let s2;
-        return 0 === r4 ? [s2] = t4.splitText(i2) : [, s2] = t4.splitText(r4, i2), s2.selectNext(0, 0), e3.replace(s2, n5), true;
+    }(t4, n4, c4, o3.multilineElement) || function(t5, e3, n5) {
+      let o4 = t5.getTextContent();
+      const r4 = n5[o4[e3 - 1]];
+      if (null == r4) return false;
+      e3 < o4.length && (o4 = o4.slice(0, e3));
+      for (const e4 of r4) {
+        if (!e4.replace || !e4.regExp) continue;
+        const n6 = o4.match(e4.regExp);
+        if (null === n6) continue;
+        const r5 = n6.index || 0, i3 = r5 + n6[0].length;
+        let s3;
+        return 0 === r5 ? [s3] = t5.splitText(i3) : [, s3] = t5.splitText(r5, i3), s3.selectNext(0, 0), e4.replace(s3, n6), true;
       }
       return false;
-    }(n3, c3, l2) || function(t4, n4, o3) {
-      const r3 = t4.getTextContent(), l3 = n4 - 1, c4 = r3[l3], f2 = o3[c4];
-      if (!f2) return false;
-      for (const n5 of f2) {
-        const { tag: o4 } = n5, f3 = o4.length, a2 = l3 - f3 + 1;
-        if (f3 > 1 && !tt(r3, a2, o4, 0, f3)) continue;
-        if (" " === r3[a2 - 1]) continue;
-        const u2 = r3[l3 + 1];
-        if (false === n5.intraword && u2 && !j.test(u2)) continue;
-        const p2 = t4;
-        let h2 = p2, x2 = Z(r3, a2, o4), T2 = h2;
-        for (; x2 < 0 && (T2 = T2.getPreviousSibling()) && !i(T2); ) if (e(T2)) {
+    }(n4, c4, l3) || function(t5, n5, o4) {
+      const r4 = t5.getTextContent(), l4 = n5 - 1, c5 = r4[l4], f3 = o4[c5];
+      if (!f3) return false;
+      for (const n6 of f3) {
+        const { tag: o5 } = n6, f4 = o5.length, a3 = l4 - f4 + 1;
+        if (f4 > 1 && !tt(r4, a3, o5, 0, f4)) continue;
+        if (" " === r4[a3 - 1]) continue;
+        const u3 = r4[l4 + 1];
+        if (false === n6.intraword && u3 && !j.test(u3)) continue;
+        const p3 = t5;
+        let h3 = p3, x3 = Z(r4, a3, o5), T2 = h3;
+        for (; x3 < 0 && (T2 = T2.getPreviousSibling()) && !i(T2); ) if (e(T2)) {
           if (T2.hasFormat("code")) continue;
-          const t5 = T2.getTextContent();
-          h2 = T2, x2 = Z(t5, t5.length, o4);
+          const t6 = T2.getTextContent();
+          h3 = T2, x3 = Z(t6, t6.length, o5);
         }
-        if (x2 < 0) continue;
-        if (h2 === p2 && x2 + f3 === a2) continue;
-        const C2 = h2.getTextContent();
-        if (x2 > 0 && C2[x2 - 1] === c4) continue;
-        const E2 = C2[x2 - 1];
-        if (false === n5.intraword && E2 && !j.test(E2)) continue;
-        const y2 = p2.getTextContent(), $2 = y2.slice(0, a2) + y2.slice(l3 + 1);
-        p2.setTextContent($2);
-        const v2 = h2 === p2 ? $2 : C2;
-        h2.setTextContent(v2.slice(0, x2) + v2.slice(x2 + f3));
+        if (x3 < 0) continue;
+        if (h3 === p3 && x3 + f4 === a3) continue;
+        const C2 = h3.getTextContent();
+        if (x3 > 0 && C2[x3 - 1] === c5) continue;
+        const E2 = C2[x3 - 1];
+        if (false === n6.intraword && E2 && !j.test(E2)) continue;
+        const y3 = p3.getTextContent(), $2 = y3.slice(0, a3) + y3.slice(l4 + 1);
+        p3.setTextContent($2);
+        const v2 = h3 === p3 ? $2 : C2;
+        h3.setTextContent(v2.slice(0, x3) + v2.slice(x3 + f4));
         const S2 = s(), b2 = d();
         m(b2);
-        const F2 = l3 - f3 * (h2 === p2 ? 2 : 1) + 1;
-        b2.anchor.set(h2.__key, x2, "text"), b2.focus.set(p2.__key, F2, "text");
-        for (const t5 of n5.format) b2.hasFormat(t5) || b2.formatText(t5);
+        const F2 = l4 - f4 * (h3 === p3 ? 2 : 1) + 1;
+        b2.anchor.set(h3.__key, x3, "text"), b2.focus.set(p3.__key, F2, "text");
+        for (const t6 of n6.format) b2.hasFormat(t6) || b2.formatText(t6);
         b2.anchor.set(b2.focus.key, b2.focus.offset, b2.focus.type);
-        for (const t5 of n5.format) b2.hasFormat(t5) && b2.toggleFormat(t5);
+        for (const t6 of n6.format) b2.hasFormat(t6) && b2.toggleFormat(t6);
         return g(S2) && (b2.format = S2.format), true;
       }
-    }(n3, c3, r2);
+    }(n4, c4, r3);
   };
-  return t2.registerUpdateListener(({ tags: n3, dirtyLeaves: o3, editorState: r3, prevEditorState: i2 }) => {
-    if (n3.has(a) || n3.has(u)) return;
-    if (t2.isComposing()) return;
-    const l3 = r3.read(s), f2 = i2.read(s);
-    if (!g(f2) || !g(l3) || !l3.isCollapsed() || l3.is(f2)) return;
-    const p2 = l3.anchor.key, d2 = l3.anchor.offset, m2 = r3._nodeMap.get(p2);
-    !e(m2) || !o3.has(p2) || 1 !== d2 && d2 > f2.anchor.offset + 1 || t2.update(() => {
-      if (!J(m2)) return;
-      const t3 = m2.getParent();
-      null === t3 || w(t3) || c2(t3, m2, l3.anchor.offset);
+  return t3.registerUpdateListener(({ tags: n4, dirtyLeaves: o4, editorState: r4, prevEditorState: i3 }) => {
+    if (n4.has(a) || n4.has(u)) return;
+    if (t3.isComposing()) return;
+    const l4 = r4.read(s), f3 = i3.read(s);
+    if (!g(f3) || !g(l4) || !l4.isCollapsed() || l4.is(f3)) return;
+    const p3 = l4.anchor.key, d3 = l4.anchor.offset, m3 = r4._nodeMap.get(p3);
+    !e(m3) || !o4.has(p3) || 1 !== d3 && d3 > f3.anchor.offset + 1 || t3.update(() => {
+      if (!J(m3)) return;
+      const t4 = m3.getParent();
+      null === t4 || w(t4) || c3(t4, m3, l4.anchor.offset);
     });
   });
 }
-function Mt(t2, e2 = Bt, n2, o2 = false, r2 = false) {
-  const i2 = o2 ? t2 : function(t3, e3 = false) {
-    const n3 = t3.split("\n");
-    let o3 = false;
-    const r3 = [];
-    for (let t4 = 0; t4 < n3.length; t4++) {
-      const i3 = n3[t4], s2 = r3[r3.length - 1];
-      ft.test(i3) ? r3.push(i3) : lt.test(i3) || ct.test(i3) ? (o3 = !o3, r3.push(i3)) : o3 || "" === i3 || "" === s2 || !s2 || it.test(s2) || it.test(i3) || st.test(i3) || nt.test(i3) || ot.test(i3) || rt.test(i3) || at.test(i3) || ut.test(i3) || !e3 ? r3.push(i3) : r3[r3.length - 1] = s2 + i3;
+function Mt(t3, e3 = Bt, n3, o3 = false, r3 = false) {
+  const i3 = o3 ? t3 : function(t4, e4 = false) {
+    const n4 = t4.split("\n");
+    let o4 = false;
+    const r4 = [];
+    for (let t5 = 0; t5 < n4.length; t5++) {
+      const i4 = n4[t5], s3 = r4[r4.length - 1];
+      ft.test(i4) ? r4.push(i4) : lt.test(i4) || ct.test(i4) ? (o4 = !o4, r4.push(i4)) : o4 || "" === i4 || "" === s3 || !s3 || it.test(s3) || it.test(i4) || st.test(i4) || nt.test(i4) || ot.test(i4) || rt.test(i4) || at.test(i4) || ut.test(i4) || !e4 ? r4.push(i4) : r4[r4.length - 1] = s3 + i4;
     }
-    return r3.join("\n");
-  }(t2, r2);
-  return Q(e2, o2)(i2, n2);
+    return r4.join("\n");
+  }(t3, r3);
+  return Q(e3, o3)(i3, n3);
 }
-function jt(t2 = Bt, e2, o2 = false) {
-  const r2 = function(t3, e3 = false) {
-    const o3 = M(t3), r3 = [...o3.multilineElement, ...o3.element], i2 = !e3, s2 = o3.textFormat.filter((t4) => 1 === t4.format.length).sort((t4, e4) => Number(t4.format.includes("code")) - Number(e4.format.includes("code")));
-    return (t4) => {
-      const e4 = [], l2 = (t4 || n()).getChildren();
-      for (let t5 = 0; t5 < l2.length; t5++) {
-        const n2 = l2[t5], c2 = W(n2, r3, s2, o3.textMatch);
-        null != c2 && e4.push(i2 && t5 > 0 && !z(n2) && !z(l2[t5 - 1]) ? "\n".concat(c2) : c2);
+function jt(t3 = Bt, e3, o3 = false) {
+  const r3 = function(t4, e4 = false) {
+    const o4 = M(t4), r4 = [...o4.multilineElement, ...o4.element], i3 = !e4, s3 = o4.textFormat.filter((t5) => 1 === t5.format.length).sort((t5, e5) => Number(t5.format.includes("code")) - Number(e5.format.includes("code")));
+    return (t5) => {
+      const e5 = [], l3 = (t5 || n()).getChildren();
+      for (let t6 = 0; t6 < l3.length; t6++) {
+        const n3 = l3[t6], c3 = W(n3, r4, s3, o4.textMatch);
+        null != c3 && e5.push(i3 && t6 > 0 && !z(n3) && !z(l3[t6 - 1]) ? "\n".concat(c3) : c3);
       }
-      return e4.join("\n");
+      return e5.join("\n");
     };
-  }(t2, o2);
-  return r2(e2);
+  }(t3, o3);
+  return r3(e3);
 }
 var j, A, U, nt, ot, rt, it, st, lt, ct, ft, at, ut, gt, pt, dt, mt, ht, xt, Tt, Ct, Et, yt, $t, vt, St, bt, Ft, It, Nt, wt, kt, Lt, Pt, Rt, _t, Bt;
 var init_LexicalMarkdown_prod = __esm({
@@ -21858,86 +21858,86 @@ var init_LexicalMarkdown_prod = __esm({
     ft = /^[ \t]*```[^`]+(?:(?:`{1,2}|`{4,})[^`]+)*```(?:[^`]|$)/;
     at = /^(?:\|)(.+)(?:\|)\s?$/;
     ut = /^(\| ?:?-*:? ?)+\|\s?$/;
-    gt = (t2) => (e2, n2, o2) => {
-      const r2 = t2(o2);
-      r2.append(...n2), e2.replace(r2), r2.select(0, 0);
+    gt = (t3) => (e3, n3, o3) => {
+      const r3 = t3(o3);
+      r3.append(...n3), e3.replace(r3), r3.select(0, 0);
     };
-    pt = (t2) => (e2, n2, o2) => {
-      const r2 = e2.getPreviousSibling(), i2 = e2.getNextSibling(), s2 = E("check" === t2 ? "x" === o2[3] : void 0);
-      if (h(i2) && i2.getListType() === t2) {
-        const t3 = i2.getFirstChild();
-        null !== t3 ? t3.insertBefore(s2) : i2.append(s2), e2.remove();
-      } else if (h(r2) && r2.getListType() === t2) r2.append(s2), e2.remove();
+    pt = (t3) => (e3, n3, o3) => {
+      const r3 = e3.getPreviousSibling(), i3 = e3.getNextSibling(), s3 = E("check" === t3 ? "x" === o3[3] : void 0);
+      if (h(i3) && i3.getListType() === t3) {
+        const t4 = i3.getFirstChild();
+        null !== t4 ? t4.insertBefore(s3) : i3.append(s3), e3.remove();
+      } else if (h(r3) && r3.getListType() === t3) r3.append(s3), e3.remove();
       else {
-        const n3 = y(t2, "number" === t2 ? Number(o2[2]) : void 0);
-        n3.append(s2), e2.replace(n3);
+        const n4 = y(t3, "number" === t3 ? Number(o3[2]) : void 0);
+        n4.append(s3), e3.replace(n4);
       }
-      s2.append(...n2), s2.select(0, 0);
-      const l2 = function(t3) {
-        const e3 = t3.match(/\t/g), n3 = t3.match(/ /g);
-        let o3 = 0;
-        return e3 && (o3 += e3.length), n3 && (o3 += Math.floor(n3.length / 4)), o3;
-      }(o2[1]);
-      l2 && s2.setIndent(l2);
+      s3.append(...n3), s3.select(0, 0);
+      const l3 = function(t4) {
+        const e4 = t4.match(/\t/g), n4 = t4.match(/ /g);
+        let o4 = 0;
+        return e4 && (o4 += e4.length), n4 && (o4 += Math.floor(n4.length / 4)), o4;
+      }(o3[1]);
+      l3 && s3.setIndent(l3);
     };
-    dt = (t2, e2, n2) => {
-      const o2 = [], r2 = t2.getChildren();
-      let i2 = 0;
-      for (const s2 of r2) if (x(s2)) {
-        if (1 === s2.getChildrenSize()) {
-          const t3 = s2.getFirstChild();
-          if (h(t3)) {
-            o2.push(dt(t3, e2, n2 + 1));
+    dt = (t3, e3, n3) => {
+      const o3 = [], r3 = t3.getChildren();
+      let i3 = 0;
+      for (const s3 of r3) if (x(s3)) {
+        if (1 === s3.getChildrenSize()) {
+          const t4 = s3.getFirstChild();
+          if (h(t4)) {
+            o3.push(dt(t4, e3, n3 + 1));
             continue;
           }
         }
-        const r3 = " ".repeat(4 * n2), l2 = t2.getListType(), c2 = "number" === l2 ? `${t2.getStart() + i2}. ` : "check" === l2 ? `- [${s2.getChecked() ? "x" : " "}] ` : "- ";
-        o2.push(r3 + c2 + e2(s2)), i2++;
+        const r4 = " ".repeat(4 * n3), l3 = t3.getListType(), c3 = "number" === l3 ? `${t3.getStart() + i3}. ` : "check" === l3 ? `- [${s3.getChecked() ? "x" : " "}] ` : "- ";
+        o3.push(r4 + c3 + e3(s3)), i3++;
       }
-      return o2.join("\n");
+      return o3.join("\n");
     };
-    mt = { dependencies: [v], export: (t2, e2) => {
-      if (!S(t2)) return null;
-      const n2 = Number(t2.getTag().slice(1));
-      return "#".repeat(n2) + " " + e2(t2);
-    }, regExp: it, replace: gt((t2) => {
-      const e2 = "h" + t2[1].length;
-      return I(e2);
+    mt = { dependencies: [v], export: (t3, e3) => {
+      if (!S(t3)) return null;
+      const n3 = Number(t3.getTag().slice(1));
+      return "#".repeat(n3) + " " + e3(t3);
+    }, regExp: it, replace: gt((t3) => {
+      const e3 = "h" + t3[1].length;
+      return I(e3);
     }), type: "element" };
-    ht = { dependencies: [b], export: (t2, e2) => {
-      if (!$(t2)) return null;
-      const n2 = e2(t2).split("\n"), o2 = [];
-      for (const t3 of n2) o2.push("> " + t3);
-      return o2.join("\n");
-    }, regExp: st, replace: (t2, e2, n2, o2) => {
-      if (o2) {
-        const n3 = t2.getPreviousSibling();
-        if ($(n3)) return n3.splice(n3.getChildrenSize(), 0, [f(), ...e2]), n3.select(0, 0), void t2.remove();
+    ht = { dependencies: [b], export: (t3, e3) => {
+      if (!$(t3)) return null;
+      const n3 = e3(t3).split("\n"), o3 = [];
+      for (const t4 of n3) o3.push("> " + t4);
+      return o3.join("\n");
+    }, regExp: st, replace: (t3, e3, n3, o3) => {
+      if (o3) {
+        const n4 = t3.getPreviousSibling();
+        if ($(n4)) return n4.splice(n4.getChildrenSize(), 0, [f(), ...e3]), n4.select(0, 0), void t3.remove();
       }
-      const r2 = F();
-      r2.append(...e2), t2.replace(r2), r2.select(0, 0);
+      const r3 = F();
+      r3.append(...e3), t3.replace(r3), r3.select(0, 0);
     }, type: "element" };
-    xt = { dependencies: [k], export: (t2) => {
-      if (!w(t2)) return null;
-      const e2 = t2.getTextContent();
-      return "```" + (t2.getLanguage() || "") + (e2 ? "\n" + e2 : "") + "\n```";
-    }, regExpEnd: { optional: true, regExp: ct }, regExpStart: lt, replace: (t2, e2, n2, o2, r2, i2) => {
-      let s2, c2;
-      if (!e2 && r2) {
-        if (1 === r2.length) o2 ? (s2 = L(), c2 = n2[1] + r2[0]) : (s2 = L(n2[1]), c2 = r2[0].startsWith(" ") ? r2[0].slice(1) : r2[0]);
+    xt = { dependencies: [k], export: (t3) => {
+      if (!w(t3)) return null;
+      const e3 = t3.getTextContent();
+      return "```" + (t3.getLanguage() || "") + (e3 ? "\n" + e3 : "") + "\n```";
+    }, regExpEnd: { optional: true, regExp: ct }, regExpStart: lt, replace: (t3, e3, n3, o3, r3, i3) => {
+      let s3, c3;
+      if (!e3 && r3) {
+        if (1 === r3.length) o3 ? (s3 = L(), c3 = n3[1] + r3[0]) : (s3 = L(n3[1]), c3 = r3[0].startsWith(" ") ? r3[0].slice(1) : r3[0]);
         else {
-          if (s2 = L(n2[1]), 0 === r2[0].trim().length) for (; r2.length > 0 && !r2[0].length; ) r2.shift();
-          else r2[0] = r2[0].startsWith(" ") ? r2[0].slice(1) : r2[0];
-          for (; r2.length > 0 && !r2[r2.length - 1].length; ) r2.pop();
-          c2 = r2.join("\n");
+          if (s3 = L(n3[1]), 0 === r3[0].trim().length) for (; r3.length > 0 && !r3[0].length; ) r3.shift();
+          else r3[0] = r3[0].startsWith(" ") ? r3[0].slice(1) : r3[0];
+          for (; r3.length > 0 && !r3[r3.length - 1].length; ) r3.pop();
+          c3 = r3.join("\n");
         }
-        const e3 = l(c2);
-        s2.append(e3), t2.append(s2);
-      } else e2 && gt((t3) => L(t3 ? t3[1] : void 0))(t2, e2, n2, i2);
+        const e4 = l(c3);
+        s3.append(e4), t3.append(s3);
+      } else e3 && gt((t4) => L(t4 ? t4[1] : void 0))(t3, e3, n3, i3);
     }, type: "multiline-element" };
-    Tt = { dependencies: [T, C], export: (t2, e2) => h(t2) ? dt(t2, e2, 0) : null, regExp: ot, replace: pt("bullet"), type: "element" };
-    Ct = { dependencies: [T, C], export: (t2, e2) => h(t2) ? dt(t2, e2, 0) : null, regExp: rt, replace: pt("check"), type: "element" };
-    Et = { dependencies: [T, C], export: (t2, e2) => h(t2) ? dt(t2, e2, 0) : null, regExp: nt, replace: pt("number"), type: "element" };
+    Tt = { dependencies: [T, C], export: (t3, e3) => h(t3) ? dt(t3, e3, 0) : null, regExp: ot, replace: pt("bullet"), type: "element" };
+    Ct = { dependencies: [T, C], export: (t3, e3) => h(t3) ? dt(t3, e3, 0) : null, regExp: rt, replace: pt("check"), type: "element" };
+    Et = { dependencies: [T, C], export: (t3, e3) => h(t3) ? dt(t3, e3, 0) : null, regExp: nt, replace: pt("number"), type: "element" };
     yt = { format: ["code"], tag: "`", type: "text-format" };
     $t = { format: ["highlight"], tag: "==", type: "text-format" };
     vt = { format: ["bold", "italic"], tag: "***", type: "text-format" };
@@ -21947,15 +21947,15 @@ var init_LexicalMarkdown_prod = __esm({
     It = { format: ["strikethrough"], tag: "~~", type: "text-format" };
     Nt = { format: ["italic"], tag: "*", type: "text-format" };
     wt = { format: ["italic"], intraword: false, tag: "_", type: "text-format" };
-    kt = { dependencies: [P], export: (t2, e2, n2) => {
-      if (!R(t2)) return null;
-      const o2 = t2.getTitle(), r2 = e2(t2);
-      return o2 ? `[${r2}](${t2.getURL()} "${o2}")` : `[${r2}](${t2.getURL()})`;
-    }, importRegExp: /(?:\[([^[]+)\])(?:\((?:([^()\s]+)(?:\s"((?:[^"]*\\")*[^"]*)"\s*)?)\))/, regExp: /(?:\[([^[]+)\])(?:\((?:([^()\s]+)(?:\s"((?:[^"]*\\")*[^"]*)"\s*)?)\))$/, replace: (t2, e2) => {
-      const [, n2, o2, r2] = e2, i2 = (s2 = o2).match(/^[a-z][a-z0-9+.-]*:/i) || s2.match(/^[/#.]/) ? s2 : s2.includes("@") ? `mailto:${s2}` : U.test(s2) ? `tel:${s2}` : `https://${s2}`;
-      var s2;
-      const c2 = _(i2, { title: r2 }), f2 = l(n2);
-      return f2.setFormat(t2.getFormat()), c2.append(f2), t2.replace(c2), f2;
+    kt = { dependencies: [P], export: (t3, e3, n3) => {
+      if (!R(t3)) return null;
+      const o3 = t3.getTitle(), r3 = e3(t3);
+      return o3 ? `[${r3}](${t3.getURL()} "${o3}")` : `[${r3}](${t3.getURL()})`;
+    }, importRegExp: /(?:\[([^[]+)\])(?:\((?:([^()\s]+)(?:\s"((?:[^"]*\\")*[^"]*)"\s*)?)\))/, regExp: /(?:\[([^[]+)\])(?:\((?:([^()\s]+)(?:\s"((?:[^"]*\\")*[^"]*)"\s*)?)\))$/, replace: (t3, e3) => {
+      const [, n3, o3, r3] = e3, i3 = (s3 = o3).match(/^[a-z][a-z0-9+.-]*:/i) || s3.match(/^[/#.]/) ? s3 : s3.includes("@") ? `mailto:${s3}` : U.test(s3) ? `tel:${s3}` : `https://${s3}`;
+      var s3;
+      const c3 = _(i3, { title: r3 }), f3 = l(n3);
+      return f3.setFormat(t3.getFormat()), c3.append(f3), t3.replace(c3), f3;
     }, trigger: ")", type: "text-match" };
     Lt = [mt, ht, Tt, Et];
     Pt = [xt];
@@ -22004,8 +22004,8 @@ function positionSticky(stickyElem, positioning) {
   style.left = rectLeft + positioning.x + "px";
 }
 function StickyComponent({
-  x: x2,
-  y: y2,
+  x: x3,
+  y: y3,
   nodeKey,
   color,
   caption
@@ -22023,18 +22023,18 @@ function StickyComponent({
   const { isCollabActive } = useCollaborationContext4();
   useEffect48(() => {
     const position = positioningRef.current;
-    position.x = x2;
-    position.y = y2;
+    position.x = x3;
+    position.y = y3;
     const stickyContainer = stickyContainerRef.current;
     if (stickyContainer !== null) {
       positionSticky(stickyContainer, position);
     }
-  }, [x2, y2]);
+  }, [x3, y3]);
   useLayoutEffect3(() => {
     const position = positioningRef.current;
     const resizeObserver = new ResizeObserver((entries) => {
-      for (let i2 = 0; i2 < entries.length; i2++) {
-        const entry = entries[i2];
+      for (let i3 = 0; i3 < entries.length; i3++) {
+        const entry = entries[i3];
         const { target } = entry;
         position.rootElementRect = target.getBoundingClientRect();
         const stickyContainer = stickyContainerRef.current;
@@ -22262,10 +22262,10 @@ var init_StickyNode = __esm({
         }
         return stickyNode;
       }
-      constructor(x2, y2, color, caption, key) {
+      constructor(x3, y3, color, caption, key) {
         super(key);
-        this.__x = x2;
-        this.__y = y2;
+        this.__x = x3;
+        this.__y = y3;
         this.__caption = caption || createEditor3();
         this.__color = color;
       }
@@ -22286,10 +22286,10 @@ var init_StickyNode = __esm({
       updateDOM() {
         return false;
       }
-      setPosition(x2, y2) {
+      setPosition(x3, y3) {
         const writable = this.getWritable();
-        writable.__x = x2;
-        writable.__y = y2;
+        writable.__x = x3;
+        writable.__y = y3;
         $setSelection10(null);
       }
       toggleColor() {
@@ -22315,6 +22315,348 @@ var init_StickyNode = __esm({
         return true;
       }
     };
+  }
+});
+
+// node_modules/@lexical/html/LexicalHtml.dev.mjs
+var LexicalHtml_dev_exports = {};
+__export(LexicalHtml_dev_exports, {
+  $generateHtmlFromNodes: () => $generateHtmlFromNodes,
+  $generateNodesFromDOM: () => $generateNodesFromDOM
+});
+import { $sliceSelectedTextNodeContent } from "@lexical/selection";
+import { isHTMLElement as isHTMLElement9, isBlockDomNode } from "@lexical/utils";
+import { $getRoot as $getRoot3, $isElementNode as $isElementNode6, $cloneWithProperties, $isTextNode as $isTextNode8, isDocumentFragment, $isRootOrShadowRoot as $isRootOrShadowRoot8, $isBlockElementNode, $createLineBreakNode as $createLineBreakNode2, ArtificialNode__DO_NOT_USE, isInlineDomNode, $createParagraphNode as $createParagraphNode13 } from "lexical";
+function $generateNodesFromDOM(editor, dom) {
+  const elements2 = dom.body ? dom.body.childNodes : [];
+  let lexicalNodes = [];
+  const allArtificialNodes = [];
+  for (let i3 = 0; i3 < elements2.length; i3++) {
+    const element = elements2[i3];
+    if (!IGNORE_TAGS.has(element.nodeName)) {
+      const lexicalNode = $createNodesFromDOM(element, editor, allArtificialNodes, false);
+      if (lexicalNode !== null) {
+        lexicalNodes = lexicalNodes.concat(lexicalNode);
+      }
+    }
+  }
+  $unwrapArtificialNodes(allArtificialNodes);
+  return lexicalNodes;
+}
+function $generateHtmlFromNodes(editor, selection) {
+  if (typeof document === "undefined" || typeof window === "undefined" && typeof global.window === "undefined") {
+    throw new Error("To use $generateHtmlFromNodes in headless mode please initialize a headless browser implementation such as JSDom before calling this function.");
+  }
+  const container = document.createElement("div");
+  const root = $getRoot3();
+  const topLevelChildren = root.getChildren();
+  for (let i3 = 0; i3 < topLevelChildren.length; i3++) {
+    const topLevelNode = topLevelChildren[i3];
+    $appendNodesToHTML(editor, topLevelNode, container, selection);
+  }
+  return container.innerHTML;
+}
+function $appendNodesToHTML(editor, currentNode, parentElement, selection = null) {
+  let shouldInclude = selection !== null ? currentNode.isSelected(selection) : true;
+  const shouldExclude = $isElementNode6(currentNode) && currentNode.excludeFromCopy("html");
+  let target = currentNode;
+  if (selection !== null) {
+    let clone = $cloneWithProperties(currentNode);
+    clone = $isTextNode8(clone) && selection !== null ? $sliceSelectedTextNodeContent(selection, clone) : clone;
+    target = clone;
+  }
+  const children = $isElementNode6(target) ? target.getChildren() : [];
+  const registeredNode = editor._nodes.get(target.getType());
+  let exportOutput;
+  if (registeredNode && registeredNode.exportDOM !== void 0) {
+    exportOutput = registeredNode.exportDOM(editor, target);
+  } else {
+    exportOutput = target.exportDOM(editor);
+  }
+  const {
+    element,
+    after
+  } = exportOutput;
+  if (!element) {
+    return false;
+  }
+  const fragment = document.createDocumentFragment();
+  for (let i3 = 0; i3 < children.length; i3++) {
+    const childNode = children[i3];
+    const shouldIncludeChild = $appendNodesToHTML(editor, childNode, fragment, selection);
+    if (!shouldInclude && $isElementNode6(currentNode) && shouldIncludeChild && currentNode.extractWithChild(childNode, selection, "html")) {
+      shouldInclude = true;
+    }
+  }
+  if (shouldInclude && !shouldExclude) {
+    if (isHTMLElement9(element) || isDocumentFragment(element)) {
+      element.append(fragment);
+    }
+    parentElement.append(element);
+    if (after) {
+      const newElement = after.call(target, element);
+      if (newElement) {
+        if (isDocumentFragment(element)) {
+          element.replaceChildren(newElement);
+        } else {
+          element.replaceWith(newElement);
+        }
+      }
+    }
+  } else {
+    parentElement.append(fragment);
+  }
+  return shouldInclude;
+}
+function getConversionFunction(domNode, editor) {
+  const {
+    nodeName
+  } = domNode;
+  const cachedConversions = editor._htmlConversions.get(nodeName.toLowerCase());
+  let currentConversion = null;
+  if (cachedConversions !== void 0) {
+    for (const cachedConversion of cachedConversions) {
+      const domConversion = cachedConversion(domNode);
+      if (domConversion !== null && (currentConversion === null || // Given equal priority, prefer the last registered importer
+      // which is typically an application custom node or HTMLConfig['import']
+      (currentConversion.priority || 0) <= (domConversion.priority || 0))) {
+        currentConversion = domConversion;
+      }
+    }
+  }
+  return currentConversion !== null ? currentConversion.conversion : null;
+}
+function $createNodesFromDOM(node, editor, allArtificialNodes, hasBlockAncestorLexicalNode, forChildMap = /* @__PURE__ */ new Map(), parentLexicalNode) {
+  let lexicalNodes = [];
+  if (IGNORE_TAGS.has(node.nodeName)) {
+    return lexicalNodes;
+  }
+  let currentLexicalNode = null;
+  const transformFunction = getConversionFunction(node, editor);
+  const transformOutput = transformFunction ? transformFunction(node) : null;
+  let postTransform = null;
+  if (transformOutput !== null) {
+    postTransform = transformOutput.after;
+    const transformNodes = transformOutput.node;
+    currentLexicalNode = Array.isArray(transformNodes) ? transformNodes[transformNodes.length - 1] : transformNodes;
+    if (currentLexicalNode !== null) {
+      for (const [, forChildFunction] of forChildMap) {
+        currentLexicalNode = forChildFunction(currentLexicalNode, parentLexicalNode);
+        if (!currentLexicalNode) {
+          break;
+        }
+      }
+      if (currentLexicalNode) {
+        lexicalNodes.push(...Array.isArray(transformNodes) ? transformNodes : [currentLexicalNode]);
+      }
+    }
+    if (transformOutput.forChild != null) {
+      forChildMap.set(node.nodeName, transformOutput.forChild);
+    }
+  }
+  const children = node.childNodes;
+  let childLexicalNodes = [];
+  const hasBlockAncestorLexicalNodeForChildren = currentLexicalNode != null && $isRootOrShadowRoot8(currentLexicalNode) ? false : currentLexicalNode != null && $isBlockElementNode(currentLexicalNode) || hasBlockAncestorLexicalNode;
+  for (let i3 = 0; i3 < children.length; i3++) {
+    childLexicalNodes.push(...$createNodesFromDOM(children[i3], editor, allArtificialNodes, hasBlockAncestorLexicalNodeForChildren, new Map(forChildMap), currentLexicalNode));
+  }
+  if (postTransform != null) {
+    childLexicalNodes = postTransform(childLexicalNodes);
+  }
+  if (isBlockDomNode(node)) {
+    if (!hasBlockAncestorLexicalNodeForChildren) {
+      childLexicalNodes = wrapContinuousInlines(node, childLexicalNodes, $createParagraphNode13);
+    } else {
+      childLexicalNodes = wrapContinuousInlines(node, childLexicalNodes, () => {
+        const artificialNode = new ArtificialNode__DO_NOT_USE();
+        allArtificialNodes.push(artificialNode);
+        return artificialNode;
+      });
+    }
+  }
+  if (currentLexicalNode == null) {
+    if (childLexicalNodes.length > 0) {
+      lexicalNodes = lexicalNodes.concat(childLexicalNodes);
+    } else {
+      if (isBlockDomNode(node) && isDomNodeBetweenTwoInlineNodes(node)) {
+        lexicalNodes = lexicalNodes.concat($createLineBreakNode2());
+      }
+    }
+  } else {
+    if ($isElementNode6(currentLexicalNode)) {
+      currentLexicalNode.append(...childLexicalNodes);
+    }
+  }
+  return lexicalNodes;
+}
+function wrapContinuousInlines(domNode, nodes, createWrapperFn) {
+  const textAlign = domNode.style.textAlign;
+  const out = [];
+  let continuousInlines = [];
+  for (let i3 = 0; i3 < nodes.length; i3++) {
+    const node = nodes[i3];
+    if ($isBlockElementNode(node)) {
+      if (textAlign && !node.getFormat()) {
+        node.setFormat(textAlign);
+      }
+      out.push(node);
+    } else {
+      continuousInlines.push(node);
+      if (i3 === nodes.length - 1 || i3 < nodes.length - 1 && $isBlockElementNode(nodes[i3 + 1])) {
+        const wrapper = createWrapperFn();
+        wrapper.setFormat(textAlign);
+        wrapper.append(...continuousInlines);
+        out.push(wrapper);
+        continuousInlines = [];
+      }
+    }
+  }
+  return out;
+}
+function $unwrapArtificialNodes(allArtificialNodes) {
+  for (const node of allArtificialNodes) {
+    if (node.getNextSibling() instanceof ArtificialNode__DO_NOT_USE) {
+      node.insertAfter($createLineBreakNode2());
+    }
+  }
+  for (const node of allArtificialNodes) {
+    const children = node.getChildren();
+    for (const child of children) {
+      node.insertBefore(child);
+    }
+    node.remove();
+  }
+}
+function isDomNodeBetweenTwoInlineNodes(node) {
+  if (node.nextSibling == null || node.previousSibling == null) {
+    return false;
+  }
+  return isInlineDomNode(node.nextSibling) && isInlineDomNode(node.previousSibling);
+}
+var IGNORE_TAGS;
+var init_LexicalHtml_dev = __esm({
+  "node_modules/@lexical/html/LexicalHtml.dev.mjs"() {
+    "use strict";
+    IGNORE_TAGS = /* @__PURE__ */ new Set(["STYLE", "SCRIPT"]);
+  }
+});
+
+// node_modules/@lexical/html/LexicalHtml.prod.mjs
+var LexicalHtml_prod_exports = {};
+__export(LexicalHtml_prod_exports, {
+  $generateHtmlFromNodes: () => m2,
+  $generateNodesFromDOM: () => h2
+});
+import { $sliceSelectedTextNodeContent as e2 } from "@lexical/selection";
+import { isHTMLElement as n2, isBlockDomNode as t2 } from "@lexical/utils";
+import { $getRoot as o2, $isElementNode as l2, $cloneWithProperties as r2, $isTextNode as i2, isDocumentFragment as s2, $isRootOrShadowRoot as c2, $isBlockElementNode as u2, $createLineBreakNode as f2, ArtificialNode__DO_NOT_USE as a2, isInlineDomNode as d2, $createParagraphNode as p2 } from "lexical";
+function h2(e3, n3) {
+  const t3 = n3.body ? n3.body.childNodes : [];
+  let o3 = [];
+  const l3 = [];
+  for (let n4 = 0; n4 < t3.length; n4++) {
+    const r3 = t3[n4];
+    if (!x2.has(r3.nodeName)) {
+      const n5 = y2(r3, e3, l3, false);
+      null !== n5 && (o3 = o3.concat(n5));
+    }
+  }
+  return function(e4) {
+    for (const n4 of e4) n4.getNextSibling() instanceof a2 && n4.insertAfter(f2());
+    for (const n4 of e4) {
+      const e5 = n4.getChildren();
+      for (const t4 of e5) n4.insertBefore(t4);
+      n4.remove();
+    }
+  }(l3), o3;
+}
+function m2(e3, n3) {
+  if ("undefined" == typeof document || "undefined" == typeof window && void 0 === global.window) throw new Error("To use $generateHtmlFromNodes in headless mode please initialize a headless browser implementation such as JSDom before calling this function.");
+  const t3 = document.createElement("div"), l3 = o2().getChildren();
+  for (let o3 = 0; o3 < l3.length; o3++) {
+    g2(e3, l3[o3], t3, n3);
+  }
+  return t3.innerHTML;
+}
+function g2(t3, o3, c3, u3 = null) {
+  let f3 = null === u3 || o3.isSelected(u3);
+  const a3 = l2(o3) && o3.excludeFromCopy("html");
+  let d3 = o3;
+  if (null !== u3) {
+    let n3 = r2(o3);
+    n3 = i2(n3) && null !== u3 ? e2(u3, n3) : n3, d3 = n3;
+  }
+  const p3 = l2(d3) ? d3.getChildren() : [], h3 = t3._nodes.get(d3.getType());
+  let m3;
+  m3 = h3 && void 0 !== h3.exportDOM ? h3.exportDOM(t3, d3) : d3.exportDOM(t3);
+  const { element: x3, after: y3 } = m3;
+  if (!x3) return false;
+  const w3 = document.createDocumentFragment();
+  for (let e3 = 0; e3 < p3.length; e3++) {
+    const n3 = p3[e3], r3 = g2(t3, n3, w3, u3);
+    !f3 && l2(o3) && r3 && o3.extractWithChild(n3, u3, "html") && (f3 = true);
+  }
+  if (f3 && !a3) {
+    if ((n2(x3) || s2(x3)) && x3.append(w3), c3.append(x3), y3) {
+      const e3 = y3.call(d3, x3);
+      e3 && (s2(x3) ? x3.replaceChildren(e3) : x3.replaceWith(e3));
+    }
+  } else c3.append(w3);
+  return f3;
+}
+function y2(e3, n3, o3, r3, i3 = /* @__PURE__ */ new Map(), s3) {
+  let h3 = [];
+  if (x2.has(e3.nodeName)) return h3;
+  let m3 = null;
+  const g3 = function(e4, n4) {
+    const { nodeName: t3 } = e4, o4 = n4._htmlConversions.get(t3.toLowerCase());
+    let l3 = null;
+    if (void 0 !== o4) for (const n5 of o4) {
+      const t4 = n5(e4);
+      null !== t4 && (null === l3 || (l3.priority || 0) <= (t4.priority || 0)) && (l3 = t4);
+    }
+    return null !== l3 ? l3.conversion : null;
+  }(e3, n3), b2 = g3 ? g3(e3) : null;
+  let C2 = null;
+  if (null !== b2) {
+    C2 = b2.after;
+    const n4 = b2.node;
+    if (m3 = Array.isArray(n4) ? n4[n4.length - 1] : n4, null !== m3) {
+      for (const [, e4] of i3) if (m3 = e4(m3, s3), !m3) break;
+      m3 && h3.push(...Array.isArray(n4) ? n4 : [m3]);
+    }
+    null != b2.forChild && i3.set(e3.nodeName, b2.forChild);
+  }
+  const S2 = e3.childNodes;
+  let v2 = [];
+  const N2 = (null == m3 || !c2(m3)) && (null != m3 && u2(m3) || r3);
+  for (let e4 = 0; e4 < S2.length; e4++) v2.push(...y2(S2[e4], n3, o3, N2, new Map(i3), m3));
+  return null != C2 && (v2 = C2(v2)), t2(e3) && (v2 = w2(e3, v2, N2 ? () => {
+    const e4 = new a2();
+    return o3.push(e4), e4;
+  } : p2)), null == m3 ? v2.length > 0 ? h3 = h3.concat(v2) : t2(e3) && function(e4) {
+    if (null == e4.nextSibling || null == e4.previousSibling) return false;
+    return d2(e4.nextSibling) && d2(e4.previousSibling);
+  }(e3) && (h3 = h3.concat(f2())) : l2(m3) && m3.append(...v2), h3;
+}
+function w2(e3, n3, t3) {
+  const o3 = e3.style.textAlign, l3 = [];
+  let r3 = [];
+  for (let e4 = 0; e4 < n3.length; e4++) {
+    const i3 = n3[e4];
+    if (u2(i3)) o3 && !i3.getFormat() && i3.setFormat(o3), l3.push(i3);
+    else if (r3.push(i3), e4 === n3.length - 1 || e4 < n3.length - 1 && u2(n3[e4 + 1])) {
+      const e5 = t3();
+      e5.setFormat(o3), e5.append(...r3), l3.push(e5), r3 = [];
+    }
+  }
+  return l3;
+}
+var x2;
+var init_LexicalHtml_prod = __esm({
+  "node_modules/@lexical/html/LexicalHtml.prod.mjs"() {
+    "use strict";
+    x2 = /* @__PURE__ */ new Set(["STYLE", "SCRIPT"]);
   }
 });
 
@@ -22514,8 +22856,8 @@ function $createAutocompleteNode(text, uuid2) {
 
 // src/utils/swipe.ts
 var elements = /* @__PURE__ */ new WeakMap();
-function readTouch(e2) {
-  const touch = e2.changedTouches[0];
+function readTouch(e3) {
+  const touch = e3.changedTouches[0];
   if (touch === void 0) {
     return null;
   }
@@ -22525,12 +22867,12 @@ function addListener(element, cb) {
   let elementValues = elements.get(element);
   if (elementValues === void 0) {
     const listeners = /* @__PURE__ */ new Set();
-    const handleTouchstart = (e2) => {
+    const handleTouchstart = (e3) => {
       if (elementValues !== void 0) {
-        elementValues.start = readTouch(e2);
+        elementValues.start = readTouch(e3);
       }
     };
-    const handleTouchend = (e2) => {
+    const handleTouchend = (e3) => {
       if (elementValues === void 0) {
         return;
       }
@@ -22538,10 +22880,10 @@ function addListener(element, cb) {
       if (start === null) {
         return;
       }
-      const end = readTouch(e2);
+      const end = readTouch(e3);
       for (const listener of listeners) {
         if (end !== null) {
-          listener([end[0] - start[0], end[1] - start[1]], e2);
+          listener([end[0] - start[0], end[1] - start[1]], e3);
         }
       }
     };
@@ -22572,10 +22914,10 @@ function deleteListener(element, cb) {
   }
 }
 function addSwipeRightListener(element, cb) {
-  return addListener(element, (force, e2) => {
-    const [x2, y2] = force;
-    if (x2 > 0 && x2 > Math.abs(y2)) {
-      cb(x2, e2);
+  return addListener(element, (force, e3) => {
+    const [x3, y3] = force;
+    if (x3 > 0 && x3 > Math.abs(y3)) {
+      cb(x3, e3);
     }
   });
 }
@@ -22594,10 +22936,10 @@ function $search(selection) {
   }
   const word = [];
   const text = node.getTextContent();
-  let i2 = node.getTextContentSize();
-  let c2;
-  while (i2-- && i2 >= 0 && (c2 = text[i2]) !== " ") {
-    word.push(c2);
+  let i3 = node.getTextContentSize();
+  let c3;
+  while (i3-- && i3 >= 0 && (c3 = text[i3]) !== " ") {
+    word.push(c3);
   }
   if (word.length === 0) {
     return [false, ""];
@@ -22688,9 +23030,9 @@ function AutocompletePlugin() {
           if (searchPromise !== null) {
             updateAsyncSuggestion(searchPromise, newSuggestion);
           }
-        }).catch((e2) => {
-          if (e2 !== "Dismissed") {
-            console.error(e2);
+        }).catch((e3) => {
+          if (e3 !== "Dismissed") {
+            console.error(e3);
           }
         });
         lastMatch = match;
@@ -22710,17 +23052,17 @@ function AutocompletePlugin() {
       $clearSuggestion();
       return true;
     }
-    function $handleKeypressCommand(e2) {
+    function $handleKeypressCommand(e3) {
       if ($handleAutocompleteIntent()) {
-        e2.preventDefault();
+        e3.preventDefault();
         return true;
       }
       return false;
     }
-    function handleSwipeRight(_force, e2) {
+    function handleSwipeRight(_force, e3) {
       editor.update(() => {
         if ($handleAutocompleteIntent()) {
-          e2.preventDefault();
+          e3.preventDefault();
         } else {
           $addUpdateTag(HISTORY_MERGE.tag);
         }
@@ -25613,13 +25955,13 @@ function AutoEmbedMenu({
   onOptionClick,
   onOptionMouseEnter
 }) {
-  return /* @__PURE__ */ jsx11("div", { className: "typeahead-popover", children: /* @__PURE__ */ jsx11("ul", { children: options.map((option, i2) => /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsx11("div", { className: "typeahead-popover", children: /* @__PURE__ */ jsx11("ul", { children: options.map((option, i3) => /* @__PURE__ */ jsx11(
     AutoEmbedMenuItem,
     {
-      index: i2,
-      isSelected: selectedItemIndex === i2,
-      onClick: () => onOptionClick(option, i2),
-      onMouseEnter: () => onOptionMouseEnter(i2),
+      index: i3,
+      isSelected: selectedItemIndex === i3,
+      onClick: () => onOptionClick(option, i3),
+      onMouseEnter: () => onOptionMouseEnter(i3),
       option
     },
     option.key
@@ -25671,8 +26013,8 @@ function AutoEmbedDialog({
         placeholder: embedConfig.exampleUrl,
         value: text,
         "data-test-id": `${embedConfig.type}-embed-modal-url`,
-        onChange: (e2) => {
-          const { value } = e2.target;
+        onChange: (e3) => {
+          const { value } = e3.target;
           setText(value);
           validateText(value);
         }
@@ -25855,7 +26197,7 @@ var PRETTIER_PARSER_MODULES = {
 async function loadPrettierParsers(lang) {
   const dynamicImports = PRETTIER_PARSER_MODULES[lang];
   const modules = await Promise.all(dynamicImports.map((imp) => imp()));
-  return modules.map((mod2) => mod2.default || mod2);
+  return modules.map((mod3) => mod3.default || mod3);
 }
 async function loadPrettierFormat() {
   const { format } = await import("prettier/standalone");
@@ -25973,12 +26315,12 @@ function CodeActionMenuContainer({
       });
       if (codeNode) {
         const { y: editorElemY, right: editorElemRight } = anchorElem.getBoundingClientRect();
-        const { y: y2, right } = codeDOMNode.getBoundingClientRect();
+        const { y: y3, right } = codeDOMNode.getBoundingClientRect();
         setLang(_lang);
         setShown(true);
         setPosition({
           right: `${editorElemRight - right + CODE_PADDING}px`,
-          top: `${y2 - editorElemY}px`
+          top: `${y3 - editorElemY}px`
         });
       }
     },
@@ -26662,7 +27004,7 @@ function KatexEquationAlterer({
       }
     ) }),
     /* @__PURE__ */ jsx20("div", { className: "KatexEquationAlterer_defaultRow", children: "Visualization " }),
-    /* @__PURE__ */ jsx20("div", { className: "KatexEquationAlterer_centerRow", children: /* @__PURE__ */ jsx20(ErrorBoundary2, { onError: (e2) => editor._onError(e2), fallback: null, children: /* @__PURE__ */ jsx20(
+    /* @__PURE__ */ jsx20("div", { className: "KatexEquationAlterer_centerRow", children: /* @__PURE__ */ jsx20(ErrorBoundary2, { onError: (e3) => editor._onError(e3), fallback: null, children: /* @__PURE__ */ jsx20(
       KatexRenderer,
       {
         equation,
@@ -26838,7 +27180,7 @@ function FileInput({
         type: "file",
         accept,
         className: "Input__input",
-        onChange: (e2) => onChange(e2.target.files),
+        onChange: (e3) => onChange(e3.target.files),
         "data-test-id": dataTestId
       }
     )
@@ -26944,8 +27286,8 @@ function InsertImageDialog({
   const hasModifier = useRef11(false);
   useEffect22(() => {
     hasModifier.current = false;
-    const handler = (e2) => {
-      hasModifier.current = e2.altKey;
+    const handler = (e3) => {
+      hasModifier.current = e3.altKey;
     };
     document.addEventListener("keydown", handler);
     return () => {
@@ -27593,7 +27935,7 @@ function LayoutPlugin() {
           editor.update(() => {
             const container = $createLayoutContainerNode(template);
             const itemsCount = getItemsCountFromTemplate(template);
-            for (let i2 = 0; i2 < itemsCount; i2++) {
+            for (let i3 = 0; i3 < itemsCount; i3++) {
               container.append(
                 $createLayoutItemNode().append($createParagraphNode6())
               );
@@ -27618,14 +27960,14 @@ function LayoutPlugin() {
               container.getTemplateColumns()
             );
             if (itemsCount > prevItemsCount) {
-              for (let i2 = prevItemsCount; i2 < itemsCount; i2++) {
+              for (let i3 = prevItemsCount; i3 < itemsCount; i3++) {
                 container.append(
                   $createLayoutItemNode().append($createParagraphNode6())
                 );
               }
             } else if (itemsCount < prevItemsCount) {
-              for (let i2 = prevItemsCount - 1; i2 >= itemsCount; i2--) {
-                const layoutItem = container.getChildAtIndex(i2);
+              for (let i3 = prevItemsCount - 1; i3 >= itemsCount; i3--) {
+                const layoutItem = container.getChildAtIndex(i3);
                 if ($isLayoutItemNode(layoutItem)) {
                   layoutItem.remove();
                 }
@@ -28070,13 +28412,13 @@ function getBaseOptions(editor, showModal) {
       })
     }),
     ...[1, 2, 3].map(
-      (n2) => new ComponentPickerOption(`Heading ${n2}`, {
-        icon: /* @__PURE__ */ jsx44("i", { className: `icon h${n2}` }),
-        keywords: ["heading", "header", `h${n2}`],
+      (n3) => new ComponentPickerOption(`Heading ${n3}`, {
+        icon: /* @__PURE__ */ jsx44("i", { className: `icon h${n3}` }),
+        keywords: ["heading", "header", `h${n3}`],
         onSelect: () => editor.update(() => {
           const selection = $getSelection10();
           if ($isRangeSelection6(selection)) {
-            $setBlocksType(selection, () => $createHeadingNode(`h${n2}`));
+            $setBlocksType(selection, () => $createHeadingNode(`h${n3}`));
           }
         })
       })
@@ -28232,17 +28574,17 @@ function ComponentPickerMenuPlugin() {
         triggerFn: checkForTriggerMatch,
         options,
         menuRenderFn: (anchorElementRef, { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }) => anchorElementRef.current && options.length ? ReactDOM3.createPortal(
-          /* @__PURE__ */ jsx44("div", { className: "typeahead-popover component-picker-menu", children: /* @__PURE__ */ jsx44("ul", { children: options.map((option, i2) => /* @__PURE__ */ jsx44(
+          /* @__PURE__ */ jsx44("div", { className: "typeahead-popover component-picker-menu", children: /* @__PURE__ */ jsx44("ul", { children: options.map((option, i3) => /* @__PURE__ */ jsx44(
             ComponentPickerMenuItem,
             {
-              index: i2,
-              isSelected: selectedIndex === i2,
+              index: i3,
+              isSelected: selectedIndex === i3,
               onClick: () => {
-                setHighlightedIndex(i2);
+                setHighlightedIndex(i3);
                 selectOptionAndCleanUp(option);
               },
               onMouseEnter: () => {
-                setHighlightedIndex(i2);
+                setHighlightedIndex(i3);
               },
               option
             },
@@ -28309,13 +28651,13 @@ function ContextMenu({
   onOptionClick,
   onOptionMouseEnter
 }) {
-  return /* @__PURE__ */ jsx45("div", { className: "typeahead-popover", children: /* @__PURE__ */ jsx45("ul", { children: options.map((option, i2) => /* @__PURE__ */ jsx45(
+  return /* @__PURE__ */ jsx45("div", { className: "typeahead-popover", children: /* @__PURE__ */ jsx45("ul", { children: options.map((option, i3) => /* @__PURE__ */ jsx45(
     ContextMenuItem,
     {
-      index: i2,
-      isSelected: selectedItemIndex === i2,
-      onClick: () => onOptionClick(option, i2),
-      onMouseEnter: () => onOptionMouseEnter(i2),
+      index: i3,
+      isSelected: selectedItemIndex === i3,
+      onClick: () => onOptionClick(option, i3),
+      onMouseEnter: () => onOptionMouseEnter(i3),
       option
     },
     option.key
@@ -28505,7 +28847,7 @@ function DragDropPaste() {
         (async () => {
           const filesResult = await mediaFileReader(
             files,
-            [ACCEPTABLE_IMAGE_TYPES].flatMap((x2) => x2)
+            [ACCEPTABLE_IMAGE_TYPES].flatMap((x3) => x3)
           );
           for (const { file, result } of filesResult) {
             if (isMimeType(file, ACCEPTABLE_IMAGE_TYPES)) {
@@ -28543,7 +28885,7 @@ function DraggableBlockPlugin({
   const [draggableElement, setDraggableElement] = useState26(
     null
   );
-  function insertBlock(e2) {
+  function insertBlock(e3) {
     if (!draggableElement || !editor) {
       return;
     }
@@ -28553,7 +28895,7 @@ function DraggableBlockPlugin({
         return;
       }
       const pNode = $createParagraphNode9();
-      if (e2.altKey || e2.ctrlKey) {
+      if (e3.altKey || e3.ctrlKey) {
         node.insertBefore(pNode);
       } else {
         node.insertAfter(pNode);
@@ -29308,19 +29650,19 @@ function TextFormatFloatingToolbar({
   const insertComment = () => {
     editor.dispatchCommand(INSERT_INLINE_COMMAND, void 0);
   };
-  function mouseMoveListener(e2) {
-    if (popupCharStylesEditorRef?.current && (e2.buttons === 1 || e2.buttons === 3)) {
+  function mouseMoveListener(e3) {
+    if (popupCharStylesEditorRef?.current && (e3.buttons === 1 || e3.buttons === 3)) {
       if (popupCharStylesEditorRef.current.style.pointerEvents !== "none") {
-        const x2 = e2.clientX;
-        const y2 = e2.clientY;
-        const elementUnderMouse = document.elementFromPoint(x2, y2);
+        const x3 = e3.clientX;
+        const y3 = e3.clientY;
+        const elementUnderMouse = document.elementFromPoint(x3, y3);
         if (!popupCharStylesEditorRef.current.contains(elementUnderMouse)) {
           popupCharStylesEditorRef.current.style.pointerEvents = "none";
         }
       }
     }
   }
-  function mouseUpListener(e2) {
+  function mouseUpListener(e3) {
     if (popupCharStylesEditorRef?.current) {
       if (popupCharStylesEditorRef.current.style.pointerEvents !== "auto") {
         popupCharStylesEditorRef.current.style.pointerEvents = "auto";
@@ -29912,11 +30254,11 @@ function InsertInlineImageDialog({
   const [showCaption, setShowCaption] = useState32(false);
   const [position, setPosition] = useState32("left");
   const isDisabled = src === "";
-  const handleShowCaptionChange = (e2) => {
-    setShowCaption(e2.target.checked);
+  const handleShowCaptionChange = (e3) => {
+    setShowCaption(e3.target.checked);
   };
-  const handlePositionChange = (e2) => {
-    setPosition(e2.target.value);
+  const handlePositionChange = (e3) => {
+    setPosition(e3.target.value);
   };
   const loadImage = (files) => {
     const reader = new FileReader();
@@ -29932,8 +30274,8 @@ function InsertInlineImageDialog({
   };
   useEffect36(() => {
     hasModifier.current = false;
-    const handler = (e2) => {
-      hasModifier.current = e2.altKey;
+    const handler = (e3) => {
+      hasModifier.current = e3.altKey;
     };
     document.addEventListener("keydown", handler);
     return () => {
@@ -30254,7 +30596,7 @@ var EMOJI = {
   importRegExp: /:([a-z0-9_]+):/,
   regExp: /:([a-z0-9_]+):$/,
   replace: (textNode, [, name]) => {
-    const emoji = emoji_list_default.find((e2) => e2.aliases.includes(name))?.emoji;
+    const emoji = emoji_list_default.find((e3) => e3.aliases.includes(name))?.emoji;
     if (emoji) {
       textNode.replace($createTextNode4(emoji));
     }
@@ -30384,8 +30726,8 @@ var TABLE = {
     for (const cells of rows) {
       const tableRow = $createTableRowNode();
       table.append(tableRow);
-      for (let i2 = 0; i2 < maxCells; i2++) {
-        tableRow.append(i2 < cells.length ? cells[i2] : $createTableCell(""));
+      for (let i3 = 0; i3 < maxCells; i3++) {
+        tableRow.append(i3 < cells.length ? cells[i3] : $createTableCell(""));
       }
     }
     const previousSibling = parentNode.getPreviousSibling();
@@ -31325,18 +31667,18 @@ function ColorPicker({
       setSelfColor(newColor);
     }
   };
-  const onMoveSaturation = ({ x: x2, y: y2 }) => {
+  const onMoveSaturation = ({ x: x3, y: y3 }) => {
     const newHsv = {
       ...selfColor.hsv,
-      s: x2 / WIDTH * 100,
-      v: 100 - y2 / HEIGHT * 100
+      s: x3 / WIDTH * 100,
+      v: 100 - y3 / HEIGHT * 100
     };
     const newColor = transformColor("hsv", newHsv);
     setSelfColor(newColor);
     setInputColor(newColor.hex);
   };
-  const onMoveHue = ({ x: x2 }) => {
-    const newHsv = { ...selfColor.hsv, h: x2 / WIDTH * 360 };
+  const onMoveHue = ({ x: x3 }) => {
+    const newHsv = { ...selfColor.hsv, h: x3 / WIDTH * 360 };
     const newColor = transformColor("hsv", newHsv);
     setSelfColor(newColor);
     setInputColor(newColor.hex);
@@ -31418,21 +31760,21 @@ function ColorPicker({
 function MoveWrapper({ className, style, onChange, children }) {
   const divRef = useRef22(null);
   const draggedRef = useRef22(false);
-  const move = (e2) => {
+  const move = (e3) => {
     if (divRef.current) {
       const { current: div } = divRef;
       const { width, height, left, top } = div.getBoundingClientRect();
       const zoom = calculateZoomLevel2(div);
-      const x2 = clamp2(e2.clientX / zoom - left, width, 0);
-      const y2 = clamp2(e2.clientY / zoom - top, height, 0);
-      onChange({ x: x2, y: y2 });
+      const x3 = clamp2(e3.clientX / zoom - left, width, 0);
+      const y3 = clamp2(e3.clientY / zoom - top, height, 0);
+      onChange({ x: x3, y: y3 });
     }
   };
-  const onMouseDown = (e2) => {
-    if (e2.button !== 0) {
+  const onMouseDown = (e3) => {
+    if (e3.button !== 0) {
       return;
     }
-    move(e2);
+    move(e3);
     const onMouseMove = (_e) => {
       draggedRef.current = true;
       skipAddingToHistoryStack = true;
@@ -31473,7 +31815,7 @@ function toHex(value) {
     ctx.fillStyle = value;
     return ctx.fillStyle;
   } else if (value.length === 4 || value.length === 5) {
-    value = value.split("").map((v2, i2) => i2 ? v2 + v2 : "#").join("");
+    value = value.split("").map((v2, i3) => i3 ? v2 + v2 : "#").join("");
     return value;
   } else if (value.length === 7 || value.length === 9) {
     return value;
@@ -31483,41 +31825,41 @@ function toHex(value) {
 function hex2rgb(hex) {
   const rbgArr = (hex.replace(
     /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-    (m2, r2, g2, b2) => "#" + r2 + r2 + g2 + g2 + b2 + b2
-  ).substring(1).match(/.{2}/g) || []).map((x2) => parseInt(x2, 16));
+    (m3, r3, g3, b2) => "#" + r3 + r3 + g3 + g3 + b2 + b2
+  ).substring(1).match(/.{2}/g) || []).map((x3) => parseInt(x3, 16));
   return {
     b: rbgArr[2],
     g: rbgArr[1],
     r: rbgArr[0]
   };
 }
-function rgb2hsv({ r: r2, g: g2, b: b2 }) {
-  r2 /= 255;
-  g2 /= 255;
+function rgb2hsv({ r: r3, g: g3, b: b2 }) {
+  r3 /= 255;
+  g3 /= 255;
   b2 /= 255;
-  const max = Math.max(r2, g2, b2);
-  const d2 = max - Math.min(r2, g2, b2);
-  const h2 = d2 ? (max === r2 ? (g2 - b2) / d2 + (g2 < b2 ? 6 : 0) : max === g2 ? 2 + (b2 - r2) / d2 : 4 + (r2 - g2) / d2) * 60 : 0;
-  const s2 = max ? d2 / max * 100 : 0;
+  const max = Math.max(r3, g3, b2);
+  const d3 = max - Math.min(r3, g3, b2);
+  const h3 = d3 ? (max === r3 ? (g3 - b2) / d3 + (g3 < b2 ? 6 : 0) : max === g3 ? 2 + (b2 - r3) / d3 : 4 + (r3 - g3) / d3) * 60 : 0;
+  const s3 = max ? d3 / max * 100 : 0;
   const v2 = max * 100;
-  return { h: h2, s: s2, v: v2 };
+  return { h: h3, s: s3, v: v2 };
 }
-function hsv2rgb({ h: h2, s: s2, v: v2 }) {
-  s2 /= 100;
+function hsv2rgb({ h: h3, s: s3, v: v2 }) {
+  s3 /= 100;
   v2 /= 100;
-  const i2 = ~~(h2 / 60);
-  const f2 = h2 / 60 - i2;
-  const p2 = v2 * (1 - s2);
-  const q2 = v2 * (1 - s2 * f2);
-  const t2 = v2 * (1 - s2 * (1 - f2));
-  const index = i2 % 6;
-  const r2 = Math.round([v2, q2, p2, p2, t2, v2][index] * 255);
-  const g2 = Math.round([t2, v2, v2, q2, p2, p2][index] * 255);
-  const b2 = Math.round([p2, p2, t2, v2, v2, q2][index] * 255);
-  return { b: b2, g: g2, r: r2 };
+  const i3 = ~~(h3 / 60);
+  const f3 = h3 / 60 - i3;
+  const p3 = v2 * (1 - s3);
+  const q2 = v2 * (1 - s3 * f3);
+  const t3 = v2 * (1 - s3 * (1 - f3));
+  const index = i3 % 6;
+  const r3 = Math.round([v2, q2, p3, p3, t3, v2][index] * 255);
+  const g3 = Math.round([t3, v2, v2, q2, p3, p3][index] * 255);
+  const b2 = Math.round([p3, p3, t3, v2, v2, q2][index] * 255);
+  return { b: b2, g: g3, r: r3 };
 }
-function rgb2hex({ b: b2, g: g2, r: r2 }) {
-  return "#" + [r2, g2, b2].map((x2) => x2.toString(16).padStart(2, "0")).join("");
+function rgb2hex({ b: b2, g: g3, r: r3 }) {
+  return "#" + [r3, g3, b2].map((x3) => x3.toString(16).padStart(2, "0")).join("");
 }
 function transformColor(format, color) {
   let hex = toHex("#121212");
@@ -31708,7 +32050,7 @@ function TableActionMenu({
   const insertTableRowAtSelection = useCallback23(
     (shouldInsertAfter) => {
       editor.update(() => {
-        for (let i2 = 0; i2 < selectionCounts.rows; i2++) {
+        for (let i3 = 0; i3 < selectionCounts.rows; i3++) {
           $insertTableRowAtSelection(shouldInsertAfter);
         }
         onClose();
@@ -31719,7 +32061,7 @@ function TableActionMenu({
   const insertTableColumnAtSelection = useCallback23(
     (shouldInsertAfter) => {
       editor.update(() => {
-        for (let i2 = 0; i2 < selectionCounts.columns; i2++) {
+        for (let i3 = 0; i3 < selectionCounts.columns; i3++) {
           $insertTableColumnAtSelection(shouldInsertAfter);
         }
         onClose();
@@ -31838,8 +32180,8 @@ function TableActionMenu({
           }
           if ($isTableSelection2(selection)) {
             const nodes = selection.getNodes();
-            for (let i2 = 0; i2 < nodes.length; i2++) {
-              const node = nodes[i2];
+            for (let i3 = 0; i3 < nodes.length; i3++) {
+              const node = nodes[i3];
               if ($isTableCellNode2(node)) {
                 node.setBackgroundColor(value);
               }
@@ -31860,8 +32202,8 @@ function TableActionMenu({
         }
         if ($isTableSelection2(selection)) {
           const nodes = selection.getNodes();
-          for (let i2 = 0; i2 < nodes.length; i2++) {
-            const node = nodes[i2];
+          for (let i3 = 0; i3 < nodes.length; i3++) {
+            const node = nodes[i3];
             if ($isTableCellNode2(node)) {
               node.setVerticalAlign(value);
             }
@@ -31903,8 +32245,8 @@ function TableActionMenu({
       {
         className: "dropdown",
         ref: dropDownRef,
-        onClick: (e2) => {
-          e2.stopPropagation();
+        onClick: (e3) => {
+          e3.stopPropagation();
         },
         children: [
           mergeCellButton,
@@ -32305,8 +32647,8 @@ function TableCellActionMenuContainer({
       {
         type: "button",
         className: "table-cell-action-button chevron-down",
-        onClick: (e2) => {
-          e2.stopPropagation();
+        onClick: (e3) => {
+          e3.stopPropagation();
           setIsMenuOpen(!isMenuOpen);
         },
         ref: menuRootRef,
@@ -32594,16 +32936,16 @@ function TableCellResizer({ editor }) {
           throw new Error("TableCellResizer: Expected active cell.");
         }
         if (pointerStartPosRef.current) {
-          const { x: x2, y: y2 } = pointerStartPosRef.current;
+          const { x: x3, y: y3 } = pointerStartPosRef.current;
           if (activeCell === null) {
             return;
           }
           const zoom = calculateZoomLevel3(event.target);
           if (isHeightChanging(direction)) {
-            const heightChange = (event.clientY - y2) / zoom;
+            const heightChange = (event.clientY - y3) / zoom;
             updateRowHeight(heightChange);
           } else {
-            const widthChange = (event.clientX - x2) / zoom;
+            const widthChange = (event.clientX - x3) / zoom;
             updateColumnWidth(widthChange);
           }
           resetState();
@@ -33189,19 +33531,19 @@ function FontSize({
 }) {
   const [inputValue, setInputValue] = React11.useState(selectionFontSize);
   const [inputChangeFlag, setInputChangeFlag] = React11.useState(false);
-  const handleKeyPress = (e2) => {
+  const handleKeyPress = (e3) => {
     const inputValueNumber = Number(inputValue);
-    if (e2.key === "Tab") {
+    if (e3.key === "Tab") {
       return;
     }
-    if (["e", "E", "+", "-"].includes(e2.key) || isNaN(inputValueNumber)) {
-      e2.preventDefault();
+    if (["e", "E", "+", "-"].includes(e3.key) || isNaN(inputValueNumber)) {
+      e3.preventDefault();
       setInputValue("");
       return;
     }
     setInputChangeFlag(true);
-    if (e2.key === "Enter" || e2.key === "Escape") {
-      e2.preventDefault();
+    if (e3.key === "Enter" || e3.key === "Escape") {
+      e3.preventDefault();
       updateFontSizeByInputValue(inputValueNumber);
     }
   };
@@ -33248,7 +33590,7 @@ function FontSize({
         className: `toolbar-item font-size-input ${inputClassName}`,
         min: MIN_ALLOWED_FONT_SIZE,
         max: MAX_ALLOWED_FONT_SIZE,
-        onChange: (e2) => setInputValue(e2.target.value),
+        onChange: (e3) => setInputValue(e3.target.value),
         onKeyDown: handleKeyPress,
         onBlur: handleInputBlur
       }
@@ -33903,8 +34245,8 @@ function ToolbarPlugin({
         updateToolbarState("isImageCaption", false);
       }
       const anchorNode = selection.anchor.getNode();
-      let element = anchorNode.getKey() === "root" ? anchorNode : $findMatchingParent6(anchorNode, (e2) => {
-        const parent2 = e2.getParent();
+      let element = anchorNode.getKey() === "root" ? anchorNode : $findMatchingParent6(anchorNode, (e3) => {
+        const parent2 = e3.getParent();
         return parent2 !== null && $isRootOrShadowRoot7(parent2);
       });
       if (element === null) {
@@ -34690,6 +35032,14 @@ function ToolbarPlugin({
 // src/EditorInner.tsx
 init_TreeViewPlugin();
 init_ContentEditable();
+import { OnChangePlugin as OnChangePlugin2 } from "@lexical/react/LexicalOnChangePlugin";
+
+// node_modules/@lexical/html/LexicalHtml.node.mjs
+var mod2 = await (process.env.NODE_ENV !== "production" ? Promise.resolve().then(() => (init_LexicalHtml_dev(), LexicalHtml_dev_exports)) : Promise.resolve().then(() => (init_LexicalHtml_prod(), LexicalHtml_prod_exports)));
+var $generateHtmlFromNodes2 = mod2.$generateHtmlFromNodes;
+var $generateNodesFromDOM2 = mod2.$generateNodesFromDOM;
+
+// src/EditorInner.tsx
 import { Fragment as Fragment25, jsx as jsx66, jsxs as jsxs38 } from "react/jsx-runtime";
 var skipCollaborationInit = (
   // @ts-expect-error
@@ -34703,7 +35053,9 @@ function LexicalEditorInner({
   placeholder: customPlaceholder,
   readOnly,
   classOverrides,
-  toolbarStyle
+  toolbarStyle,
+  outputFormat = "htmlString",
+  onChange
 }) {
   const { historyState } = useSharedHistoryContext();
   const {
@@ -34780,6 +35132,21 @@ function LexicalEditorInner({
     };
   }, [isSmallWidthViewport]);
   return /* @__PURE__ */ jsxs38(Fragment25, { children: [
+    onChange && /* @__PURE__ */ jsx66(
+      OnChangePlugin2,
+      {
+        onChange: (editorState) => {
+          if (outputFormat === "htmlString") {
+            editorState.read(() => {
+              const htmlString = $generateHtmlFromNodes2(editor, null);
+              onChange?.(htmlString);
+            });
+          } else {
+            onChange?.(editorState);
+          }
+        }
+      }
+    ),
     config.isRichText && plugins.toolbar !== false && /* @__PURE__ */ jsx66(
       ToolbarPlugin,
       {
@@ -35066,20 +35433,20 @@ init_PlaygroundEditorTheme();
 
 // src/utils/editorConfig.ts
 import {
-  $createParagraphNode as $createParagraphNode13,
+  $createParagraphNode as $createParagraphNode14,
   $createTextNode as $createTextNode5,
-  $getRoot as $getRoot3,
-  $isTextNode as $isTextNode8,
+  $getRoot as $getRoot4,
+  $isTextNode as $isTextNode9,
   TextNode as TextNode11
 } from "lexical";
 import { $createHeadingNode as $createHeadingNode4 } from "@lexical/rich-text";
 function $prepopulatedRichText() {
-  const root = $getRoot3();
+  const root = $getRoot4();
   if (root.getFirstChild() === null) {
     const heading = $createHeadingNode4("h1");
     heading.append($createTextNode5("Welcome to the playground"));
     root.append(heading);
-    const paragraph = $createParagraphNode13();
+    const paragraph = $createParagraphNode14();
     paragraph.append(
       $createTextNode5("This is the playground. Try typing some text with "),
       $createTextNode5("bold").toggleFormat("bold"),
@@ -35099,9 +35466,9 @@ var defaultInitialConfig = {
   namespace: "Editor",
   theme: PlaygroundEditorTheme_default,
   nodes: [...PlaygroundNodes_default],
-  onError: (e2) => {
-    console.error(e2);
-    throw e2;
+  onError: (e3) => {
+    console.error(e3);
+    throw e3;
   },
   editorState: $prepopulatedRichText
 };

@@ -78,8 +78,8 @@ import {
 } from "./plugins/ToolbarPlugin/toolbar-style.types";
 import { resolveClass } from "./plugins/ToolbarPlugin/utils";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { $generateHtmlFromNodes } from "@lexical/html";
-import { EditorState } from "lexical";
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from "@lexical/html";
+import { $getRoot, EditorState } from "lexical";
 
 const skipCollaborationInit =
   // @ts-expect-error
@@ -198,6 +198,7 @@ export type EditorClassOverrides = {
 };
 export interface InnerEditorProps {
   plugins?: EditorPluginConfig;
+  initialValue?: string;
   outputFormat?: "editorState" | "htmlString";
   fetchMentions?: (query: string) => Promise<Mention[]>;
   onMentionSelect?: (mention: Mention) => void;
@@ -216,6 +217,7 @@ export default function LexicalEditorInner({
   renderMentionOption,
   placeholder: customPlaceholder,
   readOnly,
+  initialValue,
   classOverrides,
   toolbarStyle,
   outputFormat = "htmlString",
@@ -325,6 +327,19 @@ export default function LexicalEditorInner({
       window.removeEventListener("resize", updateViewPortWidth);
     };
   }, [isSmallWidthViewport]);
+
+  useEffect(() => {
+    if (!initialValue || !editor) return;
+
+    editor.update(() => {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString(initialValue, "text/html");
+      const nodes = $generateNodesFromDOM(editor, dom);
+      const root = $getRoot();
+      root.clear();
+      root.append(...nodes);
+    });
+  }, [initialValue, editor]);
 
   return (
     <>

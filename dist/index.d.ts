@@ -1,5 +1,6 @@
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { JSX } from 'react';
+import { EditorState } from 'lexical';
 
 interface Mention {
     id: string;
@@ -121,6 +122,7 @@ type EditorClassOverrides = {
 };
 interface InnerEditorProps {
     plugins?: EditorPluginConfig;
+    outputFormat?: "editorState" | "htmlString";
     fetchMentions?: (query: string) => Promise<Mention[]>;
     onMentionSelect?: (mention: Mention) => void;
     renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
@@ -128,6 +130,7 @@ interface InnerEditorProps {
     readOnly?: boolean;
     toolbarStyle?: ToolbarStyleConfig;
     classOverrides?: EditorClassOverrides;
+    onChange?: (output: EditorState | string) => void;
 }
 
 interface EditorWrapperProps extends Omit<InnerEditorProps, "editor"> {

@@ -24,7 +24,6 @@ const defaultInitialConfig = {
     console.error(e);
     throw e;
   },
-  editorState: $prepopulatedRichText,
 };
 
 export interface EditorWrapperProps extends Omit<InnerEditorProps, "editor"> {
