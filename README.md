@@ -143,7 +143,7 @@ interface EditorProps {
 
 ### 🧾 Output Format and Change Handler
 
-You can control what gets returned from the editor via the `outputFormat` prop and handle the value through `onChange`.
+You can control what gets returned from the editor via the `outputFormat` prop and handle the value through `onChange` prop.
 
 | Prop           | Type                                      | Default        | Description                                                            |
 | -------------- | ----------------------------------------- | -------------- | ---------------------------------------------------------------------- |
