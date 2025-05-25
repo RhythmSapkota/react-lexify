@@ -151,6 +151,8 @@ export default function ExcalidrawModal({
   const save = () => {
     if (elements && elements.filter((el) => !el.isDeleted).length > 0) {
       const appState = excalidrawAPI?.getAppState();
+
+      console.log(appState)
       // We only need a subset of the state
       const partialState: Partial<AppState> = {
         exportBackground: appState?.exportBackground,

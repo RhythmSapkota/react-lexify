@@ -1,6 +1,7 @@
 @import './themes/CommentEditorTheme.css';
 @import './themes/StickyEditorTheme.css';
 @import './themes/PlaygroundEditorTheme.css';
+@import '@excalidraw/excalidraw/dist/excalidraw.min.css';
 
 @import './ui/Button.css';
 @import './ui/Dialog.css';
