@@ -210,8 +210,6 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
   <Editor plugins={{ autoFocus: true }} />
   ```
 
-````
-
 - `clearEditor`: `boolean` - Adds a clear editor button. Defaults to `false`.
   ```tsx
   <Editor plugins={{ clearEditor: true }} />

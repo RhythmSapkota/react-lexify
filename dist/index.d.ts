@@ -124,8 +124,11 @@ interface InnerEditorProps {
     plugins?: EditorPluginConfig;
     initialValue?: string;
     outputFormat?: "editorState" | "htmlString";
+    /** @deprecated Pass this under `plugins.mentions.fetchMentions` instead */
     fetchMentions?: (query: string) => Promise<Mention[]>;
+    /** @deprecated Pass this under `plugins.mentions.onMentionSelect` instead */
     onMentionSelect?: (mention: Mention) => void;
+    /** @deprecated Pass this under `plugins.mentions.renderMentionOption` instead */
     renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
     placeholder?: string;
     readOnly?: boolean;

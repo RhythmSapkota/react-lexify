@@ -35134,6 +35134,23 @@ function LexicalEditorInner({
     };
   }, [isSmallWidthViewport]);
   useEffect51(() => {
+    if (fetchMentions) {
+      console.warn(
+        "[LexicalEditorInner] `fetchMentions` is deprecated. Please pass it via `plugins.mentions.fetchMentions` instead."
+      );
+    }
+    if (onMentionSelect) {
+      console.warn(
+        "[LexicalEditorInner] `onMentionSelect` is deprecated. Please pass it via `plugins.mentions.onMentionSelect` instead."
+      );
+    }
+    if (renderMentionOption) {
+      console.warn(
+        "[LexicalEditorInner] `renderMentionOption` is deprecated. Please pass it via `plugins.mentions.renderMentionOption` instead."
+      );
+    }
+  }, [fetchMentions, onMentionSelect, renderMentionOption]);
+  useEffect51(() => {
     if (!initialValue || !editor) return;
     editor.update(() => {
       const parser = new DOMParser();
