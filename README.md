@@ -124,6 +124,8 @@ interface EditorProps {
   fetchMentions?: (query: string) => Promise<Mention[]>;
   onMentionSelect?: (mention: Mention) => void;
   renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
+  onChange?: (output: EditorState | string) => void;
+  outputFormat?: "htmlString" | "editorState";
 }
 ```
 
@@ -136,6 +138,43 @@ interface EditorProps {
 | `fetchMentions`       | `(query: string) => Promise<Mention[]>`                  | Function to fetch mention data based on query.                                         |
 | `onMentionSelect`     | `(mention: Mention) => void`                             | Callback function when a mention is selected.                                          |
 | `renderMentionOption` | `(mention: Mention, isSelected: boolean) => JSX.Element` | Custom render function for mention options.                                            |
+| `onChange`            | `(output: EditorState \| string) => void`                | Called whenever the editor content changes. Output depends on `outputFormat`.          |
+| `outputFormat`        | `"htmlString" \| "editorState"`                          | Determines the format returned in `onChange`. Defaults to `"htmlString"`.              |
+
+### 🧾 Output Format and Change Handler
+
+You can control what gets returned from the editor via the `outputFormat` prop and handle the value through `onChange`.
+
+| Prop           | Type                                      | Default        | Description                                                            |
+| -------------- | ----------------------------------------- | -------------- | ---------------------------------------------------------------------- |
+| `onChange`     | `(output: EditorState \| string) => void` | —              | Called whenever the editor content changes. Depends on `outputFormat`. |
+| `outputFormat` | `"htmlString" \| "editorState"`           | `"htmlString"` | Determines the output format passed to `onChange`.                     |
+
+### 📤 Output Format Usage
+
+#### 1. HTML String (default)
+
+```tsx
+<Editor
+  outputFormat="htmlString"
+  onChange={(html) => {
+    console.log("HTML content:", html);
+  }}
+/>
+```
+
+#### 2. Editor State
+
+```tsx
+<Editor
+  outputFormat="editorState"
+  onChange={(editorState) => {
+    console.log("EditorState object:", editorState);
+  }}
+/>
+```
+
+> 💡 **Tip:** Use `"htmlString"` when rendering or storing HTML; use `"editorState"` when working with serialized Lexical states (e.g., for collaboration or advanced features).
 
 ## 🔌 Plugin Configuration
 
@@ -147,6 +186,9 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
   ```tsx
   <Editor plugins={{ autoFocus: true }} />
   ```
+
+````
+
 - `clearEditor`: `boolean` - Adds a clear editor button. Defaults to `false`.
   ```tsx
   <Editor plugins={{ clearEditor: true }} />
@@ -962,14 +1004,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the [MIT License](./LICENSE).
 
-> **Disclaimer:**  
-> This project (`react-lexify`) is built on top of [Lexical](https://lexical.dev/), an open-source framework developed and maintained by [Meta Platforms, Inc.](https://meta.com).  
-> It is an **independent project not affiliated with or endorsed by Meta**.  
+> **Disclaimer:**
+> This project (`react-lexify`) is built on top of [Lexical](https://lexical.dev/), an open-source framework developed and maintained by [Meta Platforms, Inc.](https://meta.com).
+> It is an **independent project not affiliated with or endorsed by Meta**.
 > Portions of the code and plugin structure are adapted from the [Lexical Playground](https://github.com/facebook/lexical/tree/main/packages/lexical-playground), which is also licensed under the MIT License.
 
 ## 👤 Author
 
-by **rhythmsapkota**  
+by **rhythmsapkota**
 [GitHub Profile](https://github.com/rhythmsapkota)
 
 Contributions, issues, and suggestions are welcome!
+````

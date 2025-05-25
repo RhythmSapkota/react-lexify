@@ -77,6 +77,9 @@ import {
   ToolbarStyleConfig,
 } from "./plugins/ToolbarPlugin/toolbar-style.types";
 import { resolveClass } from "./plugins/ToolbarPlugin/utils";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { $generateHtmlFromNodes } from "@lexical/html";
+import { EditorState } from "lexical";
 
 const skipCollaborationInit =
   // @ts-expect-error
@@ -195,6 +198,7 @@ export type EditorClassOverrides = {
 };
 export interface InnerEditorProps {
   plugins?: EditorPluginConfig;
+  outputFormat?: "editorState" | "htmlString";
   fetchMentions?: (query: string) => Promise<Mention[]>;
   onMentionSelect?: (mention: Mention) => void;
   renderMentionOption?: (mention: Mention, isSelected: boolean) => JSX.Element;
@@ -202,6 +206,7 @@ export interface InnerEditorProps {
   readOnly?: boolean;
   toolbarStyle?: ToolbarStyleConfig;
   classOverrides?: EditorClassOverrides;
+  onChange?: (output: EditorState | string) => void;
 }
 
 export default function LexicalEditorInner({
@@ -213,6 +218,8 @@ export default function LexicalEditorInner({
   readOnly,
   classOverrides,
   toolbarStyle,
+  outputFormat = "htmlString",
+  onChange,
 }: InnerEditorProps) {
   const { historyState } = useSharedHistoryContext();
   const {
@@ -321,6 +328,20 @@ export default function LexicalEditorInner({
 
   return (
     <>
+      {onChange && (
+        <OnChangePlugin
+          onChange={(editorState) => {
+            if (outputFormat === "htmlString") {
+              editorState.read(() => {
+                const htmlString = $generateHtmlFromNodes(editor, null);
+                onChange?.(htmlString);
+              });
+            } else {
+              onChange?.(editorState);
+            }
+          }}
+        />
+      )}
       {config.isRichText && plugins.toolbar !== false && (
         <ToolbarPlugin
           editor={editor}

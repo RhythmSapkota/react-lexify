@@ -1,7 +1,7 @@
 import { buildImportMap } from "@/utils/editorConfig";
 import { JSX } from "react";
 import { useSettings } from "./context/SettingsContext";
-import "@/rs-richeditor.css"
+import "@/rs-richeditor.css";
 import Editor from "./Editor";
 
 function App(): JSX.Element {
@@ -17,6 +17,10 @@ function App(): JSX.Element {
             namespace: "Playground",
             html: { import: buildImportMap() },
             editorState: isCollab ? null : emptyEditor ? undefined : undefined,
+          }}
+          onChange={(editorState) => {
+            // const editorJSON = JSON.stringify(editorState.toJSON());
+            console.log("Editor content changed:", editorState);
           }}
           plugins={{
             richText: true,
