@@ -35,7 +35,9 @@ export type ToolbarButtonKey =
   | "columns"
   | "equation"
   | "sticky"
-  | "collapsible";
+  | "collapsible"
+  | "fontSizeIncrease"
+  | "fontSizeDecrease"
 
 export type ToolbarDropdownKey =
   | "paragraph"
@@ -60,6 +62,7 @@ export type ClassNameOverride = string | ((defaultClass: string) => string);
 
 export type ToolbarStyleConfig = {
   rootClass?: ClassNameOverride;
+  inputClasses?: Partial<Record<"fontSizeInput", ClassNameOverride>>;
   buttonClasses?: Partial<Record<ToolbarButtonKey, ClassNameOverride>>;
   iconClasses?: Partial<
     Record<ToolbarButtonKey | ToolbarDropdownKey, ClassNameOverride>

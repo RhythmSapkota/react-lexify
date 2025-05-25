@@ -191,7 +191,7 @@ function resolveClass(
   if (typeof override === "function") {
     return override(defaultClass);
   }
-  return `${override} ${defaultClass}`
+  return `${override} ${defaultClass}`;
 }
 // Components
 const Divider = (): JSX.Element => <div className="divider" />;
@@ -1018,6 +1018,13 @@ export default function ToolbarPlugin({
           />
           <Divider />
           <FontSize
+            inputClassName={toolbarStyle?.inputClasses?.fontSizeInput}
+            decrementButtonClassName={
+              toolbarStyle?.buttonClasses?.fontSizeIncrease
+            }
+            incrementButtonClassName={
+              toolbarStyle?.buttonClasses?.fontSizeDecrease
+            }
             selectionFontSize={toolbarState.fontSize.slice(0, -2)}
             editor={activeEditor}
             disabled={!isEditable}
