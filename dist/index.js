@@ -30514,7 +30514,8 @@ import {
   $isTextNode as $isTextNode6
 } from "lexical";
 function resolveClass(override, defaultClass) {
-  return typeof override === "function" ? override(defaultClass) : override ?? defaultClass;
+  const overrideStr = typeof override === "function" ? override(defaultClass) : override;
+  return `${defaultClass} ${overrideStr ?? ""}`.trim();
 }
 var calculateNextFontSize = (currentFontSize, updateType) => {
   if (!updateType) {
@@ -33336,7 +33337,7 @@ function resolveClass2(override, defaultClass) {
   if (typeof override === "function") {
     return override(defaultClass);
   }
-  return override ?? defaultClass;
+  return `${override} ${defaultClass}`;
 }
 var Divider = () => /* @__PURE__ */ jsx65("div", { className: "divider" });
 var ToolbarButton = React12.memo(
