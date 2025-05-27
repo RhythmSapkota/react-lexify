@@ -291,6 +291,11 @@ export type EditorClassOverrides = {
   treeView?: ClassNameOverride;
   editorShell?: ClassNameOverride;
   richTextPlugin?: ClassNameOverride;
+  floatingTextFormatToolbar?: {
+    container?: ClassNameOverride;
+    buttons?: ClassNameOverride;
+    activeButtons?: ClassNameOverride;
+  };
 };
 export interface InnerEditorProps {
   plugins?: EditorPluginConfig;
@@ -700,6 +705,15 @@ export default function LexicalEditorInner({
                   <FloatingTextFormatToolbarPlugin
                     anchorElem={floatingAnchorElem}
                     setIsLinkEditMode={setIsLinkEditMode}
+                    classNames={{
+                      container:
+                        classOverrides?.floatingTextFormatToolbar?.container,
+                      button:
+                        classOverrides?.floatingTextFormatToolbar?.buttons,
+                      activeButton:
+                        classOverrides?.floatingTextFormatToolbar
+                          ?.activeButtons,
+                    }}
                   />
                 )}
               </>
