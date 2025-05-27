@@ -325,7 +325,7 @@ export default function InlineImageComponent({
       <>
         <span draggable={draggable}>
           {isEditable && (
-            <button
+            <button type={"button"}
               className="image-edit-button"
               ref={buttonRef}
               onClick={() => {

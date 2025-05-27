@@ -237,7 +237,7 @@ const ToolbarButton = React.memo(
     }, [onClick]);
 
     return (
-      <button
+      <button type={"button"}
         disabled={disabled}
         onClick={handleClick}
         className={buttonClass}

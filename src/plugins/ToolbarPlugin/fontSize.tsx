@@ -95,7 +95,7 @@ export default function FontSize({
 
   return (
     <>
-      <button
+      <button type={"button"}
         type="button"
         disabled={
           disabled ||
@@ -125,7 +125,7 @@ export default function FontSize({
         onBlur={handleInputBlur}
       />
 
-      <button
+      <button type={"button"}
         type="button"
         disabled={
           disabled ||

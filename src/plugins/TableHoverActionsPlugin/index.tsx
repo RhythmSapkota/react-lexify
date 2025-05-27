@@ -261,14 +261,14 @@ function TableHoverActionsContainer({
   return (
     <>
       {isShownRow && (
-        <button
+        <button type={"button"}
           className={`${getTheme()?.tableAddRows}`}
           style={{...position}}
           onClick={() => insertAction(true)}
         />
       )}
       {isShownColumn && (
-        <button
+        <button type={"button"}
           className={`${getTheme()?.tableAddColumns}`}
           style={{...position}}
           onClick={() => insertAction(false)}

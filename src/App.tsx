@@ -11,28 +11,28 @@ function App(): JSX.Element {
 
   return (
     <>
-      <div className="editor-shell">
-        <Editor
-          initialConfig={{
-            namespace: "Playground",
-            html: { import: buildImportMap() },
-            editorState: isCollab ? null : emptyEditor ? undefined : undefined,
-          }}
-          onChange={(editorState) => {
-            // const editorJSON = JSON.stringify(editorState.toJSON());
-            console.log("Editor content changed:", editorState);
-          }}
-          plugins={{
-            richText: true,
-            toolbar: true,
-            table: { enabled: true },
-            mentions: { enabled: true },
-            emojis: true,
-            comment: { enabled: true },
-            autoFocus: true,
-          }}
-        />
-      </div>
+      {/* <div className="editor-shell"> */}
+      <Editor
+        initialConfig={{
+          namespace: "Playground",
+          // html: { import: buildImportMap() },
+          editorState: isCollab ? null : emptyEditor ? undefined : undefined,
+        }}
+        onChange={(editorState) => {
+          // const editorJSON = JSON.stringify(editorState.toJSON());
+          console.log("Editor content changed:", editorState);
+        }}
+        plugins={{
+          richText: true,
+          toolbar: true,
+          table: { enabled: true },
+          mentions: { enabled: true },
+          emojis: true,
+          comment: { enabled: true },
+          autoFocus: true,
+        }}
+      />
+      {/* </div> */}
     </>
   );
 }

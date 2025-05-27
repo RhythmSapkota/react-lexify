@@ -199,7 +199,7 @@ export default function ActionsPlugin({
   return (
     <div className="actions">
       {SUPPORT_SPEECH_RECOGNITION && (
-        <button
+        <button type={"button"}
           onClick={() => {
             editor.dispatchCommand(SPEECH_TO_TEXT_COMMAND, !isSpeechToText);
             setIsSpeechToText(!isSpeechToText);
@@ -215,7 +215,7 @@ export default function ActionsPlugin({
           <i className="mic" />
         </button>
       )}
-      <button
+      <button type={"button"}
         className="action-button import"
         onClick={() => importFile(editor)}
         title="Import"
@@ -223,7 +223,7 @@ export default function ActionsPlugin({
         <i className="import" />
       </button>
 
-      <button
+      <button type={"button"}
         className="action-button export"
         onClick={() =>
           exportFile(editor, {
@@ -235,7 +235,7 @@ export default function ActionsPlugin({
         aria-label="Export editor state to JSON">
         <i className="export" />
       </button>
-      <button
+      <button type={"button"}
         className="action-button share"
         disabled={isCollabActive || INITIAL_SETTINGS.isCollab}
         onClick={() =>
@@ -252,7 +252,7 @@ export default function ActionsPlugin({
         aria-label="Share Playground link to current editor state">
         <i className="share" />
       </button>
-      <button
+      <button type={"button"}
         className="action-button clear"
         disabled={isEditorEmpty}
         onClick={() => {
@@ -264,7 +264,7 @@ export default function ActionsPlugin({
         aria-label="Clear editor contents">
         <i className="clear" />
       </button>
-      <button
+      <button type={"button"}
         className={`action-button ${!isEditable ? 'unlock' : 'lock'}`}
         onClick={() => {
           // Send latest editor state to commenting validation server
@@ -277,7 +277,7 @@ export default function ActionsPlugin({
         aria-label={`${!isEditable ? 'Unlock' : 'Lock'} read-only mode`}>
         <i className={!isEditable ? 'unlock' : 'lock'} />
       </button>
-      <button
+      <button type={"button"}
         className="action-button"
         onClick={handleMarkdownToggle}
         title="Convert From Markdown"
@@ -285,7 +285,7 @@ export default function ActionsPlugin({
         <i className="markdown" />
       </button>
       {isCollabActive && (
-        <button
+        <button type={"button"}
           className="action-button connect"
           onClick={() => {
             editor.dispatchCommand(TOGGLE_CONNECT_COMMAND, !connected);

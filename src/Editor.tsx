@@ -14,12 +14,13 @@ import "@excalidraw/excalidraw/index.css";
 import PlaygroundNodes from "./nodes/PlaygroundNodes";
 import { TableContext } from "./plugins/TablePlugin";
 import PlaygroundEditorTheme from "./themes/PlaygroundEditorTheme";
-import { $prepopulatedRichText } from "./utils/editorConfig";
+import { $prepopulatedRichText, buildImportMap } from "./utils/editorConfig";
 import { ToolbarStyleConfig } from "./plugins/ToolbarPlugin/toolbar-style.types";
 
 const defaultInitialConfig = {
   namespace: "Editor",
   theme: PlaygroundEditorTheme,
+  html: { import: buildImportMap() },
   nodes: [...PlaygroundNodes],
   onError: (e: Error) => {
     console.error(e);
@@ -48,19 +49,21 @@ export default function Editor({
   };
 
   return (
-    <LexicalComposer initialConfig={mergedConfig}>
-      <SharedHistoryContext>
-        <TableContext>
-          <ToolbarContext>
-            <LexicalEditorInner
-              plugins={plugins}
-              toolbarStyle={toolbarStyle}
-              classOverrides={classOverrides}
-              {...props}
-            />
-          </ToolbarContext>
-        </TableContext>
-      </SharedHistoryContext>
-    </LexicalComposer>
+    <div className={`editor-shell ${classOverrides?.editorShell}`}>
+      <LexicalComposer initialConfig={mergedConfig}>
+        <SharedHistoryContext>
+          <TableContext>
+            <ToolbarContext>
+              <LexicalEditorInner
+                plugins={plugins}
+                toolbarStyle={toolbarStyle}
+                classOverrides={classOverrides}
+                {...props}
+              />
+            </ToolbarContext>
+          </TableContext>
+        </SharedHistoryContext>
+      </LexicalComposer>
+    </div>
   );
 }

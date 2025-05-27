@@ -422,7 +422,7 @@ ${steps.map(formatStep).join(`\n`)}
   }, [generateTestContent]);
 
   const button = (
-    <button
+    <button type={"button"}
       id="test-recorder-button"
       className={`editor-dev-button ${isRecording ? 'active' : ''}`}
       onClick={() => toggleEditorSelection(getCurrentEditor())}
@@ -432,19 +432,19 @@ ${steps.map(formatStep).join(`\n`)}
   const output = isRecording ? (
     <div className="test-recorder-output">
       <div className="test-recorder-toolbar">
-        <button
+        <button type={"button"}
           className="test-recorder-button"
           id="test-recorder-button-snapshot"
           title="Insert snapshot"
           onClick={onSnapshotClick}
         />
-        <button
+        <button type={"button"}
           className="test-recorder-button"
           id="test-recorder-button-copy"
           title="Copy to clipboard"
           onClick={onCopyClick}
         />
-        <button
+        <button type={"button"}
           className="test-recorder-button"
           id="test-recorder-button-download"
           title="Download as a file"

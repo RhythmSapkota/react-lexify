@@ -194,6 +194,7 @@ export type EditorClassOverrides = {
   editorContent?: ClassNameOverride;
   plainText?: ClassNameOverride;
   treeView?: ClassNameOverride;
+  editorShell?: ClassNameOverride;
   richTextPlugin?: ClassNameOverride;
 };
 export interface InnerEditorProps {

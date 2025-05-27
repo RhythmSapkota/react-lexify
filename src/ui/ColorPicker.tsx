@@ -121,7 +121,7 @@ export default function ColorPicker({
       <TextInput label="Hex" onChange={onSetHex} value={inputColor} />
       <div className="color-picker-basic-color">
         {basicColors.map((basicColor) => (
-          <button
+          <button type={"button"}
             className={basicColor === selfColor.hex ? ' active' : ''}
             key={basicColor}
             style={{backgroundColor: basicColor}}

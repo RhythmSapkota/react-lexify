@@ -56,7 +56,7 @@ export function DropDownItem({
   }, [ref, registerItem]);
 
   return (
-    <button
+    <button type={"button"}
       className={className}
       onClick={onClick}
       ref={ref}
@@ -238,7 +238,7 @@ export default function DropDown({
 
   return (
     <>
-      <button
+      <button type={"button"}
         type="button"
         disabled={disabled}
         aria-label={buttonAriaLabel || buttonLabel}

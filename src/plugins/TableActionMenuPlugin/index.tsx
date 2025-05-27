@@ -474,7 +474,7 @@ function TableActionMenu({
   if (cellMerge) {
     if (canMergeCells) {
       mergeCellButton = (
-        <button
+        <button type={"button"}
           type="button"
           className="item"
           onClick={() => mergeTableCellsAtSelection()}
@@ -484,7 +484,7 @@ function TableActionMenu({
       );
     } else if (canUnmergeCell) {
       mergeCellButton = (
-        <button
+        <button type={"button"}
           type="button"
           className="item"
           onClick={() => unmergeTableCellsAtSelection()}
@@ -504,7 +504,7 @@ function TableActionMenu({
         e.stopPropagation();
       }}>
       {mergeCellButton}
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() =>
@@ -518,7 +518,7 @@ function TableActionMenu({
         data-test-id="table-background-color">
         <span className="text">Background color</span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => toggleRowStriping()}
@@ -560,14 +560,14 @@ function TableActionMenu({
           </div>
         </DropDownItem>
       </DropDown>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => toggleFirstRowFreeze()}
         data-test-id="table-freeze-first-row">
         <span className="text">Toggle First Row Freeze</span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => toggleFirstColumnFreeze()}
@@ -575,7 +575,7 @@ function TableActionMenu({
         <span className="text">Toggle First Column Freeze</span>
       </button>
       <hr />
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => insertTableRowAtSelection(false)}
@@ -586,7 +586,7 @@ function TableActionMenu({
           above
         </span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => insertTableRowAtSelection(true)}
@@ -598,7 +598,7 @@ function TableActionMenu({
         </span>
       </button>
       <hr />
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => insertTableColumnAtSelection(false)}
@@ -611,7 +611,7 @@ function TableActionMenu({
           left
         </span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => insertTableColumnAtSelection(true)}
@@ -625,21 +625,21 @@ function TableActionMenu({
         </span>
       </button>
       <hr />
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => deleteTableColumnAtSelection()}
         data-test-id="table-delete-columns">
         <span className="text">Delete column</span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => deleteTableRowAtSelection()}
         data-test-id="table-delete-rows">
         <span className="text">Delete row</span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => deleteTableAtSelection()}
@@ -647,7 +647,7 @@ function TableActionMenu({
         <span className="text">Delete table</span>
       </button>
       <hr />
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => toggleTableRowIsHeader()}
@@ -660,7 +660,7 @@ function TableActionMenu({
           row header
         </span>
       </button>
-      <button
+      <button type={"button"}
         type="button"
         className="item"
         onClick={() => toggleTableColumnIsHeader()}
@@ -891,7 +891,7 @@ function TableCellActionMenuContainer({
     <div className="table-cell-action-button-container" ref={menuButtonRef}>
       {tableCellNode != null && (
         <>
-          <button
+          <button type={"button"}
             type="button"
             className="table-cell-action-button chevron-down"
             onClick={(e) => {

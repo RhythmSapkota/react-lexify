@@ -223,14 +223,14 @@ export default function StickyComponent({
             event.preventDefault();
           }
         }}>
-        <button
+        <button type={"button"}
           onClick={handleDelete}
           className="delete"
           aria-label="Delete sticky note"
           title="Delete">
           X
         </button>
-        <button
+        <button type={"button"}
           onClick={handleColorChange}
           className="color"
           aria-label="Change sticky note color"

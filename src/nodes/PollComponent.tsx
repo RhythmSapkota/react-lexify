@@ -108,7 +108,7 @@ function PollOptionComponent({
           placeholder={`Option ${index + 1}`}
         />
       </div>
-      <button
+      <button type={"button"}
         disabled={options.length < 3}
         className={joinClasses(
           'PollNode__optionDelete',

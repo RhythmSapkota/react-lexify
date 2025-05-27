@@ -26,7 +26,7 @@ export default function Switch({
   return (
     <div className="switch" id={id}>
       <label htmlFor={buttonId}>{text}</label>
-      <button
+      <button type={"button"}
         role="switch"
         aria-checked={checked}
         id={buttonId}

@@ -193,7 +193,7 @@ function TextFormatFloatingToolbar({
     <div ref={popupCharStylesEditorRef} className="floating-text-format-popup">
       {editor.isEditable() && (
         <>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
@@ -203,7 +203,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text as bold">
             <i className="format bold" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
@@ -213,7 +213,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text as italics">
             <i className="format italic" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
@@ -223,7 +223,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to underlined">
             <i className="format underline" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
@@ -233,7 +233,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text with a strikethrough">
             <i className="format strikethrough" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
@@ -243,7 +243,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format Subscript">
             <i className="format subscript" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
@@ -253,7 +253,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format Superscript">
             <i className="format superscript" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'uppercase');
@@ -263,7 +263,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to uppercase">
             <i className="format uppercase" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'lowercase');
@@ -273,7 +273,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to lowercase">
             <i className="format lowercase" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'capitalize');
@@ -283,7 +283,7 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to capitalize">
             <i className="format capitalize" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
@@ -293,7 +293,7 @@ function TextFormatFloatingToolbar({
             aria-label="Insert code block">
             <i className="format code" />
           </button>
-          <button
+          <button type={"button"}
             type="button"
             onClick={insertLink}
             className={'popup-item spaced ' + (isLink ? 'active' : '')}
@@ -303,7 +303,7 @@ function TextFormatFloatingToolbar({
           </button>
         </>
       )}
-      <button
+      <button type={"button"}
         type="button"
         onClick={insertComment}
         className={'popup-item spaced insert-comment'}

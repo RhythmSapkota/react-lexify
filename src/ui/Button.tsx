@@ -31,7 +31,7 @@ export default function Button({
   title?: string;
 }): JSX.Element {
   return (
-    <button
+    <button type={"button"}
       disabled={disabled}
       className={joinClasses(
         'Button__root',
