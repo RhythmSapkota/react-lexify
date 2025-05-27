@@ -111,6 +111,107 @@ export default function MyEditor() {
 }
 ```
 
+## Basic Usage for Next.js (with SSR-safe Setup)
+
+To integrate `react-lexify` into a **Next.js App Router** project safely (especially with plugins like `excalidraw` that are **not SSR-compatible**), use the `dynamic()` import to load the editor **client-side only**.
+
+### 1. `EditorShell.tsx` – Client Component Wrapper
+
+```tsx
+// components/editor/editor-shell.tsx
+"use client";
+
+import { Editor, EditorProps } from "react-lexify";
+
+export default function EditorShell(props: EditorProps) {
+  return (
+    <div className="w-full max-w-full space-y-2 editor-shell">
+      <Editor {...props} />
+    </div>
+  );
+}
+```
+
+---
+
+### 2. `EditorLoader.tsx` – Custom Skeleton Loader (Optional)
+
+```tsx
+// components/editor/editor-loader.tsx
+import { Skeleton } from "@/components/ui/skeleton";
+import { Loader2 } from "lucide-react";
+
+export const EditorLoader = () => {
+  return (
+    <div className="relative w-full border rounded-md p-3 min-h-[300px] bg-white shadow-sm">
+      <div className="flex items-center gap-1 md:gap-2 lg:gap-3 mb-4 overflow-auto">
+        <Skeleton className="hidden lg:block h-6 w-6 rounded-full" />
+        <Skeleton className="hidden lg:block h-6 w-20" />
+        <Skeleton className="hidden lg:block h-6 w-16" />
+        <Skeleton className="h-6 w-6" />
+        <Skeleton className="h-6 w-6" />
+        <Skeleton className="h-6 w-6" />
+        <Skeleton className="h-6 w-6" />
+        <Skeleton className="hidden lg:block h-6 w-6" />
+        <Skeleton className="h-6 w-6" />
+        <Skeleton className="h-6 w-6" />
+        <Skeleton className="h-6 w-16" />
+        <Skeleton className="hidden lg:block h-6 w-16" />
+        <Skeleton className="hidden lg:block h-6 w-16" />
+        <Skeleton className="hidden lg:block h-6 w-16" />
+        <Skeleton className="hidden lg:block h-6 w-10 ml-auto" />
+      </div>
+      <Skeleton className="h-[280px] w-full rounded-md" />
+      <div className="absolute top-1/2 left-1/2 flex flex-col justify-center items-center -translate-x-1/2 -translate-y-1/2">
+        <Loader2 className="animate-spin text-muted-foreground" />
+        <p className="text-xs font-normal text-muted-foreground mt-2">
+          Loading Editor
+        </p>
+      </div>
+    </div>
+  );
+};
+```
+
+---
+
+### 3. Dynamic Import in Page
+
+```tsx
+// app/editor/page.tsx or your dynamic editor page
+"use client";
+
+import dynamic from "next/dynamic";
+import { EditorLoader } from "@/components/editor/editor-loader";
+
+// Dynamically import EditorShell to disable SSR
+const EditorShell = dynamic(() => import("@/components/editor/editor-shell"), {
+  ssr: false,
+  loading: () => <EditorLoader />,
+});
+
+export default function EditorPage() {
+  return (
+    <div className="p-4">
+      <EditorShell
+        placeholder="Write your content here..."
+        plugins={{
+          richText: true,
+          toolbar: true,
+          history: true,
+          excalidraw: true,
+        }}
+      />
+    </div>
+  );
+}
+```
+
+---
+
+> ✅ **Why this setup?**  
+> Some plugins like `Excalidraw` or `speech-to-text` use browser-only APIs and will break on SSR. Using `dynamic()` with `ssr: false` ensures these are loaded **only on the client**.
+
 ## ⚙️ Editor Props
 
 The `Editor` component accepts the following props:
@@ -206,6 +307,7 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
 ### Core Plugins
 
 - `autoFocus`: `boolean` - Enables auto-focus on the editor when it mounts. Defaults to `false`.
+
   ```tsx
   <Editor plugins={{ autoFocus: true }} />
   ```
@@ -592,9 +694,40 @@ The `EditorPluginConfig` interface defines all available plugin options. Below i
 
 react-lexify provides a flexible way to override the default class names used for styling the editor and toolbar components. This allows developers to fully customize the appearance using their own CSS framework (e.g., Tailwind, Bootstrap) or design system.
 
-## Editor Class Overrides
+## 🎨 Editor Class Overrides
 
-You can override the editor wrapper and internal elements using the theme configuration inside initialConfig:
+You can override structural wrapper classes using the `classOverrides` prop. These styles affect how the editor container and internal wrappers are rendered and styled.
+
+```tsx
+<Editor
+  classOverrides={{
+    editorContainer: "w-full rounded-md border",
+    editorScroller: "max-h-[400px] overflow-y-auto",
+    editorContent: "min-h-[250px] bg-white px-3 py-2",
+    editorShell: "bg-background shadow-sm",
+    floatingTextFormatToolbar: {
+      container: "flex py-2 px-1 gap-2 h-12",
+    },
+  }}
+/>
+```
+
+### 🧩 Available Keys for `classOverrides`
+
+| Key                         | Description                                          |
+| --------------------------- | ---------------------------------------------------- |
+| `editorContainer`           | Outermost wrapper of the editor                      |
+| `editorScroller`            | Scrollable area of the editor                        |
+| `editorContent`             | Core editable content area                           |
+| `editorShell`               | Shell that wraps the editor (for background, border) |
+| `floatingTextFormatToolbar` | Class for the floating text toolbar container        |
+| `plainText`                 | Plain text editor wrapper                            |
+| `richTextPlugin`            | Rich text editor plugin wrapper                      |
+| `treeView`                  | Tree view panel if enabled                           |
+
+> ✅ Use `classOverrides` for layout-level styling
+
+## Editor Theme Customization
 
 ```jsx
 <Editor
@@ -621,6 +754,8 @@ You can override the editor wrapper and internal elements using the theme config
   }}
 />
 ```
+
+> ✅ Use `initialConfig.theme` for formatting nodes like headings, lists, links, etc.
 
 ## Toolbar Style Customization
 
@@ -1036,4 +1171,7 @@ by **rhythmsapkota**
 [GitHub Profile](https://github.com/rhythmsapkota)
 
 Contributions, issues, and suggestions are welcome!
-````
+
+```
+
+```

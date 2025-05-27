@@ -120,6 +120,11 @@ type EditorClassOverrides = {
     treeView?: ClassNameOverride;
     editorShell?: ClassNameOverride;
     richTextPlugin?: ClassNameOverride;
+    floatingTextFormatToolbar?: {
+        container?: ClassNameOverride;
+        buttons?: ClassNameOverride;
+        activeButtons?: ClassNameOverride;
+    };
 };
 interface InnerEditorProps {
     plugins?: EditorPluginConfig;

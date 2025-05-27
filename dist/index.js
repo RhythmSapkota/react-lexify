@@ -29645,7 +29645,8 @@ function TextFormatFloatingToolbar({
   isStrikethrough,
   isSubscript: isSubscript2,
   isSuperscript: isSuperscript2,
-  setIsLinkEditMode
+  setIsLinkEditMode,
+  classNames = {}
 }) {
   const popupCharStylesEditorRef = useRef17(null);
   const insertLink = useCallback20(() => {
@@ -29745,164 +29746,171 @@ function TextFormatFloatingToolbar({
       )
     );
   }, [editor, $updateTextFormatFloatingToolbar]);
-  return /* @__PURE__ */ jsxs26("div", { ref: popupCharStylesEditorRef, className: "floating-text-format-popup", children: [
-    editor.isEditable() && /* @__PURE__ */ jsxs26(Fragment17, { children: [
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
-          },
-          className: "popup-item spaced " + (isBold ? "active" : ""),
-          title: "Bold",
-          "aria-label": "Format text as bold",
-          children: /* @__PURE__ */ jsx50("i", { className: "format bold" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
-          },
-          className: "popup-item spaced " + (isItalic ? "active" : ""),
-          title: "Italic",
-          "aria-label": "Format text as italics",
-          children: /* @__PURE__ */ jsx50("i", { className: "format italic" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
-          },
-          className: "popup-item spaced " + (isUnderline ? "active" : ""),
-          title: "Underline",
-          "aria-label": "Format text to underlined",
-          children: /* @__PURE__ */ jsx50("i", { className: "format underline" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
-          },
-          className: "popup-item spaced " + (isStrikethrough ? "active" : ""),
-          title: "Strikethrough",
-          "aria-label": "Format text with a strikethrough",
-          children: /* @__PURE__ */ jsx50("i", { className: "format strikethrough" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript");
-          },
-          className: "popup-item spaced " + (isSubscript2 ? "active" : ""),
-          title: "Subscript",
-          "aria-label": "Format Subscript",
-          children: /* @__PURE__ */ jsx50("i", { className: "format subscript" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript");
-          },
-          className: "popup-item spaced " + (isSuperscript2 ? "active" : ""),
-          title: "Superscript",
-          "aria-label": "Format Superscript",
-          children: /* @__PURE__ */ jsx50("i", { className: "format superscript" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "uppercase");
-          },
-          className: "popup-item spaced " + (isUppercase2 ? "active" : ""),
-          title: "Uppercase",
-          "aria-label": "Format text to uppercase",
-          children: /* @__PURE__ */ jsx50("i", { className: "format uppercase" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "lowercase");
-          },
-          className: "popup-item spaced " + (isLowercase2 ? "active" : ""),
-          title: "Lowercase",
-          "aria-label": "Format text to lowercase",
-          children: /* @__PURE__ */ jsx50("i", { className: "format lowercase" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "capitalize");
-          },
-          className: "popup-item spaced " + (isCapitalize2 ? "active" : ""),
-          title: "Capitalize",
-          "aria-label": "Format text to capitalize",
-          children: /* @__PURE__ */ jsx50("i", { className: "format capitalize" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
-          },
-          className: "popup-item spaced " + (isCode ? "active" : ""),
-          title: "Insert code block",
-          "aria-label": "Insert code block",
-          children: /* @__PURE__ */ jsx50("i", { className: "format code" })
-        }
-      ),
-      /* @__PURE__ */ jsx50(
-        "button",
-        {
-          type: "button",
-          onClick: insertLink,
-          className: "popup-item spaced " + (isLink ? "active" : ""),
-          title: "Insert link",
-          "aria-label": "Insert link",
-          children: /* @__PURE__ */ jsx50("i", { className: "format link" })
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsx50(
-      "button",
-      {
-        type: "button",
-        onClick: insertComment,
-        className: "popup-item spaced insert-comment",
-        title: "Insert comment",
-        "aria-label": "Insert comment",
-        children: /* @__PURE__ */ jsx50("i", { className: "format add-comment" })
-      }
-    )
-  ] });
+  return /* @__PURE__ */ jsxs26(
+    "div",
+    {
+      ref: popupCharStylesEditorRef,
+      className: `floating-text-format-popup ${classNames.container ?? ""}`,
+      children: [
+        editor.isEditable() && /* @__PURE__ */ jsxs26(Fragment17, { children: [
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isBold ? classNames.activeButton ?? "active" : ""}`,
+              title: "Bold",
+              "aria-label": "Format text as bold",
+              children: /* @__PURE__ */ jsx50("i", { className: "format bold" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
+              },
+              className: "popup-item spaced " + (isItalic ? "active" : ""),
+              title: "Italic",
+              "aria-label": "Format text as italics",
+              children: /* @__PURE__ */ jsx50("i", { className: "format italic" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isUnderline ? classNames.activeButton ?? "active" : ""}`,
+              title: "Underline",
+              "aria-label": "Format text to underlined",
+              children: /* @__PURE__ */ jsx50("i", { className: "format underline" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isStrikethrough ? classNames.activeButton ?? "active" : ""}`,
+              title: "Strikethrough",
+              "aria-label": "Format text with a strikethrough",
+              children: /* @__PURE__ */ jsx50("i", { className: "format strikethrough" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isSubscript2 ? classNames.activeButton ?? "active" : ""}`,
+              title: "Subscript",
+              "aria-label": "Format Subscript",
+              children: /* @__PURE__ */ jsx50("i", { className: "format subscript" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isSuperscript2 ? classNames.activeButton ?? "active" : ""}`,
+              title: "Superscript",
+              "aria-label": "Format Superscript",
+              children: /* @__PURE__ */ jsx50("i", { className: "format superscript" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "uppercase");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isUppercase2 ? classNames.activeButton ?? "active" : ""}`,
+              title: "Uppercase",
+              "aria-label": "Format text to uppercase",
+              children: /* @__PURE__ */ jsx50("i", { className: "format uppercase" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "lowercase");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isLowercase2 ? classNames.activeButton ?? "active" : ""}`,
+              title: "Lowercase",
+              "aria-label": "Format text to lowercase",
+              children: /* @__PURE__ */ jsx50("i", { className: "format lowercase" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "capitalize");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isCapitalize2 ? classNames.activeButton ?? "active" : ""}`,
+              title: "Capitalize",
+              "aria-label": "Format text to capitalize",
+              children: /* @__PURE__ */ jsx50("i", { className: "format capitalize" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
+              },
+              className: `popup-item spaced ${classNames.button ?? ""} ${isCode ? classNames.activeButton ?? "active" : ""}`,
+              title: "Insert code block",
+              "aria-label": "Insert code block",
+              children: /* @__PURE__ */ jsx50("i", { className: "format code" })
+            }
+          ),
+          /* @__PURE__ */ jsx50(
+            "button",
+            {
+              type: "button",
+              onClick: insertLink,
+              className: `popup-item spaced ${classNames.button ?? ""} ${isLink ? classNames.activeButton ?? "active" : ""}`,
+              title: "Insert link",
+              "aria-label": "Insert link",
+              children: /* @__PURE__ */ jsx50("i", { className: "format link" })
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx50(
+          "button",
+          {
+            type: "button",
+            onClick: insertComment,
+            className: `popup-item spaced insert-comment`,
+            title: "Insert comment",
+            "aria-label": "Insert comment",
+            children: /* @__PURE__ */ jsx50("i", { className: "format add-comment" })
+          }
+        )
+      ]
+    }
+  );
 }
-function useFloatingTextFormatToolbar(editor, anchorElem, setIsLinkEditMode) {
+function useFloatingTextFormatToolbar(editor, anchorElem, setIsLinkEditMode, classNames) {
   const [isText, setIsText] = useState30(false);
   const [isLink, setIsLink] = useState30(false);
   const [isBold, setIsBold] = useState30(false);
@@ -29997,7 +30005,8 @@ function useFloatingTextFormatToolbar(editor, anchorElem, setIsLinkEditMode) {
         isSuperscript: isSuperscript2,
         isUnderline,
         isCode,
-        setIsLinkEditMode
+        setIsLinkEditMode,
+        classNames
       }
     ),
     anchorElem
@@ -30005,10 +30014,16 @@ function useFloatingTextFormatToolbar(editor, anchorElem, setIsLinkEditMode) {
 }
 function FloatingTextFormatToolbarPlugin({
   anchorElem = document.body,
-  setIsLinkEditMode
+  setIsLinkEditMode,
+  classNames
 }) {
   const [editor] = useLexicalComposerContext33();
-  return useFloatingTextFormatToolbar(editor, anchorElem, setIsLinkEditMode);
+  return useFloatingTextFormatToolbar(
+    editor,
+    anchorElem,
+    setIsLinkEditMode,
+    classNames
+  );
 }
 
 // src/plugins/InlineImagePlugin/index.tsx
@@ -35473,7 +35488,12 @@ function LexicalEditorInner({
                 FloatingTextFormatToolbarPlugin,
                 {
                   anchorElem: floatingAnchorElem,
-                  setIsLinkEditMode
+                  setIsLinkEditMode,
+                  classNames: {
+                    container: classOverrides?.floatingTextFormatToolbar?.container,
+                    button: classOverrides?.floatingTextFormatToolbar?.buttons,
+                    activeButton: classOverrides?.floatingTextFormatToolbar?.activeButtons
+                  }
                 }
               )
             ] })
