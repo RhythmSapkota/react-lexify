@@ -96,7 +96,7 @@ export default function FontSize({
   return (
     <>
       <button type={"button"}
-        type="button"
+        
         disabled={
           disabled ||
           (selectionFontSize !== "" &&
@@ -126,7 +126,7 @@ export default function FontSize({
       />
 
       <button type={"button"}
-        type="button"
+        
         disabled={
           disabled ||
           (selectionFontSize !== "" &&

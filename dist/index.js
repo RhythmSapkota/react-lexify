@@ -177,6 +177,7 @@ function PortalImpl({
     /* @__PURE__ */ jsx4(
       "button",
       {
+        type: "button",
         className: "Modal__closeButton",
         "aria-label": "Close modal",
         type: "button",
@@ -278,6 +279,7 @@ function Button({
   return /* @__PURE__ */ jsx6(
     "button",
     {
+      type: "button",
       disabled,
       className: joinClasses(
         "Button__root",
@@ -826,8 +828,8 @@ function ExcalidrawModal({
             }
           ),
           /* @__PURE__ */ jsxs9("div", { className: "ExcalidrawModal__actions", children: [
-            /* @__PURE__ */ jsx22("button", { className: "action-button", onClick: discard, children: "Discard" }),
-            /* @__PURE__ */ jsx22("button", { className: "action-button", onClick: save, children: "Save" })
+            /* @__PURE__ */ jsx22("button", { type: "button", className: "action-button", onClick: discard, children: "Discard" }),
+            /* @__PURE__ */ jsx22("button", { type: "button", className: "action-button", onClick: save, children: "Save" })
           ] })
         ] })
       }
@@ -1033,6 +1035,7 @@ function ImageResizer({
     !showCaption && captionsEnabled && /* @__PURE__ */ jsx23(
       "button",
       {
+        type: "button",
         className: "image-caption-button",
         ref: buttonRef,
         onClick: () => {
@@ -1345,6 +1348,7 @@ function ExcalidrawComponent({
     elements2.length > 0 && /* @__PURE__ */ jsxs11(
       "button",
       {
+        type: "button",
         ref: buttonRef,
         className: `excalidraw-button ${isSelected ? "selected" : ""}`,
         children: [
@@ -2904,6 +2908,7 @@ function PollOptionComponent({
     /* @__PURE__ */ jsx40(
       "button",
       {
+        type: "button",
         disabled: options.length < 3,
         className: joinClasses(
           "PollNode__optionDelete",
@@ -20203,6 +20208,7 @@ function InlineImageComponent({
         isEditable && /* @__PURE__ */ jsx52(
           "button",
           {
+            type: "button",
             className: "image-edit-button",
             ref: buttonRef,
             onClick: () => {
@@ -22150,6 +22156,7 @@ function StickyComponent({
         /* @__PURE__ */ jsx61(
           "button",
           {
+            type: "button",
             onClick: handleDelete,
             className: "delete",
             "aria-label": "Delete sticky note",
@@ -22160,6 +22167,7 @@ function StickyComponent({
         /* @__PURE__ */ jsx61(
           "button",
           {
+            type: "button",
             onClick: handleColorChange,
             className: "color",
             "aria-label": "Change sticky note color",
@@ -26180,7 +26188,7 @@ function CopyButton({ editor, getCodeDOMNode }) {
       console.error("Failed to copy: ", err);
     }
   }
-  return /* @__PURE__ */ jsx13("button", { className: "menu-item", onClick: handleClick, "aria-label": "copy", children: isCopyCompleted ? /* @__PURE__ */ jsx13("i", { className: "format success" }) : /* @__PURE__ */ jsx13("i", { className: "format copy" }) });
+  return /* @__PURE__ */ jsx13("button", { type: "button", className: "menu-item", onClick: handleClick, "aria-label": "copy", children: isCopyCompleted ? /* @__PURE__ */ jsx13("i", { className: "format success" }) : /* @__PURE__ */ jsx13("i", { className: "format copy" }) });
 }
 
 // src/plugins/CodeActionMenuPlugin/components/PrettierButton/index.tsx
@@ -26263,6 +26271,7 @@ function PrettierButton({ lang, editor, getCodeDOMNode }) {
     /* @__PURE__ */ jsx14(
       "button",
       {
+        type: "button",
         className: "menu-item",
         onClick: handleClick,
         onMouseEnter: () => syntaxError && setTipsVisible(true),
@@ -27524,6 +27533,7 @@ function DropDownItem({
   return /* @__PURE__ */ jsx37(
     "button",
     {
+      type: "button",
       className,
       onClick,
       ref,
@@ -27665,6 +27675,7 @@ function DropDown({
     /* @__PURE__ */ jsxs16(
       "button",
       {
+        type: "button",
         type: "button",
         disabled,
         "aria-label": buttonAriaLabel || buttonLabel,
@@ -28914,6 +28925,7 @@ function DraggableBlockPlugin({
         /* @__PURE__ */ jsx46(
           "button",
           {
+            type: "button",
             title: "Click to add below",
             className: "icon icon-plus",
             onClick: insertBlock
@@ -29742,6 +29754,7 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
+          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
           },
@@ -29754,6 +29767,7 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
+          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
@@ -29768,6 +29782,7 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
+          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
           },
@@ -29780,6 +29795,7 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
+          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
@@ -29794,6 +29810,7 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
+          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript");
           },
@@ -29806,6 +29823,7 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
+          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript");
@@ -29820,6 +29838,7 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
+          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "uppercase");
           },
@@ -29832,6 +29851,7 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
+          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "lowercase");
@@ -29846,6 +29866,7 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
+          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "capitalize");
           },
@@ -29858,6 +29879,7 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
+          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
@@ -29872,6 +29894,7 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
+          type: "button",
           onClick: insertLink,
           className: "popup-item spaced " + (isLink ? "active" : ""),
           title: "Insert link",
@@ -29883,6 +29906,7 @@ function TextFormatFloatingToolbar({
     /* @__PURE__ */ jsx50(
       "button",
       {
+        type: "button",
         type: "button",
         onClick: insertComment,
         className: "popup-item spaced insert-comment",
@@ -31622,6 +31646,9 @@ import { calculateZoomLevel as calculateZoomLevel2 } from "@lexical/utils";
 import { useEffect as useEffect43, useMemo as useMemo16, useRef as useRef22, useState as useState34 } from "react";
 import { jsx as jsx56, jsxs as jsxs30 } from "react/jsx-runtime";
 var skipAddingToHistoryStack = false;
+function parseAllowedColor(input) {
+  return /^rgb\(\d+, \d+, \d+\)$/.test(input) ? input : "";
+}
 var basicColors = [
   "#d0021b",
   "#f5a623",
@@ -31709,6 +31736,7 @@ function ColorPicker({
         /* @__PURE__ */ jsx56("div", { className: "color-picker-basic-color", children: basicColors.map((basicColor) => /* @__PURE__ */ jsx56(
           "button",
           {
+            type: "button",
             className: basicColor === selfColor.hex ? " active" : "",
             style: { backgroundColor: basicColor },
             onClick: () => {
@@ -32220,6 +32248,7 @@ function TableActionMenu({
         "button",
         {
           type: "button",
+          type: "button",
           className: "item",
           onClick: () => mergeTableCellsAtSelection(),
           "data-test-id": "table-merge-cells",
@@ -32230,6 +32259,7 @@ function TableActionMenu({
       mergeCellButton = /* @__PURE__ */ jsx57(
         "button",
         {
+          type: "button",
           type: "button",
           className: "item",
           onClick: () => unmergeTableCellsAtSelection(),
@@ -32255,6 +32285,7 @@ function TableActionMenu({
             "button",
             {
               type: "button",
+              type: "button",
               className: "item",
               onClick: () => showColorPickerModal("Cell background color", () => /* @__PURE__ */ jsx57(
                 ColorPicker,
@@ -32270,6 +32301,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleRowStriping(),
@@ -32330,6 +32362,7 @@ function TableActionMenu({
             "button",
             {
               type: "button",
+              type: "button",
               className: "item",
               onClick: () => toggleFirstRowFreeze(),
               "data-test-id": "table-freeze-first-row",
@@ -32339,6 +32372,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleFirstColumnFreeze(),
@@ -32350,6 +32384,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => insertTableRowAtSelection(false),
@@ -32366,6 +32401,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => insertTableRowAtSelection(true),
@@ -32384,6 +32420,7 @@ function TableActionMenu({
             "button",
             {
               type: "button",
+              type: "button",
               className: "item",
               onClick: () => insertTableColumnAtSelection(false),
               "data-test-id": "table-insert-column-before",
@@ -32399,6 +32436,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => insertTableColumnAtSelection(true),
@@ -32417,6 +32455,7 @@ function TableActionMenu({
             "button",
             {
               type: "button",
+              type: "button",
               className: "item",
               onClick: () => deleteTableColumnAtSelection(),
               "data-test-id": "table-delete-columns",
@@ -32426,6 +32465,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => deleteTableRowAtSelection(),
@@ -32437,6 +32477,7 @@ function TableActionMenu({
             "button",
             {
               type: "button",
+              type: "button",
               className: "item",
               onClick: () => deleteTableAtSelection(),
               "data-test-id": "table-delete",
@@ -32447,6 +32488,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleTableRowIsHeader(),
@@ -32461,6 +32503,7 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
+              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleTableColumnIsHeader(),
@@ -32646,6 +32689,7 @@ function TableCellActionMenuContainer({
     /* @__PURE__ */ jsx57(
       "button",
       {
+        type: "button",
         type: "button",
         className: "table-cell-action-button chevron-down",
         onClick: (e3) => {
@@ -33266,6 +33310,7 @@ function TableHoverActionsContainer({
     isShownRow && /* @__PURE__ */ jsx59(
       "button",
       {
+        type: "button",
         className: `${getTheme()?.tableAddRows}`,
         style: { ...position },
         onClick: () => insertAction(true)
@@ -33274,6 +33319,7 @@ function TableHoverActionsContainer({
     isShownColumn && /* @__PURE__ */ jsx59(
       "button",
       {
+        type: "button",
         className: `${getTheme()?.tableAddColumns}`,
         style: { ...position },
         onClick: () => insertAction(false)
@@ -33522,6 +33568,16 @@ init_url();
 // src/plugins/ToolbarPlugin/fontSize.tsx
 import * as React11 from "react";
 import { Fragment as Fragment23, jsx as jsx64, jsxs as jsxs36 } from "react/jsx-runtime";
+function parseAllowedFontSize(input) {
+  const match = input.match(/^(\d+(?:\.\d+)?)px$/);
+  if (match) {
+    const n3 = Number(match[1]);
+    if (n3 >= MIN_ALLOWED_FONT_SIZE && n3 <= MAX_ALLOWED_FONT_SIZE) {
+      return input;
+    }
+  }
+  return "";
+}
 function FontSize({
   selectionFontSize,
   disabled,
@@ -33573,6 +33629,7 @@ function FontSize({
       "button",
       {
         type: "button",
+        type: "button",
         disabled: disabled || selectionFontSize !== "" && Number(inputValue) <= MIN_ALLOWED_FONT_SIZE,
         onClick: () => updateFontSize(editor, 2 /* decrement */, inputValue),
         className: `toolbar-item font-decrement ${decrementButtonClassName}`,
@@ -33599,6 +33656,7 @@ function FontSize({
     /* @__PURE__ */ jsx64(
       "button",
       {
+        type: "button",
         type: "button",
         disabled: disabled || selectionFontSize !== "" && Number(inputValue) >= MAX_ALLOWED_FONT_SIZE,
         onClick: () => updateFontSize(editor, 1 /* increment */, inputValue),
@@ -33714,6 +33772,7 @@ var ToolbarButton = React12.memo(
     return /* @__PURE__ */ jsx65(
       "button",
       {
+        type: "button",
         disabled,
         onClick: handleClick,
         className: buttonClass,
@@ -35464,10 +35523,73 @@ var PlaygroundNodes_default = PlaygroundNodes;
 
 // src/Editor.tsx
 init_PlaygroundEditorTheme();
+
+// src/utils/editorConfig.ts
+import {
+  $createParagraphNode as $createParagraphNode14,
+  $createTextNode as $createTextNode5,
+  $getRoot as $getRoot5,
+  $isTextNode as $isTextNode9,
+  TextNode as TextNode11
+} from "lexical";
+import { $createHeadingNode as $createHeadingNode4 } from "@lexical/rich-text";
+function getExtraStyles(element) {
+  let extraStyles = "";
+  const fontSize = parseAllowedFontSize(element.style.fontSize);
+  const backgroundColor = parseAllowedColor(element.style.backgroundColor);
+  const color = parseAllowedColor(element.style.color);
+  if (fontSize !== "" && fontSize !== "15px") {
+    extraStyles += `font-size: ${fontSize};`;
+  }
+  if (backgroundColor !== "" && backgroundColor !== "rgb(255, 255, 255)") {
+    extraStyles += `background-color: ${backgroundColor};`;
+  }
+  if (color !== "" && color !== "rgb(0, 0, 0)") {
+    extraStyles += `color: ${color};`;
+  }
+  return extraStyles;
+}
+function buildImportMap() {
+  const importMap = {};
+  for (const [tag, fn] of Object.entries(TextNode11.importDOM() || {})) {
+    importMap[tag] = (importNode) => {
+      const importer = fn(importNode);
+      if (!importer) return null;
+      return {
+        ...importer,
+        conversion: (element) => {
+          const output = importer.conversion(element);
+          if (output === null || output.forChild === void 0 || output.after !== void 0 || output.node !== null) {
+            return output;
+          }
+          const extraStyles = getExtraStyles(element);
+          if (extraStyles) {
+            const { forChild } = output;
+            return {
+              ...output,
+              forChild: (child, parent) => {
+                const textNode = forChild(child, parent);
+                if ($isTextNode9(textNode)) {
+                  textNode.setStyle(textNode.getStyle() + extraStyles);
+                }
+                return textNode;
+              }
+            };
+          }
+          return output;
+        }
+      };
+    };
+  }
+  return importMap;
+}
+
+// src/Editor.tsx
 import { jsx as jsx67 } from "react/jsx-runtime";
 var defaultInitialConfig = {
   namespace: "Editor",
   theme: PlaygroundEditorTheme_default,
+  html: { import: buildImportMap() },
   nodes: [...PlaygroundNodes_default],
   onError: (e3) => {
     console.error(e3);
@@ -35485,7 +35607,7 @@ function Editor({
     ...defaultInitialConfig,
     ...initialConfig
   };
-  return /* @__PURE__ */ jsx67(LexicalComposer2, { initialConfig: mergedConfig, children: /* @__PURE__ */ jsx67(SharedHistoryContext, { children: /* @__PURE__ */ jsx67(TableContext, { children: /* @__PURE__ */ jsx67(ToolbarContext, { children: /* @__PURE__ */ jsx67(
+  return /* @__PURE__ */ jsx67("div", { className: `editor-shell ${classOverrides?.editorShell}`, children: /* @__PURE__ */ jsx67(LexicalComposer2, { initialConfig: mergedConfig, children: /* @__PURE__ */ jsx67(SharedHistoryContext, { children: /* @__PURE__ */ jsx67(TableContext, { children: /* @__PURE__ */ jsx67(ToolbarContext, { children: /* @__PURE__ */ jsx67(
     LexicalEditorInner,
     {
       plugins,
@@ -35493,7 +35615,7 @@ function Editor({
       classOverrides,
       ...props
     }
-  ) }) }) }) });
+  ) }) }) }) }) });
 }
 
 // src/index.ts

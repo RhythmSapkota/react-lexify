@@ -242,7 +242,7 @@ const ToolbarButton = React.memo(
         onClick={handleClick}
         className={buttonClass}
         title={`${title} (${shortcut})`}
-        type="button"
+        
         aria-label={`${title}. Shortcut: ${shortcut}`}
       >
         <i className={iconClass} />

@@ -118,6 +118,7 @@ type EditorClassOverrides = {
     editorContent?: ClassNameOverride;
     plainText?: ClassNameOverride;
     treeView?: ClassNameOverride;
+    editorShell?: ClassNameOverride;
     richTextPlugin?: ClassNameOverride;
 };
 interface InnerEditorProps {

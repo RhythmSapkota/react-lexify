@@ -194,7 +194,7 @@ function TextFormatFloatingToolbar({
       {editor.isEditable() && (
         <>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
             }}
@@ -204,7 +204,7 @@ function TextFormatFloatingToolbar({
             <i className="format bold" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
             }}
@@ -214,7 +214,7 @@ function TextFormatFloatingToolbar({
             <i className="format italic" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
             }}
@@ -224,7 +224,7 @@ function TextFormatFloatingToolbar({
             <i className="format underline" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
             }}
@@ -234,7 +234,7 @@ function TextFormatFloatingToolbar({
             <i className="format strikethrough" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
             }}
@@ -244,7 +244,7 @@ function TextFormatFloatingToolbar({
             <i className="format subscript" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
             }}
@@ -254,7 +254,7 @@ function TextFormatFloatingToolbar({
             <i className="format superscript" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'uppercase');
             }}
@@ -264,7 +264,7 @@ function TextFormatFloatingToolbar({
             <i className="format uppercase" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'lowercase');
             }}
@@ -274,7 +274,7 @@ function TextFormatFloatingToolbar({
             <i className="format lowercase" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'capitalize');
             }}
@@ -284,7 +284,7 @@ function TextFormatFloatingToolbar({
             <i className="format capitalize" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
             }}
@@ -294,7 +294,7 @@ function TextFormatFloatingToolbar({
             <i className="format code" />
           </button>
           <button type={"button"}
-            type="button"
+            
             onClick={insertLink}
             className={'popup-item spaced ' + (isLink ? 'active' : '')}
             title="Insert link"
@@ -304,7 +304,7 @@ function TextFormatFloatingToolbar({
         </>
       )}
       <button type={"button"}
-        type="button"
+        
         onClick={insertComment}
         className={'popup-item spaced insert-comment'}
         title="Insert comment"
