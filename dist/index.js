@@ -180,7 +180,6 @@ function PortalImpl({
         type: "button",
         className: "Modal__closeButton",
         "aria-label": "Close modal",
-        type: "button",
         onClick: onClose,
         children: "X"
       }
@@ -27538,7 +27537,6 @@ function DropDownItem({
       onClick,
       ref,
       title,
-      type: "button",
       children
     }
   );
@@ -27675,7 +27673,6 @@ function DropDown({
     /* @__PURE__ */ jsxs16(
       "button",
       {
-        type: "button",
         type: "button",
         disabled,
         "aria-label": buttonAriaLabel || buttonLabel,
@@ -29754,7 +29751,6 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
-          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
           },
@@ -29767,7 +29763,6 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
-          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
@@ -29782,7 +29777,6 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
-          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
           },
@@ -29795,7 +29789,6 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
-          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
@@ -29810,7 +29803,6 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
-          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript");
           },
@@ -29823,7 +29815,6 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
-          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript");
@@ -29838,7 +29829,6 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
-          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "uppercase");
           },
@@ -29851,7 +29841,6 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
-          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "lowercase");
@@ -29866,7 +29855,6 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
-          type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "capitalize");
           },
@@ -29879,7 +29867,6 @@ function TextFormatFloatingToolbar({
       /* @__PURE__ */ jsx50(
         "button",
         {
-          type: "button",
           type: "button",
           onClick: () => {
             editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
@@ -29894,7 +29881,6 @@ function TextFormatFloatingToolbar({
         "button",
         {
           type: "button",
-          type: "button",
           onClick: insertLink,
           className: "popup-item spaced " + (isLink ? "active" : ""),
           title: "Insert link",
@@ -29906,7 +29892,6 @@ function TextFormatFloatingToolbar({
     /* @__PURE__ */ jsx50(
       "button",
       {
-        type: "button",
         type: "button",
         onClick: insertComment,
         className: "popup-item spaced insert-comment",
@@ -32248,7 +32233,6 @@ function TableActionMenu({
         "button",
         {
           type: "button",
-          type: "button",
           className: "item",
           onClick: () => mergeTableCellsAtSelection(),
           "data-test-id": "table-merge-cells",
@@ -32259,7 +32243,6 @@ function TableActionMenu({
       mergeCellButton = /* @__PURE__ */ jsx57(
         "button",
         {
-          type: "button",
           type: "button",
           className: "item",
           onClick: () => unmergeTableCellsAtSelection(),
@@ -32285,7 +32268,6 @@ function TableActionMenu({
             "button",
             {
               type: "button",
-              type: "button",
               className: "item",
               onClick: () => showColorPickerModal("Cell background color", () => /* @__PURE__ */ jsx57(
                 ColorPicker,
@@ -32301,7 +32283,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleRowStriping(),
@@ -32362,7 +32343,6 @@ function TableActionMenu({
             "button",
             {
               type: "button",
-              type: "button",
               className: "item",
               onClick: () => toggleFirstRowFreeze(),
               "data-test-id": "table-freeze-first-row",
@@ -32372,7 +32352,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleFirstColumnFreeze(),
@@ -32384,7 +32363,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => insertTableRowAtSelection(false),
@@ -32401,7 +32379,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => insertTableRowAtSelection(true),
@@ -32420,7 +32397,6 @@ function TableActionMenu({
             "button",
             {
               type: "button",
-              type: "button",
               className: "item",
               onClick: () => insertTableColumnAtSelection(false),
               "data-test-id": "table-insert-column-before",
@@ -32436,7 +32412,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => insertTableColumnAtSelection(true),
@@ -32455,7 +32430,6 @@ function TableActionMenu({
             "button",
             {
               type: "button",
-              type: "button",
               className: "item",
               onClick: () => deleteTableColumnAtSelection(),
               "data-test-id": "table-delete-columns",
@@ -32465,7 +32439,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => deleteTableRowAtSelection(),
@@ -32477,7 +32450,6 @@ function TableActionMenu({
             "button",
             {
               type: "button",
-              type: "button",
               className: "item",
               onClick: () => deleteTableAtSelection(),
               "data-test-id": "table-delete",
@@ -32488,7 +32460,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleTableRowIsHeader(),
@@ -32503,7 +32474,6 @@ function TableActionMenu({
           /* @__PURE__ */ jsx57(
             "button",
             {
-              type: "button",
               type: "button",
               className: "item",
               onClick: () => toggleTableColumnIsHeader(),
@@ -32689,7 +32659,6 @@ function TableCellActionMenuContainer({
     /* @__PURE__ */ jsx57(
       "button",
       {
-        type: "button",
         type: "button",
         className: "table-cell-action-button chevron-down",
         onClick: (e3) => {
@@ -33629,7 +33598,6 @@ function FontSize({
       "button",
       {
         type: "button",
-        type: "button",
         disabled: disabled || selectionFontSize !== "" && Number(inputValue) <= MIN_ALLOWED_FONT_SIZE,
         onClick: () => updateFontSize(editor, 2 /* decrement */, inputValue),
         className: `toolbar-item font-decrement ${decrementButtonClassName}`,
@@ -33656,7 +33624,6 @@ function FontSize({
     /* @__PURE__ */ jsx64(
       "button",
       {
-        type: "button",
         type: "button",
         disabled: disabled || selectionFontSize !== "" && Number(inputValue) >= MAX_ALLOWED_FONT_SIZE,
         onClick: () => updateFontSize(editor, 1 /* increment */, inputValue),
@@ -33777,7 +33744,6 @@ var ToolbarButton = React12.memo(
         onClick: handleClick,
         className: buttonClass,
         title: `${title} (${shortcut})`,
-        type: "button",
         "aria-label": `${title}. Shortcut: ${shortcut}`,
         children: /* @__PURE__ */ jsx65("i", { className: iconClass })
       }
