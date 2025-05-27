@@ -59,7 +59,6 @@ import {
   UNDO_COMMAND,
 } from "lexical";
 
-// Local components and hooks
 import {
   blockTypeToBlockName,
   useToolbarState,
@@ -98,6 +97,7 @@ import {
   formatQuote,
 } from "./utils";
 import type { ToolbarStyleConfig } from "./toolbar-style.types";
+import { defaultPlugins, EditorPluginConfig } from "@/EditorInner";
 
 // Constants
 const rootTypeToRootName = {
@@ -193,6 +193,7 @@ function resolveClass(
   }
   return `${override} ${defaultClass}`;
 }
+
 // Components
 const Divider = (): JSX.Element => <div className="divider" />;
 
@@ -237,12 +238,12 @@ const ToolbarButton = React.memo(
     }, [onClick]);
 
     return (
-      <button type={"button"}
+      <button
+        type="button"
         disabled={disabled}
         onClick={handleClick}
         className={buttonClass}
         title={`${title} (${shortcut})`}
-        
         aria-label={`${title}. Shortcut: ${shortcut}`}
       >
         <i className={iconClass} />
@@ -251,6 +252,15 @@ const ToolbarButton = React.memo(
   }
 );
 
+interface BlockFormatDropDownProps {
+  editor: LexicalEditor;
+  blockType: keyof typeof blockTypeToBlockName;
+  rootType: keyof typeof rootTypeToRootName;
+  disabled?: boolean;
+  toolbarStyle?: ToolbarStyleConfig;
+  plugins: EditorPluginConfig;
+}
+
 const BlockFormatDropDown = React.memo(
   ({
     editor,
@@ -258,13 +268,8 @@ const BlockFormatDropDown = React.memo(
     rootType,
     disabled = false,
     toolbarStyle,
-  }: {
-    editor: LexicalEditor;
-    blockType: keyof typeof blockTypeToBlockName;
-    rootType: keyof typeof rootTypeToRootName;
-    disabled?: boolean;
-    toolbarStyle?: ToolbarStyleConfig;
-  }): JSX.Element => {
+    plugins,
+  }: BlockFormatDropDownProps): JSX.Element => {
     const getButtonClassName = () =>
       resolveClass(
         toolbarStyle?.buttonClasses?.blockControls,
@@ -309,117 +314,148 @@ const BlockFormatDropDown = React.memo(
           </div>
           <span className="shortcut">{SHORTCUTS.NORMAL}</span>
         </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("h1")}
-          onClick={() => formatHeading(editor, blockType, "h1")}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(toolbarStyle?.iconClasses?.h1, "icon h1")}
-            />
-            <span className="text">{getLabel("h1")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.HEADING1}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("h2")}
-          onClick={() => formatHeading(editor, blockType, "h2")}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(toolbarStyle?.iconClasses?.h2, "icon h2")}
-            />
-            <span className="text">{getLabel("h2")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.HEADING2}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("h3")}
-          onClick={() => formatHeading(editor, blockType, "h3")}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(toolbarStyle?.iconClasses?.h3, "icon h3")}
-            />
-            <span className="text">{getLabel("h3")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.HEADING3}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("bullet")}
-          onClick={() => formatBulletList(editor, blockType)}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(
-                toolbarStyle?.iconClasses?.bullet,
-                "icon bullet-list"
-              )}
-            />
-            <span className="text">{getLabel("bullet")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.BULLET_LIST}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("number")}
-          onClick={() => formatNumberedList(editor, blockType)}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(
-                toolbarStyle?.iconClasses?.number,
-                "icon numbered-list"
-              )}
-            />
-            <span className="text">{getLabel("number")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.NUMBERED_LIST}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("check")}
-          onClick={() => formatCheckList(editor, blockType)}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(
-                toolbarStyle?.iconClasses?.check,
-                "icon check-list"
-              )}
-            />
-            <span className="text">{getLabel("check")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.CHECK_LIST}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("quote")}
-          onClick={() => formatQuote(editor, blockType)}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(
-                toolbarStyle?.iconClasses?.quote,
-                "icon quote"
-              )}
-            />
-            <span className="text">{getLabel("quote")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.QUOTE}</span>
-        </DropDownItem>
-        <DropDownItem
-          className={getItemClassName("code")}
-          onClick={() => formatCode(editor, blockType)}
-        >
-          <div className="icon-text-container">
-            <i
-              className={resolveClass(
-                toolbarStyle?.iconClasses?.code,
-                "icon code"
-              )}
-            />
-            <span className="text">{getLabel("code")}</span>
-          </div>
-          <span className="shortcut">{SHORTCUTS.CODE_BLOCK}</span>
-        </DropDownItem>
+
+        {plugins.richText && (
+          <>
+            <>
+              <DropDownItem
+                className={getItemClassName("h1")}
+                onClick={() => formatHeading(editor, blockType, "h1")}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.h1,
+                      "icon h1"
+                    )}
+                  />
+                  <span className="text">{getLabel("h1")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.HEADING1}</span>
+              </DropDownItem>
+              <DropDownItem
+                className={getItemClassName("h2")}
+                onClick={() => formatHeading(editor, blockType, "h2")}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.h2,
+                      "icon h2"
+                    )}
+                  />
+                  <span className="text">{getLabel("h2")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.HEADING2}</span>
+              </DropDownItem>
+              <DropDownItem
+                className={getItemClassName("h3")}
+                onClick={() => formatHeading(editor, blockType, "h3")}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.h3,
+                      "icon h3"
+                    )}
+                  />
+                  <span className="text">{getLabel("h3")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.HEADING3}</span>
+              </DropDownItem>
+            </>
+
+            {plugins.list && (
+              <DropDownItem
+                className={getItemClassName("bullet")}
+                onClick={() => formatBulletList(editor, blockType)}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.bullet,
+                      "icon bullet-list"
+                    )}
+                  />
+                  <span className="text">{getLabel("bullet")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.BULLET_LIST}</span>
+              </DropDownItem>
+            )}
+
+            {plugins.list && (
+              <DropDownItem
+                className={getItemClassName("number")}
+                onClick={() => formatNumberedList(editor, blockType)}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.number,
+                      "icon numbered-list"
+                    )}
+                  />
+                  <span className="text">{getLabel("number")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.NUMBERED_LIST}</span>
+              </DropDownItem>
+            )}
+
+            {plugins.checkList && (
+              <DropDownItem
+                className={getItemClassName("check")}
+                onClick={() => formatCheckList(editor, blockType)}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.check,
+                      "icon check-list"
+                    )}
+                  />
+                  <span className="text">{getLabel("check")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.CHECK_LIST}</span>
+              </DropDownItem>
+            )}
+
+            {plugins.richText && (
+              <DropDownItem
+                className={getItemClassName("quote")}
+                onClick={() => formatQuote(editor, blockType)}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.quote,
+                      "icon quote"
+                    )}
+                  />
+                  <span className="text">{getLabel("quote")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.QUOTE}</span>
+              </DropDownItem>
+            )}
+
+            {plugins.codeHighlight && (
+              <DropDownItem
+                className={getItemClassName("code")}
+                onClick={() => formatCode(editor, blockType)}
+              >
+                <div className="icon-text-container">
+                  <i
+                    className={resolveClass(
+                      toolbarStyle?.iconClasses?.code,
+                      "icon code"
+                    )}
+                  />
+                  <span className="text">{getLabel("code")}</span>
+                </div>
+                <span className="shortcut">{SHORTCUTS.CODE_BLOCK}</span>
+              </DropDownItem>
+            )}
+          </>
+        )}
       </DropDown>
     );
   }
@@ -684,12 +720,14 @@ export default function ToolbarPlugin({
   setActiveEditor,
   setIsLinkEditMode,
   toolbarStyle,
+  plugins,
 }: {
   editor: LexicalEditor;
   activeEditor: LexicalEditor;
   setActiveEditor: Dispatch<LexicalEditor>;
   setIsLinkEditMode: Dispatch<boolean>;
   toolbarStyle?: ToolbarStyleConfig;
+  plugins?: EditorPluginConfig;
 }): JSX.Element {
   const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(
     null
@@ -946,6 +984,8 @@ export default function ToolbarPlugin({
   const canViewerSeeInsertDropdown = !toolbarState.isImageCaption;
   const canViewerSeeInsertCodeButton = !toolbarState.isImageCaption;
 
+  console.log(canViewerSeeInsertCodeButton, plugins?.codeHighlight);
+
   const rootClassName = resolveClass(toolbarStyle?.rootClass, "toolbar");
 
   return (
@@ -973,41 +1013,29 @@ export default function ToolbarPlugin({
         onClick={() => activeEditor.dispatchCommand(REDO_COMMAND, undefined)}
       />
       <Divider />
-      {toolbarState.blockType in blockTypeToBlockName &&
-        activeEditor === editor && (
-          <>
-            <BlockFormatDropDown
-              disabled={!isEditable}
-              blockType={toolbarState.blockType}
-              rootType={toolbarState.rootType}
-              editor={activeEditor}
-              toolbarStyle={toolbarStyle}
-            />
-            <Divider />
-          </>
-        )}
-      {toolbarState.blockType === "code" ? (
-        <DropDown
-          disabled={!isEditable}
-          buttonClassName="toolbar-item code-language"
-          buttonLabel={getLanguageFriendlyName(toolbarState.codeLanguage)}
-          buttonAriaLabel="Select language"
-        >
-          {CODE_LANGUAGE_OPTIONS.map(([value, name]) => {
-            return (
-              <DropDownItem
-                className={`item ${dropDownActiveClass(
-                  value === toolbarState.codeLanguage
-                )}`}
-                onClick={() => onCodeLanguageSelect(value)}
-                key={value}
-              >
-                <span className="text">{name}</span>
-              </DropDownItem>
-            );
-          })}
-        </DropDown>
-      ) : (
+
+      {/* Block formatting */}
+      {plugins.richText && (
+        <>
+          {toolbarState.blockType in blockTypeToBlockName &&
+            activeEditor === editor && (
+              <>
+                <BlockFormatDropDown
+                  disabled={!isEditable}
+                  blockType={toolbarState.blockType}
+                  rootType={toolbarState.rootType}
+                  editor={activeEditor}
+                  toolbarStyle={toolbarStyle}
+                  plugins={plugins}
+                />
+                <Divider />
+              </>
+            )}
+        </>
+      )}
+
+      {/* Text formatting */}
+      {plugins.richText && (
         <>
           <FontDropDown
             disabled={!isEditable}
@@ -1069,7 +1097,7 @@ export default function ToolbarPlugin({
               activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")
             }
           />
-          {canViewerSeeInsertCodeButton && (
+          {canViewerSeeInsertCodeButton && plugins.codeHighlight && (
             <ToolbarButton
               command={FORMAT_TEXT_COMMAND}
               active={toolbarState.isCode}
@@ -1084,17 +1112,19 @@ export default function ToolbarPlugin({
               }
             />
           )}
-          <ToolbarButton
-            command={TOGGLE_LINK_COMMAND}
-            active={toolbarState.isLink}
-            disabled={!isEditable}
-            icon="link"
-            title="Insert link"
-            shortcut={SHORTCUTS.INSERT_LINK}
-            buttonKey="link"
-            toolbarStyle={toolbarStyle}
-            onClick={insertLink}
-          />
+          {plugins.link?.enabled && (
+            <ToolbarButton
+              command={TOGGLE_LINK_COMMAND}
+              active={toolbarState.isLink}
+              disabled={!isEditable}
+              icon="link"
+              title="Insert link"
+              shortcut={SHORTCUTS.INSERT_LINK}
+              buttonKey="link"
+              toolbarStyle={toolbarStyle}
+              onClick={insertLink}
+            />
+          )}
           <DropdownColorPicker
             disabled={!isEditable}
             buttonClassName={resolveClass(
@@ -1213,44 +1243,48 @@ export default function ToolbarPlugin({
                 <Divider />
 
                 {/* --- Group: Media --- */}
-                <DropDownItem
-                  onClick={() =>
-                    showModal("Insert Image", (onClose) => (
-                      <InsertImageDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ))
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.image,
-                      "icon image"
-                    )}
-                  />
-                  <span className="text">Image</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() =>
-                    showModal("Insert Inline Image", (onClose) => (
-                      <InsertInlineImageDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ))
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.inlineImage,
-                      "icon image"
-                    )}
-                  />
-                  <span className="text">Inline Image</span>
-                </DropDownItem>
+                {plugins?.images && (
+                  <DropDownItem
+                    onClick={() =>
+                      showModal("Insert Image", (onClose) => (
+                        <InsertImageDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                        />
+                      ))
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.image,
+                        "icon image"
+                      )}
+                    />
+                    <span className="text">Image</span>
+                  </DropDownItem>
+                )}
+                {plugins?.inlineImage && (
+                  <DropDownItem
+                    onClick={() =>
+                      showModal("Insert Inline Image", (onClose) => (
+                        <InsertInlineImageDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                        />
+                      ))
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.inlineImage,
+                        "icon image"
+                      )}
+                    />
+                    <span className="text">Inline Image</span>
+                  </DropDownItem>
+                )}
                 <DropDownItem
                   onClick={() =>
                     insertGifOnClick({
@@ -1272,138 +1306,152 @@ export default function ToolbarPlugin({
                 <Divider />
 
                 {/* --- Group: Interactive Elements --- */}
-                <DropDownItem
-                  onClick={() =>
-                    activeEditor.dispatchCommand(
-                      INSERT_EXCALIDRAW_COMMAND,
-                      undefined
-                    )
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.excalidraw,
-                      "icon diagram-2"
-                    )}
-                  />
-                  <span className="text">Excalidraw</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() =>
-                    showModal("Insert Table", (onClose) => (
-                      <InsertTableDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ))
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.table,
-                      "icon table"
-                    )}
-                  />
-                  <span className="text">Table</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() =>
-                    showModal("Insert Poll", (onClose) => (
-                      <InsertPollDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ))
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.poll,
-                      "icon poll"
-                    )}
-                  />
-                  <span className="text">Poll</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() =>
-                    showModal("Insert Columns Layout", (onClose) => (
-                      <InsertLayoutDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ))
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.columns,
-                      "icon columns"
-                    )}
-                  />
-                  <span className="text">Columns Layout</span>
-                </DropDownItem>
+                {plugins?.excalidraw && (
+                  <DropDownItem
+                    onClick={() =>
+                      activeEditor.dispatchCommand(
+                        INSERT_EXCALIDRAW_COMMAND,
+                        undefined
+                      )
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.excalidraw,
+                        "icon diagram-2"
+                      )}
+                    />
+                    <span className="text">Excalidraw</span>
+                  </DropDownItem>
+                )}
+                {plugins?.table?.enabled && (
+                  <DropDownItem
+                    onClick={() =>
+                      showModal("Insert Table", (onClose) => (
+                        <InsertTableDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                        />
+                      ))
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.table,
+                        "icon table"
+                      )}
+                    />
+                    <span className="text">Table</span>
+                  </DropDownItem>
+                )}
+                {plugins?.poll && (
+                  <DropDownItem
+                    onClick={() =>
+                      showModal("Insert Poll", (onClose) => (
+                        <InsertPollDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                        />
+                      ))
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.poll,
+                        "icon poll"
+                      )}
+                    />
+                    <span className="text">Poll</span>
+                  </DropDownItem>
+                )}
+                {plugins?.tableCellActionMenu && (
+                  <DropDownItem
+                    onClick={() =>
+                      showModal("Insert Columns Layout", (onClose) => (
+                        <InsertLayoutDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                        />
+                      ))
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.columns,
+                        "icon columns"
+                      )}
+                    />
+                    <span className="text">Columns Layout</span>
+                  </DropDownItem>
+                )}
 
                 <Divider />
 
                 {/* --- Group: Math / Sticky / Collapsible --- */}
-                <DropDownItem
-                  onClick={() =>
-                    showModal("Insert Equation", (onClose) => (
-                      <InsertEquationDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ))
-                  }
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.equation,
-                      "icon equation"
-                    )}
-                  />
-                  <span className="text">Equation</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    editor.update(() => {
-                      const root = $getRoot();
-                      const stickyNode = $createStickyNode(0, 0);
-                      root.append(stickyNode);
-                    });
-                  }}
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.sticky,
-                      "icon sticky"
-                    )}
-                  />
-                  <span className="text">Sticky Note</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    editor.dispatchCommand(
-                      INSERT_COLLAPSIBLE_COMMAND,
-                      undefined
-                    );
-                  }}
-                  className="item"
-                >
-                  <i
-                    className={resolveClass(
-                      toolbarStyle?.iconClasses?.collapsible,
-                      "icon caret-right"
-                    )}
-                  />
-                  <span className="text">Collapsible container</span>
-                </DropDownItem>
+                {
+                  <DropDownItem
+                    onClick={() =>
+                      showModal("Insert Equation", (onClose) => (
+                        <InsertEquationDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                        />
+                      ))
+                    }
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.equation,
+                        "icon equation"
+                      )}
+                    />
+                    <span className="text">Equation</span>
+                  </DropDownItem>
+                }
+                {
+                  <DropDownItem
+                    onClick={() => {
+                      editor.update(() => {
+                        const root = $getRoot();
+                        const stickyNode = $createStickyNode(0, 0);
+                        root.append(stickyNode);
+                      });
+                    }}
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.sticky,
+                        "icon sticky"
+                      )}
+                    />
+                    <span className="text">Sticky Note</span>
+                  </DropDownItem>
+                }
+                {plugins?.collapsible && (
+                  <DropDownItem
+                    onClick={() => {
+                      editor.dispatchCommand(
+                        INSERT_COLLAPSIBLE_COMMAND,
+                        undefined
+                      );
+                    }}
+                    className="item"
+                  >
+                    <i
+                      className={resolveClass(
+                        toolbarStyle?.iconClasses?.collapsible,
+                        "icon caret-right"
+                      )}
+                    />
+                    <span className="text">Collapsible container</span>
+                  </DropDownItem>
+                )}
 
                 <Divider />
 
@@ -1434,12 +1482,14 @@ export default function ToolbarPlugin({
         </>
       )}
       <Divider />
-      <ElementFormatDropdown
-        disabled={!isEditable}
-        value={toolbarState.elementFormat}
-        editor={activeEditor}
-        isRTL={toolbarState.isRTL}
-      />
+      {
+        <ElementFormatDropdown
+          disabled={!isEditable}
+          value={toolbarState.elementFormat}
+          editor={activeEditor}
+          isRTL={toolbarState.isRTL}
+        />
+      }
 
       {modal}
     </div>

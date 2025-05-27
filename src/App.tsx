@@ -24,8 +24,10 @@ function App(): JSX.Element {
         }}
         plugins={{
           richText: true,
+          link: { enabled: true },
+          excalidraw: true,
           toolbar: true,
-          table: { enabled: true },
+          table: { enabled: false },
           mentions: { enabled: true },
           emojis: true,
           comment: { enabled: true },

@@ -85,6 +85,101 @@ const skipCollaborationInit =
   // @ts-expect-error
   window.parent != null && window.parent.frames.right === window;
 
+export const defaultPlugins: EditorPluginConfig = {
+  // Core
+  autoFocus: true,
+  clearEditor: true,
+  history: true,
+  selectionAlwaysOnDisplay: true,
+
+  // Rich text
+  richText: true,
+  toolbar: true,
+  shortcuts: true,
+  markdownShortcut: true,
+  codeHighlight: true,
+  list: true,
+  checkList: true,
+  table: {
+    enabled: true,
+    cellMerge: true,
+    cellBackgroundColor: true,
+    horizontalScroll: true,
+  },
+  tableCellResizer: true,
+  horizontalRule: true,
+  tabFocus: true,
+  tabIndentation: true,
+
+  // Content types
+  images: true,
+  inlineImage: true,
+  link: {
+    enabled: true,
+    hasAttributes: true,
+  },
+  poll: true,
+  twitter: true,
+  youtube: true,
+  figma: true,
+  clickableLink: true,
+  equations: true,
+  excalidraw: true,
+  collapsible: true,
+  pageBreak: true,
+  layout: true,
+
+  // Interactive
+  dragDropPaste: true,
+  componentPicker: true,
+  emojiPicker: true,
+  autoEmbed: true,
+  mentions: {
+    enabled: true,
+  },
+  emojis: true,
+  hashtag: true,
+  keywords: true,
+  speechToText: true,
+  autoLink: true,
+
+  // Collaborative
+  collaboration: {
+    enabled: true,
+  },
+  comment: {
+    enabled: true,
+  },
+
+  // UI & behavior
+  maxLength: {
+    enabled: true,
+    length: 1000,
+  },
+  characterLimit: {
+    enabled: true,
+    charset: "UTF-8",
+    maxLength: 5000,
+  },
+  autocomplete: true,
+  treeView: true,
+  tableOfContents: true,
+  contextMenu: true,
+  specialText: true,
+  actions: {
+    enabled: true,
+    preserveNewLinesInMarkdown: true,
+  },
+
+  // Floating UI
+  floatingLinkEditor: true,
+  floatingTextFormatToolbar: true,
+  draggableBlock: true,
+  codeActionMenu: true,
+  tableHoverActions: true,
+  tableCellActionMenu: true,
+};
+
 export type EditorPluginConfig = {
   // Core plugins
   autoFocus?: boolean;
@@ -219,7 +314,7 @@ export interface InnerEditorProps {
 }
 
 export default function LexicalEditorInner({
-  plugins = {},
+  plugins = defaultPlugins,
   fetchMentions,
   onMentionSelect,
   renderMentionOption,
@@ -388,6 +483,7 @@ export default function LexicalEditorInner({
       {config.isRichText && plugins.toolbar !== false && (
         <ToolbarPlugin
           editor={editor}
+          plugins={{ ...defaultPlugins, ...plugins }}
           activeEditor={activeEditor}
           setActiveEditor={setActiveEditor}
           setIsLinkEditMode={setIsLinkEditMode}
